@@ -64,6 +64,7 @@ public async Task HelpAsync() {
     style.DelEmoji = "🗑";
     style.ForwardLabel = "›";
     style.LastLabel = "»";
+    style.DeletionMessage = "Embed page has been deleted";
     style.Btncolor = ButtonStyle.Success;
     style.Delcolor = ButtonStyle.Danger;
     style.Skipcolor = ButtonStyle.Primary;
