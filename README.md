@@ -22,30 +22,30 @@ Inject the EmbedPagesService into your Module using DI instead. (Constructor / P
 
 ### Example: Creating Embed Pages using discord commands structure
 ```cs
-	[Command("Help")]
-        [Alias("h")]
-        public async Task HelpAsync() {
-            List<EmbedBuilder> embedBuilders = new();
+[Command("Help")]
+[Alias("h")]
+public async Task HelpAsync() {
+    List<EmbedBuilder> embedBuilders = new();
 
-            EmbedBuilder embedBuilder = new();
-            embedBuilder.WithTitle("Family System");
-            embedBuilder.WithDescription(
-                "This is the family system.");
-            embedBuilder.AddField("Planned Stuff:",
-                " - Family tree where it shows the families a bit better.\n " +
-                " - Remove Family Member.\n" +
-                " - Remove Family Connection.\n" +
-                " - Leave Family.\n\n" +
-                "Commands to help you:");
-            embedBuilder.AddField("!af or !addFamily", "Add a new family.");
-            embedBuilders.Add(embedBuilder);
+    EmbedBuilder embedBuilder = new();
+    embedBuilder.WithTitle("Family System");
+    embedBuilder.WithDescription(
+        "This is the family system.");
+    embedBuilder.AddField("Planned Stuff:",
+        " - Family tree where it shows the families a bit better.\n " +
+        " - Remove Family Member.\n" +
+        " - Remove Family Connection.\n" +
+        " - Leave Family.\n\n" +
+        "Commands to help you:");
+    embedBuilder.AddField("!af or !addFamily", "Add a new family.");
+    embedBuilders.Add(embedBuilder);
 
-            embedBuilder = new();
-            embedBuilder.WithTitle("Animal Searches");
-            embedBuilder.WithDescription("This is the animal picture system here is some commands to help you:");
-            embedBuilder.AddField("!cat", "Get a cat picture.");
-            embedBuilders.Add(embedBuilder);
+    embedBuilder = new();
+    embedBuilder.WithTitle("Animal Searches");
+    embedBuilder.WithDescription("This is the animal picture system here is some commands to help you:");
+    embedBuilder.AddField("!cat", "Get a cat picture.");
+    embedBuilders.Add(embedBuilder);
 
-            await EmbedPagesService.CreateEmbedPages(Context.Client, Context.Message, embedBuilders);
-        }
+    await EmbedPagesService.CreateEmbedPages(Context.Client, Context.Message, embedBuilders);
+}
 ```
