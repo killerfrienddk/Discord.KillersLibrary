@@ -1,23 +1,23 @@
 # Discord.Killer
 
+[![NuGet](https://img.shields.io/badge/nuget-v1.0.0--labs-brightgreen.svg?style=plastic)](https://www.nuget.org/packages/Discord.Killer)
 This is an addon for the Discord API Wrapper [Discord.Net-Labs](https://github.com/discord-net-labs/Discord.Net-Labs)
 
 ## Installation
-Make sure to use the preview version of this package if you are planning to use the preview of Discord.Net
+Make sure to use the preview version of this package if you are planning to use the preview of Discord.Net.
 
 ## Features
- - Waiting for a message / reaction which passes your filter
+ - Creating dynamic embed pages.
    
- 
 ## Usage
-To properly use the features this addon provides you need to add the `InteractivityService` to your service provider.
+To properly use the features this addon provides you need to add the `EmbedPagesService` to your service provider.
 
 ```cs
 var provider = new ServiceCollection()
                 .AddSingleton<EmbedPagesService>()
                 ....
 ```
-Inject the InteractivityService into your Module using DI instead. (Constructor / Public Property Injection)
+Inject the EmbedPagesService into your Module using DI instead. (Constructor / Public Property Injection).
 
 ### Example: Creating Embed Pages using discord commands structure
 ```cs

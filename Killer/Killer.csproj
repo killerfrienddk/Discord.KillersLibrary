@@ -19,13 +19,12 @@
     <Win32Resource />
     <Copyright>Copyright 2021 KillerFRIEND</Copyright>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Description>
-      This package is an Addon for Discord.Net.
-      It provides basic and advanced interactivity features for your Discord Bot.
-      Moreover it includes support for any command framework.
-    </Description>
+    <Description>This package is an Addon for Discord.Net.
+It provides embeding pages for your Discord Bot.
+Moreover it includes support for any command framework.</Description>
     <Authors>KillerFRIEND</Authors>
     <TargetFrameworkProfile />
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -39,6 +38,10 @@
   </ItemGroup>
   
   <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
