@@ -23,7 +23,6 @@ Inject the EmbedPagesService into your Module using DI instead. (Constructor / P
 ### Example: Creating Embed Pages using discord commands structure
 ```cs
 [Command("Help")]
-[Alias("h")]
 public async Task HelpAsync() {
     List<EmbedBuilder> embedBuilders = new();
 
@@ -47,5 +46,27 @@ public async Task HelpAsync() {
     embedBuilders.Add(embedBuilder);
 
     await EmbedPagesService.CreateEmbedPages(Context.Client, Context.Message, embedBuilders);
+}
+```
+
+### Example: Creating Embed Pages customization
+None of the EmbedPagesStyles has to be set what you see is their default values. 
+You can leave out all of them or some of them or change them at will.
+```cs
+[Command("Help")]
+public async Task HelpAsync() {
+    EmbedPagesStyles style = new();
+    style.FirstLabel = "«";
+    style.BackLabel = "‹";
+    style.DelEmoji = "🗑";
+    style.ForwardLabel = "›";
+    style.LastLabel = "»";
+    style.Btncolor = ButtonStyle.Success;
+    style.Delcolor = ButtonStyle.Danger;
+    style.Skipcolor = ButtonStyle.Primary;
+    style.FastChangeBtns = false;
+    style.PageNumbers = true;
+    
+    await EmbedPagesService.CreateEmbedPages(Context.Client, Context.Message, embedBuilders, style);
 }
 ```
