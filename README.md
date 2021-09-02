@@ -49,7 +49,7 @@ public async Task HelpAsync() {
 }
 ```
 
-### Example: Creating Embed Pages customization
+### Example: Changing Embed Pages customization
 None of the EmbedPagesStyles has to be set what you see is their default values. 
 
 You can leave out all of them or some of them or change them at will.
@@ -65,8 +65,8 @@ public async Task HelpAsync() {
     style.Btncolor = ButtonStyle.Success;
     style.Delcolor = ButtonStyle.Danger;
     style.Skipcolor = ButtonStyle.Primary;
-    style.FastChangeBtns = false;
-    style.PageNumbers = true;
+    style.FastChangeBtns = false; // Do you want there to be a button that goes directly to either ends?
+    style.PageNumbers = true; //Do you want the embed to have page numbers like "Page: 1/4"? Depends on how many pages you have.
     
     await EmbedPagesService.CreateEmbedPages(Context.Client, Context.Message, embedBuilders, style);
 }
