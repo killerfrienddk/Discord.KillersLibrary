@@ -51,6 +51,7 @@ public async Task HelpAsync() {
 
 ### Example: Creating Embed Pages customization
 None of the EmbedPagesStyles has to be set what you see is their default values. 
+
 You can leave out all of them or some of them or change them at will.
 ```cs
 [Command("Help")]
