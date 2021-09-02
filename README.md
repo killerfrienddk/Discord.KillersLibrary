@@ -18,6 +18,8 @@ var provider = new ServiceCollection()
                 .AddSingleton<EmbedPagesService>()
                 ....
 ```
+![Embed Pages example](https://i.imgur.com/hUxpVg2.jpg)
+
 Inject the EmbedPagesService into your Module using DI instead. (Constructor / Public Property Injection).
 
 ### Example: Creating Embed Pages using discord commands structure
