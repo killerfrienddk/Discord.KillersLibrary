@@ -49,7 +49,7 @@ public async Task HelpAsync() {
 }
 ```
 
-### Example: Changing Embed Pages customization
+### Example: Changing Embed Pages Customization
 None of the EmbedPagesStyles has to be set what you see is their default values. 
 
 You can leave out all of them or some of them or change them at will.
