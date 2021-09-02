@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ProjectGuid>{3D492FFF-FBAA-499D-BD64-A2896EC36AE2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Killer</RootNamespace>
+    <AssemblyName>Discord.Killer</AssemblyName>
+    <Deterministic>true</Deterministic>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <RepositoryType>Github</RepositoryType>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageTags />
+    <SignAssembly>false</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <ApplicationIcon />
+    <Win32Resource />
+    <Copyright>Copyright 2021 KillerFRIEND</Copyright>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Description>
+      This package is an Addon for Discord.Net.
+      It provides basic and advanced interactivity features for your Discord Bot.
+      Moreover it includes support for any command framework.
+    </Description>
+    <Authors>KillerFRIEND</Authors>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Discord.Net.Labs" Version="3.0.2" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+</Project>
