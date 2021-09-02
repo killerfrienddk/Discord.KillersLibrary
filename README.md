@@ -1,4 +1,4 @@
-# Discord.KillersLibary
+# Discord.KillersLibrary
 
 [![NuGet](https://img.shields.io/badge/nuget-v1.0.0--labs-brightgreen.svg?style=plastic)](https://www.nuget.org/packages/Discord.Killer)
 
