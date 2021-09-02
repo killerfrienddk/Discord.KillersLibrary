@@ -7,16 +7,16 @@ using Discord;
 namespace KillersLibrary.EmbedPages {
     public class EmbedPagesService {
         /// <summary>
-        ///     Gets whether the message starts with the provided character.
+        ///     Creates Embed Pages as a message.
         /// </summary>
-        /// <param name="client">Discord Client.</param>
-        /// <param name="message">The message to send it the embed.</param>
-        /// <param name="embedBuilders">Embeds that you want to be displayed as pages.</param>
-        /// <param name="embedPagesStyles">Styling or customization of the Embed and the buttons.</param>
+        /// <param name="client">Discord Client. <see cref="DiscordSocketClient"/></param>
+        /// <param name="message">Used to send the message. <see cref="SocketUserMessage"/></param>
+        /// <param name="embedBuilders">Embeds that you want to be displayed as pages. <see cref="EmbedBuilder"/></param>
+        /// <param name="embedPagesStyles">Styling or customization of the embeds and the buttons. <see cref="EmbedPagesStyles"/></param>
         public async Task CreateEmbedPages(DiscordSocketClient client, SocketUserMessage message, List<EmbedBuilder> embedBuilders, EmbedPagesStyles embedPagesStyles = null) {
             if (embedPagesStyles == null) embedPagesStyles = new();
             if (!embedBuilders.Any()) {
-                await message.Channel.SendMessageAsync($"error: EMBEDBUILDERS_NOT_FOUND. You didnt specify any embedBuilders to me. See Examples: ");
+                await message.Channel.SendMessageAsync($"error: EMBEDBUILDERS_NOT_FOUND. You didnt specify any embedBuilders to me. See Examples: https://github.com/killerfrienddk/Discord.KillersLibrary.Labs");
                 return;
             }
 
@@ -36,7 +36,7 @@ namespace KillersLibrary.EmbedPages {
             componentBuilder.WithButton(pageMovingButtons2);
 
             ButtonBuilder deleteBtn = new ButtonBuilder()
-                .WithCustomId("delete")
+                .WithCustomId("delete_embed_pages")
                 .WithEmote(new Emoji(embedPagesStyles.DelEmoji ?? "🗑"))
                 .WithStyle(ButtonStyle.Danger);
             componentBuilder.WithButton(deleteBtn);
@@ -91,11 +91,17 @@ namespace KillersLibrary.EmbedPages {
                                 msg.Components = componentBuilder.Build();
                             });
                             break;
+                        case "delete_embed_pages":
+                            await currentMessage.DeleteAsync();
+                            await interaction.FollowupAsync(embedPagesStyles.DeletionMessage, ephemeral: true);
+                            break;
                     }
                 }
             };
         }
     }
+
+
 
     public class EmbedPagesStyles {
         public string FirstLabel { get; set; } = "«";
@@ -103,6 +109,7 @@ namespace KillersLibrary.EmbedPages {
         public string DelEmoji { get; set; } = "🗑";
         public string ForwardLabel { get; set; } = "›";
         public string LastLabel { get; set; } = "»";
+        public string DeletionMessage { get; set; } = "Embed page has been deleted";
         public ButtonStyle Btncolor { get; set; } = ButtonStyle.Success;
         public ButtonStyle Delcolor { get; set; } = ButtonStyle.Danger;
         public ButtonStyle Skipcolor { get; set; } = ButtonStyle.Primary;
