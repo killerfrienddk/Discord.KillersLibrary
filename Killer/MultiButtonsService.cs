@@ -27,7 +27,7 @@ namespace KillersLibrary {
 
     public class MultiButtonsService {
         /// <summary>
-        ///     Creates MultiButtons.
+        ///     Creates Multi Buttons.
         /// </summary>
         /// <param name="titles">List of strings that will be placed on the buttons title e.g A-B"/></param>
         /// <param name="styles">Styling or customization of the buttons. <see cref="MultiButtonsStyles"/></param>
@@ -79,7 +79,7 @@ namespace KillersLibrary {
         }
 
         /// <summary>
-        ///     Creates Select For MultiButtons.
+        ///     Creates Select For Multi Buttons.
         /// </summary>
         /// <param name="interaction">Interaction. <see cref="SocketMessageComponent"/></param>
         /// <param name="multiButtons">List of multiButtons that will be calculated placed in the select depending on the range that has been choosen."/></param>
