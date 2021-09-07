@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System;
 using Discord.WebSocket;
 using Discord;
+using System.Threading.Tasks;
 
 namespace KillersLibrary {
     public class MultiButton {
@@ -21,7 +23,7 @@ namespace KillersLibrary {
         public bool RagedLettersOnEndOfPlaceholder { get; set; } = true;
     }
 
-    public class MultiButtons {
+    public class MultiButtonsService {
         /// <summary>
         ///     Creates MultiButtons.
         /// </summary>
@@ -60,7 +62,7 @@ namespace KillersLibrary {
             if (count >= 2) {
                 if (resetAt > titles.Count) resetAt++;
                 firstLetter = titles[resetAt][0].ToString();
-                lastLetter = titles[count ^ 1][0].ToString();
+                lastLetter = titles[count - 2][0].ToString();
 
                 ButtonBuilder button = new();
                 button.WithLabel((styles.UpperCaseLetters ? firstLetter.ToUpper() : firstLetter.ToLower()) +
@@ -70,8 +72,6 @@ namespace KillersLibrary {
 
                 builder.WithButton(button);
             }
-
-            /*builder.WithButton(_commonService.MakeGoBackButton());*/
 
             return builder;
         }
@@ -85,7 +85,7 @@ namespace KillersLibrary {
         public ComponentBuilder CreateSelectForMultiButtons(SocketMessageComponent interaction, List<MultiButton> multiButtons, SelectForMultiButtonsStyles styles = null) {
             styles ??= new();
 
-            int number = Convert.ToInt32(interaction.Data.CustomId.Replace(styles.CustomID, ""));
+            int number = Convert.ToInt32(string.Join("", interaction.Data.CustomId.Where(c => char.IsDigit(c))));
 
             SelectMenuBuilder selectMenu = new SelectMenuBuilder()
                 .WithCustomId(styles.CustomID);
@@ -103,8 +103,7 @@ namespace KillersLibrary {
             selectMenu.WithPlaceholder(styles.Placeholder +
                 (styles.RagedLettersOnEndOfPlaceholder ? " - " + rangeLetters : ""));
 
-            var builder = new ComponentBuilder()
-                .WithSelectMenu(selectMenu);
+            var builder = new ComponentBuilder().WithSelectMenu(selectMenu);
 
             return builder;
         }
