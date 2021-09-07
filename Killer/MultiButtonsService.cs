@@ -15,12 +15,14 @@ namespace KillersLibrary {
         public string CustomID { get; set; } = "multiButtons";
         public ButtonStyle ButtonStyle { get; set; } = ButtonStyle.Success;
         public bool UpperCaseLetters { get; set; } = true;
+        public bool OrderByTitle { get; set; } = true;
     }
 
     public class SelectForMultiButtonsStyles {
         public string CustomID { get; set; } = "chooseRange";
         public string Placeholder { get; set; } = "Select Item";
         public bool RagedLettersOnEndOfPlaceholder { get; set; } = true;
+        public bool OrderByTitle { get; set; } = true;
     }
 
     public class MultiButtonsService {
@@ -40,7 +42,7 @@ namespace KillersLibrary {
             int buttonCount = 0;
 
             string lastLetter;
-            for (int i = 0; i < titles.Count; i++) {
+            for (int i = 0; i < (styles.OrderByTitle ? titles.OrderBy(t => t).ToList() : titles).Count; i++) {
                 if (count == 1) firstLetter = titles[i][0].ToString();
 
                 if (count == 25) {
@@ -84,6 +86,7 @@ namespace KillersLibrary {
         /// <param name="styles">Styling or customization of the buttons. <see cref="SelectForMultiButtonsStyles"/></param>
         public ComponentBuilder CreateSelectForMultiButtons(SocketMessageComponent interaction, List<MultiButton> multiButtons, SelectForMultiButtonsStyles styles = null) {
             styles ??= new();
+            multiButtons = (styles.OrderByTitle ? multiButtons.OrderBy(m => m.Title).ToList() : multiButtons);
 
             int number = Convert.ToInt32(string.Join("", interaction.Data.CustomId.Where(c => char.IsDigit(c))));
 
