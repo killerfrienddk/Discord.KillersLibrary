@@ -12,51 +12,51 @@ namespace KillersLibrary.EmbedPages {
         /// <param name="client">Discord Client. <see cref="DiscordSocketClient"/></param>
         /// <param name="message">Used to send the message. <see cref="SocketUserMessage"/></param>
         /// <param name="embedBuilders">Embeds that you want to be displayed as pages. <see cref="EmbedBuilder"/></param>
-        /// <param name="embedPagesStyles">Styling or customization of the embeds and the buttons. <see cref="EmbedPagesStyles"/></param>
-        public async Task CreateEmbedPages(DiscordSocketClient client, SocketUserMessage message, List<EmbedBuilder> embedBuilders, EmbedPagesStyles embedPagesStyles = null) {
-            if (embedPagesStyles == null) embedPagesStyles = new();
+        /// <param name="styles">Styling or customization of the embeds and the buttons. <see cref="EmbedPagesStyles"/></param>
+        public async Task CreateEmbedPages(DiscordSocketClient client, SocketUserMessage message, List<EmbedBuilder> embedBuilders, EmbedPagesStyles styles = null) {
+            styles = styles ?? new();
             if (!embedBuilders.Any()) {
                 await message.Channel.SendMessageAsync($"error: EMBEDBUILDERS_NOT_FOUND. You didnt specify any embedBuilders to me. See Examples: https://github.com/killerfrienddk/Discord.KillersLibrary.Labs");
                 return;
             }
 
             ComponentBuilder componentBuilder = new();
-            if (embedPagesStyles.FastChangeBtns) {
+            if (styles.FastChangeBtns) {
                 ButtonBuilder firstbtn = new ButtonBuilder()
                     .WithCustomId("first_embed")
-                    .WithLabel(embedPagesStyles.FirstLabel ?? "«")
-                    .WithStyle(embedPagesStyles.Skipcolor);
+                    .WithLabel(styles.FirstLabel ?? "«")
+                    .WithStyle(styles.Skipcolor);
                 componentBuilder.WithButton(firstbtn);
             }
 
             ButtonBuilder pageMovingButtons2 = new ButtonBuilder()
                 .WithCustomId("back_button_embed")
-                .WithLabel(embedPagesStyles.BackLabel ?? "‹")
-                .WithStyle(embedPagesStyles.Btncolor);
+                .WithLabel(styles.BackLabel ?? "‹")
+                .WithStyle(styles.Btncolor);
             componentBuilder.WithButton(pageMovingButtons2);
 
             ButtonBuilder deleteBtn = new ButtonBuilder()
                 .WithCustomId("delete_embed_pages")
-                .WithEmote(new Emoji(embedPagesStyles.DelEmoji ?? "🗑"))
+                .WithEmote(new Emoji(styles.DelEmoji ?? "🗑"))
                 .WithStyle(ButtonStyle.Danger);
             componentBuilder.WithButton(deleteBtn);
 
             ButtonBuilder pageMovingButtons1 = new ButtonBuilder()
                 .WithCustomId("forward_button_embed")
-                .WithLabel(embedPagesStyles.ForwardLabel ?? "›")
-                .WithStyle(embedPagesStyles.Btncolor);
+                .WithLabel(styles.ForwardLabel ?? "›")
+                .WithStyle(styles.Btncolor);
             componentBuilder.WithButton(pageMovingButtons1);
 
-            if (embedPagesStyles.FastChangeBtns) {
+            if (styles.FastChangeBtns) {
                 ButtonBuilder lastbtn = new ButtonBuilder()
                     .WithCustomId("last_embed")
-                    .WithLabel(embedPagesStyles.LastLabel ?? "»")
-                    .WithStyle(embedPagesStyles.Skipcolor);
+                    .WithLabel(styles.LastLabel ?? "»")
+                    .WithStyle(styles.Skipcolor);
                 componentBuilder.WithButton(lastbtn);
             }
 
             var currentPage = 0;
-            if (embedPagesStyles.PageNumbers) embedBuilders[0] = embedBuilders[0].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
+            if (styles.PageNumbers) embedBuilders[0] = embedBuilders[0].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
             var currentMessage = await message.Channel.SendMessageAsync(embed: embedBuilders[0].Build(), component: componentBuilder.Build());
             client.InteractionCreated += async (socketInteraction) => {
                 SocketMessageComponent interaction = (SocketMessageComponent)socketInteraction;
@@ -85,7 +85,7 @@ namespace KillersLibrary.EmbedPages {
                         case "back_button_embed":
                         case "forward_button_embed":
                         case "last_embed":
-                            if (embedPagesStyles.PageNumbers) embedBuilders[currentPage] = embedBuilders[0].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
+                            if (styles.PageNumbers) embedBuilders[currentPage] = embedBuilders[0].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
                             await currentMessage.ModifyAsync(msg => {
                                 msg.Embed = embedBuilders[currentPage].Build();
                                 msg.Components = componentBuilder.Build();
@@ -93,7 +93,7 @@ namespace KillersLibrary.EmbedPages {
                             break;
                         case "delete_embed_pages":
                             await currentMessage.DeleteAsync();
-                            await interaction.FollowupAsync(embedPagesStyles.DeletionMessage, ephemeral: true);
+                            await interaction.FollowupAsync(styles.DeletionMessage, ephemeral: true);
                             break;
                     }
                 }
