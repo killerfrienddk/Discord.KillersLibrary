@@ -8,8 +8,9 @@ This is an addon for the Discord API Wrapper [Discord.Net-Labs](https://github.c
 Make sure to use the preview version of this package if you are planning to use the preview of Discord.Net.
 
 ## Features
- - Creating dynamic embed pages.
- - Creating dynamic Multi buttons and after that selection.
+ - [Creating dynamic embed pages](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#embed-pages).
+ - [Creating dynamic multi buttons](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons).
+ - [Multi buttons select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select).
    
 ## Usage
 To properly use the features this addon provides you need to add the `EmbedPagesService` to your service provider.
@@ -20,6 +21,8 @@ var provider = new ServiceCollection()
                 .AddSingleton<MultiButtonsService>() // For multi buttons
                 ....
 ```
+
+## Embed Pages
 ![Embed Pages example](https://i.imgur.com/hUxpVg2.jpg)
 
 Inject the EmbedPagesService into your Module using DI instead. (Constructor / Public Property Injection).
@@ -77,6 +80,7 @@ public async Task HelpAsync() {
 }
 ```
 
+## Multi Buttons
 ![Multi Buttons example](https://i.imgur.com/9tXMrmS.jpg)
 
 Inject the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
@@ -126,6 +130,7 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
 }
 ```
 
+## Multi Buttons Select
 ![MultiButtons Select example](https://i.imgur.com/7MM1il5.jpg)
 
 Inject the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
