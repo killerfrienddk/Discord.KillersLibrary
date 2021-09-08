@@ -9,6 +9,7 @@ Make sure to use the preview version of this package if you are planning to use 
 
 ## Features
  - Creating dynamic embed pages.
+ - Creating dynamic Multi buttons and after that selection.
    
 ## Usage
 To properly use the features this addon provides you need to add the `EmbedPagesService` to your service provider.
