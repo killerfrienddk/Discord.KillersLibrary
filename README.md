@@ -112,7 +112,8 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
     MultiButtonsStyles multiButtonsStyles = new() {
         CustomID = "multiButtons",
         ButtonStyle = ButtonStyle.Success,
-        UpperCaseLetters = true
+        UpperCaseLetters = true,
+        OrderByTitle = true
     };
 
     var builder = _multiButtonsService.CreateMultiButtons(titles, multiButtonsStyles);
@@ -175,7 +176,8 @@ public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
     SelectForMultiButtonsStyles selectForMultiButtonsStyles = new() {
         CustomID = "chooseRange",
         Placeholder = "Select Item",
-        RagedLettersOnEndOfPlaceholder = true
+        RagedLettersOnEndOfPlaceholder = true,
+        OrderByTitle = true
     };
 
     var builder = _multiButtonsService.CreateSelectForMultiButtons(interaction, multiButtons, selectForMultiButtonsStyles);
