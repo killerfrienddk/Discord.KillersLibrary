@@ -20,7 +20,7 @@
     <Copyright>Copyright 2021 KillerFRIEND</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>This package is an Addon for Discord.Net.
-It provides embeding pages for your Discord Bot.
+It provides embeding pages and multi buttons for your Discord Bot.
 Moreover it includes support for any command framework.</Description>
     <Authors>KillerFRIEND</Authors>
     <TargetFrameworkProfile />
