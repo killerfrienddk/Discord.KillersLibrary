@@ -84,6 +84,9 @@ Inject the MultiButtonsService into your Module using DI instead. (Constructor /
 ### Example: Creating Multi Buttons
 You can do as i have done for making buttons that splits up people in your server by 25 pr button.
 Or just a long list of strings.
+
+In order to get a list of users you have to activate the "Privileged Gateway Intents" those being "PRESENCE INTENT" and "SERVER MEMBERS INTENT" they can be set [here](https://discord.com/developers/applications) by choosing your bot and going to the Bots tab. 
+Remember if you your bot is in 100 or more servers then it needs to get verification and whitelisting from discord for the intents to work. [Read more here](https://support.discord.com/hc/en-us/articles/360040720412).
 ```cs
 public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
     List<RestGuildUser> users = await _userService.GetSortedUserListAsync(((SocketGuildUser)interaction.User).Guild);
@@ -128,6 +131,9 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
 Inject the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
 
 ### Example: Creating Multi Buttons Select
+In order to get a list of users you have to activate the "Privileged Gateway Intents" those being "PRESENCE INTENT" and "SERVER MEMBERS INTENT" they can be set [here](https://discord.com/developers/applications) by choosing your bot and going to the Bots tab. 
+Remember if you your bot is in 100 or more servers then it needs to get verification and whitelisting from discord for the intents to work. [Read more here](https://support.discord.com/hc/en-us/articles/360040720412).
+
 Place this in side of your Button Handler and set the "multiButtons" to what your customId is.
 ```cs
 private async Task ButtonHandler(SocketMessageComponent interaction) {
