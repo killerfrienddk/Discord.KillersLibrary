@@ -5,7 +5,7 @@
 This is an addon for the Discord API Wrapper [Discord.Net-Labs](https://github.com/discord-net-labs/Discord.Net-Labs)
 
 ## Installation
-Make sure to use the preview version of this package if you are planning to use the preview of Discord.Net.
+Make sure to use the preview version of this package if you are planning to use the preview of Discord.Net.Labs
 
 ## Features
  - [Creating dynamic embed pages](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#embed-pages).
@@ -13,13 +13,29 @@ Make sure to use the preview version of this package if you are planning to use 
  - [Multi buttons select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select).
    
 ## Usage
-To properly use the features this addon provides you need to add the `EmbedPagesService` to your service provider.
+To properly use the features this addon provides you need to add the `EmbedPagesService` or `MultiButtonsService` to your service provider depending on which part you want.
 
 ```cs
 var provider = new ServiceCollection()
-                .AddSingleton<EmbedPagesService>() // For embedding pages
-                .AddSingleton<MultiButtonsService>() // For multi buttons
-                ....
+    .AddSingleton<EmbedPagesService>() // For embedding pages
+    .AddSingleton<MultiButtonsService>() // For multi buttons
+    ....
+```
+Dependency Injection in commands
+```cs
+public EmbedPagesService EmbedPagesService { get; set; }
+public MultiButtonsService MultiButtonsService { get; set; }
+```
+
+Dependency Injection using ctor
+```cs
+private readonly EmbedPagesService _embedPagesService;
+private readonly MultiButtonsService _multiButtonsService;
+
+public CTOR(EmbedPagesService embedPagesService, MultiButtonsService multiButtonsService) {
+    _embedPagesService = embedPagesService;
+    _multiButtonsService = multiButtonsService;
+}
 ```
 
 ## Embed Pages
