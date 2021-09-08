@@ -95,7 +95,7 @@ namespace KillersLibrary {
         ///     Creates Select For Multi Buttons.
         /// </summary>
         /// <param name="interaction">Interaction. <see cref="SocketMessageComponent"/></param>
-        /// <param name="multiButtons">List of multiButtons that will be calculated placed in the select depending on the range that has been choosen. List of <see cref="MultiButton"/>"/></param>
+        /// <param name="multiButtons">List of <see cref="MultiButton"/>s that will be calculated placed in the select depending on the range that has been choosen."/></param>
         /// <param name="styles">Styling or customization of the buttons. <see cref="SelectForMultiButtonsStyles"/></param>
         public ComponentBuilder CreateSelectForMultiButtons(SocketMessageComponent interaction, List<MultiButton> multiButtons, SelectForMultiButtonsStyles styles = null) {
             styles ??= new();
