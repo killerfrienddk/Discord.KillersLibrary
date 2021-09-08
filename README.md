@@ -21,13 +21,13 @@ var provider = new ServiceCollection()
     .AddSingleton<MultiButtonsService>() // For multi buttons
     ....
 ```
-Dependency Injection in commands
+### Dependency Injection in commands
 ```cs
 public EmbedPagesService EmbedPagesService { get; set; }
 public MultiButtonsService MultiButtonsService { get; set; }
 ```
 
-Dependency Injection using ctor
+### Dependency Injection using ctor
 ```cs
 private readonly EmbedPagesService _embedPagesService;
 private readonly MultiButtonsService _multiButtonsService;
