@@ -11,7 +11,9 @@ Make sure to use the preview version of this package if you are planning to use 
  - [Creating dynamic embed pages](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#embed-pages).
  - [Creating dynamic multi buttons](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons).
  - [Multi buttons select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select).
-   
+
+## Wiki
+[Wiki on github](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/wiki).
 ## Usage
 To properly use the features this addon provides you need to add the `EmbedPagesService` or `MultiButtonsService` to your service provider depending on which part you want.
 
