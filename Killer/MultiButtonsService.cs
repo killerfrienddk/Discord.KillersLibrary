@@ -41,7 +41,9 @@ namespace KillersLibrary {
             int buttonCount = 0;
 
             string lastLetter;
-            for (int i = 0; i < (styles.OrderByTitle ? titles.OrderBy(t => t).ToList() : titles).Count; i++) {
+            if (styles.OrderByTitle) titles = titles.OrderBy(t => t).ToList();
+
+            for (int i = 0; i < titles.Count; i++) {
                 if (count == 1) firstLetter = titles[i][0].ToString();
 
                 if (count == 25) {
@@ -49,8 +51,14 @@ namespace KillersLibrary {
                     count = 1;
                     resetAt = i + 1;
                     ButtonBuilder button = new();
-                    button.WithLabel((styles.UpperCaseLetters ? firstLetter.ToUpper() : firstLetter.ToLower()) +
-                        "-" + (styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower()));
+                    string letters = "";
+                    if (string.IsNullOrWhiteSpace(firstLetter)) {
+                        letters = styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower();
+                    } else {
+                        letters = (styles.UpperCaseLetters ? firstLetter.ToUpper() : firstLetter.ToLower()) +
+                        "-" + (styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower());
+                    }
+                    button.WithLabel(letters);
                     button.WithStyle(styles.ButtonStyle);
                     button.WithCustomId(styles.CustomID + ++buttonCount);
 
@@ -63,11 +71,17 @@ namespace KillersLibrary {
             if (count >= 2) {
                 if (resetAt > titles.Count) resetAt++;
                 firstLetter = titles[resetAt][0].ToString();
-                lastLetter = titles[count - 2][0].ToString();
+                lastLetter = titles[resetAt + count - 2][0].ToString();
 
                 ButtonBuilder button = new();
-                button.WithLabel((styles.UpperCaseLetters ? firstLetter.ToUpper() : firstLetter.ToLower()) +
-                    "-" + (styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower()));
+                string letters = "";
+                if (string.IsNullOrWhiteSpace(firstLetter)) {
+                    letters = styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower();
+                } else {
+                    letters = (styles.UpperCaseLetters ? firstLetter.ToUpper() : firstLetter.ToLower()) +
+                    "-" + (styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower());
+                }
+                button.WithLabel(letters);
                 button.WithStyle(styles.ButtonStyle);
                 button.WithCustomId(styles.CustomID + ++buttonCount);
 
@@ -85,7 +99,6 @@ namespace KillersLibrary {
         /// <param name="styles">Styling or customization of the buttons. <see cref="SelectForMultiButtonsStyles"/></param>
         public ComponentBuilder CreateSelectForMultiButtons(SocketMessageComponent interaction, List<MultiButton> multiButtons, SelectForMultiButtonsStyles styles = null) {
             styles ??= new();
-            multiButtons = (styles.OrderByTitle ? multiButtons.OrderBy(m => m.Title).ToList() : multiButtons);
 
             int number = Convert.ToInt32(string.Join("", interaction.Data.CustomId.Where(c => char.IsDigit(c))));
 
@@ -93,6 +106,7 @@ namespace KillersLibrary {
                 .WithCustomId(styles.CustomID);
 
             string lastLetter = "";
+            if (styles.OrderByTitle) multiButtons = multiButtons.OrderBy(m => m.Title).ToList();
             try {
                 for (int i = (number * 25) - 25; i < number * 25; i++) {
                     selectMenu.AddOption(multiButtons[i].Title, multiButtons[i].Value);
