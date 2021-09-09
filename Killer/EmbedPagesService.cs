@@ -101,8 +101,6 @@ namespace KillersLibrary.EmbedPages {
         }
     }
 
-
-
     public class EmbedPagesStyles {
         public string FirstLabel { get; set; } = "«";
         public string BackLabel { get; set; } = "‹";
