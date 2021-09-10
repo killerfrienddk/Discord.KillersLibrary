@@ -58,9 +58,9 @@ namespace KillersLibrary {
         /// <param name="filename">The filename of the attachment.</param>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        public virtual async Task MakeFileResponse(Stream stream, string filename, SocketCommandContext context = null, SocketSlashCommand command = null) {
-            if (context == null) await command.Channel.SendFileAsync(stream, filename);
-            else await context.Channel.SendFileAsync(stream, filename);
+        public virtual async Task MakeFileResponse(Stream stream, string filename, string text = null, SocketCommandContext context = null, SocketSlashCommand command = null) {
+            if (context == null) await command.Channel.SendFileAsync(stream, filename, text);
+            else await context.Channel.SendFileAsync(stream, filename, text);
         }
 
         /// <summary>
