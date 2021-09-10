@@ -16,7 +16,7 @@ namespace KillersLibrary.EmbedPages {
         /// <param name="context">the <see cref="SocketCommandContext"/> used to send normal commands.</param>
         /// <param name="context">the <see cref="SocketSlashCommand"/> used to send slash commands.</param>
         /// <param name="styles">The <see cref="EmbedPagesStyles"/> is for customization of many parameters.</param>
-        public async Task CreateEmbedPages(DiscordSocketClient client, List<EmbedBuilder> embedBuilders, SocketCommandContext context = null, SocketSlashCommand command = null, EmbedPagesStyles styles = null) {
+        public virtual async Task CreateEmbedPages(DiscordSocketClient client, List<EmbedBuilder> embedBuilders, SocketCommandContext context = null, SocketSlashCommand command = null, EmbedPagesStyles styles = null) {
             styles ??= new();
             if (!embedBuilders.Any()) {
                 await CommonService.Instance.MakeResponse("error: EMBEDBUILDERS_NOT_FOUND. You didnt specify any embedBuilders to me. See Examples: https://github.com/killerfrienddk/Discord.KillersLibrary.Labs", context: context, command: command);
@@ -111,7 +111,7 @@ namespace KillersLibrary.EmbedPages {
         /// <param name="embedBuilders">Embeds that you want to be displayed as pages. <see cref="EmbedBuilder"/></param>
         /// <param name="styles">Styling or customization of the embeds and the buttons. <see cref="EmbedPagesStyles"/></param>
         [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new version instead which is called the same but it uses the context and or the slashcommands.")]
-        public async Task CreateEmbedPages(DiscordSocketClient client, SocketUserMessage message, List<EmbedBuilder> embedBuilders, EmbedPagesStyles styles = null) {
+        public virtual async Task CreateEmbedPages(DiscordSocketClient client, SocketUserMessage message, List<EmbedBuilder> embedBuilders, EmbedPagesStyles styles = null) {
             styles ??= new();
 
             if (!embedBuilders.Any()) {

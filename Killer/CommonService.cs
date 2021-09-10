@@ -23,7 +23,7 @@ namespace KillersLibrary {
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
         /// <returns>A UserID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is null.</returns>
-        public ulong GetUserID(SocketCommandContext context = null, SocketSlashCommand command = null) {
+        public virtual ulong GetUserID(SocketCommandContext context = null, SocketSlashCommand command = null) {
             if (context == null) return command.User.Id;
             else return context.User.Id;
         }
@@ -34,7 +34,7 @@ namespace KillersLibrary {
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
         /// <returns>A GuildID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is null.</returns>
-        public ulong GetGuildID(SocketCommandContext context = null, SocketSlashCommand command = null) {
+        public virtual ulong GetGuildID(SocketCommandContext context = null, SocketSlashCommand command = null) {
             if (context == null) return ((SocketGuildUser)command.User).Guild.Id;
             else return context.Guild.Id;
         }
@@ -45,7 +45,7 @@ namespace KillersLibrary {
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
         /// <returns>A AuthorID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is null.</returns>
-        public ulong GetAuthorID(SocketCommandContext context = null, SocketSlashCommand command = null) {
+        public virtual ulong GetAuthorID(SocketCommandContext context = null, SocketSlashCommand command = null) {
             if (context == null) return command.User.Id;
             else return context.Message.Author.Id;
         }
@@ -58,7 +58,7 @@ namespace KillersLibrary {
         /// <param name="filename">The filename of the attachment.</param>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        public async Task MakeFileResponse(Stream stream, string filename, SocketCommandContext context = null, SocketSlashCommand command = null) {
+        public virtual async Task MakeFileResponse(Stream stream, string filename, SocketCommandContext context = null, SocketSlashCommand command = null) {
             if (context == null) await command.Channel.SendFileAsync(stream, filename);
             else await context.Channel.SendFileAsync(stream, filename);
         }
@@ -71,7 +71,7 @@ namespace KillersLibrary {
         /// <param name="component">A <see cref="MessageComponent"/> to be sent with this response</param>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        public async Task<RestUserMessage> MakeResponse(string text = null, Embed embed = null, MessageComponent component = null, SocketCommandContext context = null, SocketSlashCommand command = null) {
+        public virtual async Task<RestUserMessage> MakeResponse(string text = null, Embed embed = null, MessageComponent component = null, SocketCommandContext context = null, SocketSlashCommand command = null) {
             if (context == null) return await command.FollowupAsync(text, embed: embed, component: component);
             else return await context.Channel.SendMessageAsync(text, embed: embed, component: component);
         }

@@ -31,7 +31,7 @@ namespace KillersLibrary {
         /// <param name="titles">List of strings that will be placed on the buttons title e.g A-B"/></param>
         /// <param name="styles">The <see cref="MultiButtonsStyles"/> is for customization of many parameters.</param>
         /// <returns>A <see cref="ComponentBuilder"/></returns>
-        public ComponentBuilder CreateMultiButtons(List<string> titles, MultiButtonsStyles styles = null) {
+        public virtual ComponentBuilder CreateMultiButtons(List<string> titles, MultiButtonsStyles styles = null) {
             styles ??= new();
 
             var builder = new ComponentBuilder();
@@ -99,7 +99,7 @@ namespace KillersLibrary {
         /// <param name="multiButtons">List of <see cref="MultiButton"/>s that will be calculated placed in the select depending on the range that has been choosen."/></param>
         /// <param name="styles">The <see cref="SelectForMultiButtonsStyles"/> is for customization of many parameters.</param>
         /// <returns>A <see cref="ComponentBuilder"/></returns>
-        public ComponentBuilder CreateSelectForMultiButtons(SocketMessageComponent interaction, List<MultiButton> multiButtons, SelectForMultiButtonsStyles styles = null) {
+        public virtual ComponentBuilder CreateSelectForMultiButtons(SocketMessageComponent interaction, List<MultiButton> multiButtons, SelectForMultiButtonsStyles styles = null) {
             styles ??= new();
 
             int number = Convert.ToInt32(string.Join("", interaction.Data.CustomId.Where(c => char.IsDigit(c))));
