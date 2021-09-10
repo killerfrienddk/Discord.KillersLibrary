@@ -10,7 +10,7 @@ namespace KillersLibrary {
         internal CommonService() { }
         static CommonService() { }
 
-        private static readonly CommonService _instance = new CommonService();
+        private static readonly CommonService _instance = new();
 
         public static CommonService Instance {
             get { return _instance; }
