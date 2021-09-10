@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Linq;
 using Discord.WebSocket;
+using Discord.Commands;
 using Discord;
 
 namespace KillersLibrary.EmbedPages {
@@ -9,14 +10,15 @@ namespace KillersLibrary.EmbedPages {
         /// <summary>
         ///     Creates Embed Pages as a message.
         /// </summary>
-        /// <param name="client">Discord Client. <see cref="DiscordSocketClient"/></param>
-        /// <param name="message">Used to send the message. <see cref="SocketUserMessage"/></param>
-        /// <param name="embedBuilders">Embeds that you want to be displayed as pages. <see cref="EmbedBuilder"/></param>
-        /// <param name="styles">Styling or customization of the embeds and the buttons. <see cref="EmbedPagesStyles"/></param>
-        public async Task CreateEmbedPages(DiscordSocketClient client, SocketUserMessage message, List<EmbedBuilder> embedBuilders, EmbedPagesStyles styles = null) {
+        /// <param name="client">The <see cref="DiscordSocketClient"/> Client. </param>
+        /// <param name="embedBuilders">The list of <see cref="EmbedBuilder"/> is used to display them as pages.</param>
+        /// <param name="context">the <see cref="SocketCommandContext"/> used to send normal commands.</param>
+        /// <param name="context">the <see cref="SocketSlashCommand"/> used to send slash commands.</param>
+        /// <param name="styles">The <see cref="EmbedPagesStyles"/> is for customization of many parameters.</param>
+        public async Task CreateEmbedPages(DiscordSocketClient client, List<EmbedBuilder> embedBuilders, SocketCommandContext context = null, SocketSlashCommand command = null, EmbedPagesStyles styles = null) {
             styles ??= new();
             if (!embedBuilders.Any()) {
-                await message.Channel.SendMessageAsync($"error: EMBEDBUILDERS_NOT_FOUND. You didnt specify any embedBuilders to me. See Examples: https://github.com/killerfrienddk/Discord.KillersLibrary.Labs");
+                await CommonService.Instance.MakeResponse("error: EMBEDBUILDERS_NOT_FOUND. You didnt specify any embedBuilders to me. See Examples: https://github.com/killerfrienddk/Discord.KillersLibrary.Labs", context: context, command: command);
                 return;
             }
 
@@ -57,12 +59,12 @@ namespace KillersLibrary.EmbedPages {
 
             var currentPage = 0;
             if (styles.PageNumbers) embedBuilders[0] = embedBuilders[0].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
-            var currentMessage = await message.Channel.SendMessageAsync(embed: embedBuilders[0].Build(), component: componentBuilder.Build());
+            var currentMessage = await CommonService.Instance.MakeResponse(embed: embedBuilders[0].Build(), component: componentBuilder.Build(), context: context, command: command);
             client.InteractionCreated += async (socketInteraction) => {
                 SocketMessageComponent interaction = (SocketMessageComponent)socketInteraction;
                 if (interaction.Data.Type != ComponentType.Button) return;
 
-                if (interaction.Message.Id == currentMessage.Id && interaction.User.Id == message.Author.Id) {
+                if (interaction.Message.Id == currentMessage.Id && interaction.User.Id == CommonService.Instance.GetAuthorID(context, command)) {
                     switch (interaction.Data.CustomId) {
                         case "back_button_embed":
                             if (currentPage - 1 < 0) currentPage = embedBuilders.Count - 1;

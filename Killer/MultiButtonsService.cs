@@ -29,7 +29,8 @@ namespace KillersLibrary {
         ///     Creates Multi Buttons.
         /// </summary>
         /// <param name="titles">List of strings that will be placed on the buttons title e.g A-B"/></param>
-        /// <param name="styles">Styling or customization of the buttons. <see cref="MultiButtonsStyles"/></param>
+        /// <param name="styles">The <see cref="MultiButtonsStyles"/> is for customization of many parameters.</param>
+        /// <returns>A <see cref="ComponentBuilder"/></returns>
         public ComponentBuilder CreateMultiButtons(List<string> titles, MultiButtonsStyles styles = null) {
             styles ??= new();
 
@@ -94,9 +95,10 @@ namespace KillersLibrary {
         /// <summary>
         ///     Creates Select For Multi Buttons.
         /// </summary>
-        /// <param name="interaction">Interaction. <see cref="SocketMessageComponent"/></param>
+        /// <param name="interaction">The <see cref="SocketMessageComponent"/> is used for getting the number at the end of the customID. <see cref="SocketMessageComponent"/></param>
         /// <param name="multiButtons">List of <see cref="MultiButton"/>s that will be calculated placed in the select depending on the range that has been choosen."/></param>
-        /// <param name="styles">Styling or customization of the buttons. <see cref="SelectForMultiButtonsStyles"/></param>
+        /// <param name="styles">The <see cref="SelectForMultiButtonsStyles"/> is for customization of many parameters.</param>
+        /// <returns>A <see cref="ComponentBuilder"/></returns>
         public ComponentBuilder CreateSelectForMultiButtons(SocketMessageComponent interaction, List<MultiButton> multiButtons, SelectForMultiButtonsStyles styles = null) {
             styles ??= new();
 
