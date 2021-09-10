@@ -88,7 +88,7 @@ namespace KillersLibrary.EmbedPages {
                         case "back_button_embed":
                         case "forward_button_embed":
                         case "last_embed":
-                            if (styles.PageNumbers) embedBuilders[currentPage] = embedBuilders[0].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
+                            if (styles.PageNumbers) embedBuilders[currentPage] = embedBuilders[currentPage].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
                             await currentMessage.ModifyAsync(msg => {
                                 msg.Embed = embedBuilders[currentPage].Build();
                                 msg.Components = componentBuilder.Build();
@@ -184,7 +184,7 @@ namespace KillersLibrary.EmbedPages {
                         case "back_button_embed":
                         case "forward_button_embed":
                         case "last_embed":
-                            if (styles.PageNumbers) embedBuilders[currentPage] = embedBuilders[0].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
+                            if (styles.PageNumbers) embedBuilders[currentPage] = embedBuilders[currentPage].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
                             await currentMessage.ModifyAsync(msg => {
                                 msg.Embed = embedBuilders[currentPage].Build();
                                 msg.Components = componentBuilder.Build();
