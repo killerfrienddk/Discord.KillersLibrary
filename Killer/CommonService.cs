@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
 using System.IO;
+using System;
 using Discord.WebSocket;
 using Discord.Commands;
-using Discord;
 using Discord.Rest;
+using Discord;
 
 namespace KillersLibrary {
     public class CommonService {
@@ -18,11 +19,23 @@ namespace KillersLibrary {
 
         #region Other
         /// <summary>
+        ///     Gets the DiscordID depending on which of the two inputs are null.
+        /// </summary>
+        /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
+        /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
+        /// <returns>A DiscordID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is null.</returns>
+        public virtual ulong GetDiscordID(SocketCommandContext context = null, SocketSlashCommand command = null) {
+            if (context == null) return command.User.Id;
+            else return context.User.Id;
+        }
+
+        /// <summary>
         ///     Gets the UserID depending on which of the two inputs are null.
         /// </summary>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
         /// <returns>A UserID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is null.</returns>
+        [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new GetDiscordID instead", true)]
         public virtual ulong GetUserID(SocketCommandContext context = null, SocketSlashCommand command = null) {
             if (context == null) return command.User.Id;
             else return context.User.Id;
