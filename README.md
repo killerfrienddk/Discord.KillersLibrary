@@ -45,7 +45,7 @@ public CTOR(EmbedPagesService embedPagesService, MultiButtonsService multiButton
 
 Inject the EmbedPagesService into your Module using DI instead. (Constructor / Public Property Injection).
 
-### Example: Creating Embed Pages using discord commands structure
+### Example: Creating Embed Pages using discord commands structure or slash commands
 ```cs
 [Command("Help")]
 public async Task HelpAsync() {
@@ -69,8 +69,9 @@ public async Task HelpAsync() {
     embedBuilder.WithDescription("This is the animal picture system here is some commands to help you:");
     embedBuilder.AddField("!cat", "Get a cat picture.");
     embedBuilders.Add(embedBuilder);
-
-    await EmbedPagesService.CreateEmbedPages(Context.Client, Context.Message, embedBuilders);
+    
+    await _embedPagesService.CreateEmbedPages(client, embedBuilders, context);
+    // await _embedPagesService.CreateEmbedPages(client, embedBuilders, command: command); //Or slashcommands
 }
 ```
 
@@ -94,7 +95,8 @@ public async Task HelpAsync() {
     style.FastChangeBtns = false; // Do you want there to be a button that goes directly to either ends?
     style.PageNumbers = true; //Do you want the embed to have page numbers like "Page: 1/4"? Depends on how many pages you have.
     
-    await EmbedPagesService.CreateEmbedPages(Context.Client, Context.Message, embedBuilders, style);
+    await _embedPagesService.CreateEmbedPages(client, embedBuilders, context, style: style);
+    // await _embedPagesService.CreateEmbedPages(client, embedBuilders, command: command, style: style); //Or slashcommands
 }
 ```
 
@@ -119,7 +121,7 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
     var builder = _multiButtonsService.CreateMultiButtons(titles, multiButtonsStyles);
     builder.WithButton(_commonService.MakeGoBackButton());
 
-    await interaction.FollowupAsync(text: "Choose Person", component: builder.Build());
+    await interaction.FollowupAsync("Choose Person", component: builder.Build());
 }
 ```
 
@@ -144,7 +146,7 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
     var builder = _multiButtonsService.CreateMultiButtons(titles, multiButtonsStyles);
     builder.WithButton(_commonService.MakeGoBackButton());
 
-    await interaction.FollowupAsync(text: "Choose Person", component: builder.Build());
+    await interaction.FollowupAsync("Choose Person", component: builder.Build());
 }
 ```
 
@@ -181,7 +183,7 @@ public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
     var builder = _multiButtonsService.CreateSelectForMultiButtons(interaction, multiButtons, selectForMultiButtonsStyles);
     builder.WithButton(_commonService.MakeGoBackButton());
 
-    await interaction.FollowupAsync(text: "Choose Person", component: builder.Build());
+    await interaction.FollowupAsync("Choose Person", component: builder.Build());
 }
 ```
 
@@ -212,6 +214,6 @@ public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
     var builder = _multiButtonsService.CreateSelectForMultiButtons(interaction, multiButtons, selectForMultiButtonsStyles);
     builder.WithButton(_commonService.MakeGoBackButton());
 
-    await interaction.FollowupAsync(text: "Choose Person", component: builder.Build());
+    await interaction.FollowupAsync("Choose Person", component: builder.Build());
 }
 ```
