@@ -39,8 +39,6 @@ namespace KillersLibrary.EmbedPages {
             };
         }
 
-       
-
         /// <summary>
         ///     Creates Embed Pages as a message.
         /// </summary>
@@ -72,7 +70,7 @@ namespace KillersLibrary.EmbedPages {
             };
         }
 
-        public async Task FinishEmbedActions(SocketMessageComponent interaction, List<EmbedBuilder> embedBuilders, int currentPage, RestUserMessage currentMessage, ComponentBuilder componentBuilder, EmbedPagesStyles styles) {
+        private async Task FinishEmbedActions(SocketMessageComponent interaction, List<EmbedBuilder> embedBuilders, int currentPage, RestUserMessage currentMessage, ComponentBuilder componentBuilder, EmbedPagesStyles styles) {
             currentPage = GetCurrentPage(interaction, currentPage, embedBuilders);
 
             switch (interaction.Data.CustomId) {
@@ -93,7 +91,7 @@ namespace KillersLibrary.EmbedPages {
             }
         }
 
-        public int GetCurrentPage(SocketMessageComponent interaction, int currentPage, List<EmbedBuilder> embedBuilders) {
+        private int GetCurrentPage(SocketMessageComponent interaction, int currentPage, List<EmbedBuilder> embedBuilders) {
             switch (interaction.Data.CustomId) {
                 case "back_button_embed":
                     if (currentPage - 1 < 0) currentPage = embedBuilders.Count - 1;
@@ -114,7 +112,7 @@ namespace KillersLibrary.EmbedPages {
             return currentPage;
         }
 
-        public ComponentBuilder GetComponentBuilder(EmbedPagesStyles styles) {
+        private ComponentBuilder GetComponentBuilder(EmbedPagesStyles styles) {
             ComponentBuilder componentBuilder = new();
             if (styles.FastChangeBtns) {
                 ButtonBuilder firstbtn = new ButtonBuilder()
@@ -153,8 +151,6 @@ namespace KillersLibrary.EmbedPages {
             return componentBuilder;
         }
     }
-
-  
 
     public class EmbedPagesStyles {
         public string FirstLabel { get; set; } = "«";
