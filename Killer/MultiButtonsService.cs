@@ -10,18 +10,20 @@ namespace KillersLibrary {
         public string Value { get; set; }
     }
 
-    public class MultiButtonsStyles {
-        public string CustomID { get; set; } = "multiButtons";
+
+    public class BaseStyle {
+        public string CustomID { get; set; }
         public ButtonStyle ButtonStyle { get; set; } = ButtonStyle.Success;
-        public bool UpperCaseLetters { get; set; } = true;
         public bool OrderByTitle { get; set; } = true;
     }
 
-    public class SelectForMultiButtonsStyles {
-        public string CustomID { get; set; } = "chooseRange";
+    public class MultiButtonsStyles : BaseStyle {
+        public bool UpperCaseLetters { get; set; } = true;
+    }
+
+    public class SelectForMultiButtonsStyles : BaseStyle {
         public string Placeholder { get; set; } = "Select Item";
         public bool RagedLettersOnEndOfPlaceholder { get; set; } = true;
-        public bool OrderByTitle { get; set; } = true;
     }
 
     public class MultiButtonsService {
@@ -34,16 +36,14 @@ namespace KillersLibrary {
         public virtual ComponentBuilder CreateMultiButtons(List<string> titles, MultiButtonsStyles styles = null) {
             styles ??= new();
 
-            var builder = new ComponentBuilder();
-
-            int count = 1;
-            string firstLetter = "";
-            int resetAt = 0;
-            int buttonCount = 0;
-
-            string lastLetter;
             if (styles.OrderByTitle) titles = titles.OrderBy(t => t).ToList();
 
+            var builder = new ComponentBuilder();
+            int count = 1;
+            int resetAt = 0;
+            int buttonCount = 0;
+            string firstLetter = "";
+            string lastLetter;
             for (int i = 0; i < titles.Count; i++) {
                 if (count == 1) firstLetter = titles[i][0].ToString();
 
@@ -59,6 +59,7 @@ namespace KillersLibrary {
                         letters = (styles.UpperCaseLetters ? firstLetter.ToUpper() : firstLetter.ToLower()) +
                         "-" + (styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower());
                     }
+
                     button.WithLabel(letters);
                     button.WithStyle(styles.ButtonStyle);
                     button.WithCustomId(styles.CustomID + ++buttonCount);
@@ -121,9 +122,7 @@ namespace KillersLibrary {
             selectMenu.WithPlaceholder(styles.Placeholder +
                 (styles.RagedLettersOnEndOfPlaceholder ? " - " + rangeLetters : ""));
 
-            var builder = new ComponentBuilder().WithSelectMenu(selectMenu);
-
-            return builder;
+            return new ComponentBuilder().WithSelectMenu(selectMenu);
         }
     }
 }
