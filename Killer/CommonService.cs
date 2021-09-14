@@ -99,6 +99,9 @@ namespace KillersLibrary {
         /// <param name="component">A <see cref="MessageComponent"/> to be sent with this response</param>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
+        /// <returns>
+        /// A <see cref="RestUserMessage"/>
+        /// </returns>
         public virtual async Task<RestUserMessage> MakeResponse(string text = null, Embed embed = null, MessageComponent component = null, SocketCommandContext context = null, SocketSlashCommand command = null) {
             ContextAndCommandIsNullCheck(context, command);
             if (context == null) return await command.FollowupAsync(text, embed: embed, component: component);
