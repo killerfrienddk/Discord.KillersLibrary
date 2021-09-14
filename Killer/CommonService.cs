@@ -19,11 +19,11 @@ namespace KillersLibrary {
 
         #region Other
         /// <summary>
-        ///     Gets the DiscordID depending on which of the two inputs are null.
+        ///     Gets the DiscordID depending on which of the two inputs are <see langword="null"/>.
         /// </summary>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        /// <returns>A DiscordID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is null.</returns>
+        /// <returns>A DiscordID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is <see langword="null"/>.</returns>
         public virtual ulong GetDiscordID(SocketCommandContext context = null, SocketSlashCommand command = null) {
             ContextAndCommandIsNullCheck(context, command);
             if (context == null) return command.User.Id;
@@ -31,11 +31,11 @@ namespace KillersLibrary {
         }
 
         /// <summary>
-        ///     Gets the UserID depending on which of the two inputs are null.
+        ///     Gets the UserID depending on which of the two inputs are <see langword="null"/>.
         /// </summary>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        /// <returns>A UserID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is null.</returns>
+        /// <returns>A UserID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is <see langword="null"/>.</returns>
         [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new GetDiscordID instead", true)]
         public virtual ulong GetUserID(SocketCommandContext context = null, SocketSlashCommand command = null) {
             ContextAndCommandIsNullCheck(context, command);
@@ -44,11 +44,11 @@ namespace KillersLibrary {
         }
 
         /// <summary>
-        ///     Gets the GuildID depending on which of the two inputs are null.
+        ///     Gets the GuildID depending on which of the two inputs are <see langword="null"/>.
         /// </summary>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        /// <returns>A GuildID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is null.</returns>
+        /// <returns>A GuildID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is <see langword="null"/>.</returns>
         public virtual ulong GetGuildID(SocketCommandContext context = null, SocketSlashCommand command = null) {
             ContextAndCommandIsNullCheck(context, command);
             if (context == null) return ((SocketGuildUser)command.User).Guild.Id;
@@ -56,11 +56,11 @@ namespace KillersLibrary {
         }
 
         /// <summary>
-        ///     Gets the AuthorID depending on which of the two inputs are null.
+        ///     Gets the AuthorID depending on which of the two inputs are <see langword="null"/>.
         /// </summary>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        /// <returns>A AuthorID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is null.</returns>
+        /// <returns>A AuthorID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is <see langword="null"/>.</returns>
         public virtual ulong GetAuthorID(SocketCommandContext context = null, SocketSlashCommand command = null) {
             ContextAndCommandIsNullCheck(context, command);
             if (context == null) return command.User.Id;
@@ -68,7 +68,7 @@ namespace KillersLibrary {
         }
 
         /// <summary>
-        ///     Throws an <see cref="ArgumentException"/> if both the <see cref="SocketCommandContext"/> and the <see cref="SocketSlashCommand"/> is null.
+        ///     Throws an <see cref="ArgumentException"/> if both the <see cref="SocketCommandContext"/> and the <see cref="SocketSlashCommand"/> is <see langword="null"/>.
         /// </summary>
         /// <param name="context">The <see cref="SocketCommandContext"/>.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/>.</param>
@@ -78,7 +78,7 @@ namespace KillersLibrary {
 
         #region Responses
         /// <summary>
-        ///     Sends a file using <see cref="ISocketMessageChannel"/> depending on which of the two inputs are null.
+        ///     Sends a file using <see cref="ISocketMessageChannel"/> depending on which of the two inputs are <see langword="null"/>.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> is the image data you want to send.</param>
         /// <param name="filename">The filename of the attachment.</param>
@@ -92,7 +92,7 @@ namespace KillersLibrary {
         }
 
         /// <summary>
-        ///     Sends a file using <see cref="ISocketMessageChannel"/> depending on which of the two inputs are null.
+        ///     Sends a file using <see cref="ISocketMessageChannel"/> depending on which of the two inputs are <see langword="null"/>.
         /// </summary>
         /// <param name="text">The text of the message to be sent.</param>
         /// <param name="embed">A single embed to send with this response. If this is passed alongside an array of embeds, the single embed will be ignored.</param>
