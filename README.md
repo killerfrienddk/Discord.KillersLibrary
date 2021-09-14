@@ -51,7 +51,7 @@ Inject the EmbedPagesService into your Module using DI instead. (Constructor / P
 
 ### Example: Creating Embed Pages using discord commands structure or slash commands
 ```cs
-[Command("Help")]
+[Command("Help")] // Remove this for slash commands
 public async Task HelpAsync() {
     List<EmbedBuilder> embedBuilders = new();
 
@@ -84,7 +84,7 @@ None of the EmbedPagesStyles has to be set what you see is their default values.
 
 You can leave out all of them or some of them or change them at will.
 ```cs
-[Command("Help")]
+[Command("Help")] // Remove this for slash commands
 public async Task HelpAsync() {
     EmbedPagesStyles style = new();
     style.FirstLabel = "«";
