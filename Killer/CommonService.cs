@@ -72,7 +72,7 @@ namespace KillersLibrary {
         /// </summary>
         /// <param name="context">The <see cref="SocketCommandContext"/>.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/>.</param>
-        public void ContextAndCommandIsNullCheck(SocketCommandContext context = null, SocketSlashCommand command = null) {
+        public virtual void ContextAndCommandIsNullCheck(SocketCommandContext context = null, SocketSlashCommand command = null) {
             if (context == null && command == null) throw new ArgumentException("Both the context and the command is empty. Please fill one of the parameters.");
         }
 
