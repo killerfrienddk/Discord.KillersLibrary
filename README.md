@@ -10,7 +10,10 @@ Make sure to use the preview version of this package if you are planning to use 
 ## Features
  - [Creating dynamic embed pages](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#embed-pages).
  - [Creating dynamic multi buttons](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons).
- - [Multi buttons select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select).
+ - [Multi buttons select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select). - [There is some Methods that will return either a DiscordID From either slash or normal commands.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/CommonService.cs)
+ - [Same thing for GuildID](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/CommonService.cs)
+ - [It does also contain FileUpload and SendMessages that both work with the slash and normal commands.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/CommonService.cs)
+ - More is to be added in the future.
 
 ## Wiki
 [Wiki on github](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/wiki).
