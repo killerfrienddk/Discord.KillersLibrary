@@ -47,7 +47,7 @@ public CTOR(EmbedPagesService embedPagesService, MultiButtonsService multiButton
 ## Embed Pages
 ![Embed Pages example](https://i.imgur.com/hUxpVg2.jpg)
 
-[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#usage) the EmbedPagesService into your Module using DI instead. (Constructor / Public Property Injection).
+[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/README.md#dependency-injection-in-commands) the EmbedPagesService into your Module using DI instead. (Constructor / Public Property Injection).
 
 ### Example: Creating Embed Pages using discord commands structure or slash commands
 ```cs
@@ -107,7 +107,7 @@ public async Task HelpAsync() {
 ## Multi Buttons
 ![Multi Buttons example](https://i.imgur.com/9tXMrmS.jpg)
 
-[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#usage) the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
+[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/README.md#dependency-injection-in-commands) the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
 
 ### Example: Creating Multi Buttons
 You can do as i have done for making buttons that splits up people in your server by 25 pr button.
@@ -157,7 +157,7 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
 ## Multi Buttons Select
 ![MultiButtons Select example](https://i.imgur.com/7MM1il5.jpg)
 
-[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#usage) the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
+[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/README.md#dependency-injection-in-commands) the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
 
 ### Example: Creating Multi Buttons Select
 In order to get a list of users you have to activate the "Privileged Gateway Intents" those being "PRESENCE INTENT" and "SERVER MEMBERS INTENT" they can be set [here](https://discord.com/developers/applications) by choosing your bot and going to the Bots tab. 
