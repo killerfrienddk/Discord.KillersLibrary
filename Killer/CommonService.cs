@@ -82,7 +82,7 @@ namespace KillersLibrary {
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> is the image data you want to send.</param>
         /// <param name="filename">The filename of the attachment.</param>
-        /// <param name="text">The message to be sent.</param>
+        /// <param name="text">The text of the message to be sent.</param>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
         public virtual async Task MakeFileResponse(Stream stream, string filename, string text = null, SocketCommandContext context = null, SocketSlashCommand command = null) {
