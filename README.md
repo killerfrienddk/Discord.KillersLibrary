@@ -123,7 +123,6 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
     foreach (RestGuildUser user in users) titles.Add(user.Nickname ?? user.Username);
 
     var builder = _multiButtonsService.CreateMultiButtons(titles, multiButtonsStyles);
-    builder.WithButton(_commonService.MakeGoBackButton());
 
     await interaction.FollowupAsync("Choose Person", component: builder.Build());
 }
@@ -147,8 +146,7 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
         OrderByTitle = true
     };
 
-    var builder = _multiButtonsService.CreateMultiButtons(titles, multiButtonsStyles);
-    builder.WithButton(_commonService.MakeGoBackButton());
+    var builder = _multiButtonsService.CreateMultiButtons(titles, multiButtonsStyles
 
     await interaction.FollowupAsync("Choose Person", component: builder.Build());
 }
@@ -185,7 +183,6 @@ public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
     }
 
     var builder = _multiButtonsService.CreateSelectForMultiButtons(interaction, multiButtons, selectForMultiButtonsStyles);
-    builder.WithButton(_commonService.MakeGoBackButton());
 
     await interaction.FollowupAsync("Choose Person", component: builder.Build());
 }
@@ -216,7 +213,6 @@ public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
     };
 
     var builder = _multiButtonsService.CreateSelectForMultiButtons(interaction, multiButtons, selectForMultiButtonsStyles);
-    builder.WithButton(_commonService.MakeGoBackButton());
 
     await interaction.FollowupAsync("Choose Person", component: builder.Build());
 }
