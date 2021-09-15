@@ -35,7 +35,7 @@ namespace KillersLibrary.EmbedPages {
                 if (interaction.Data.Type != ComponentType.Button) return;
 
                 if (interaction.Message.Id == currentMessage.Id && interaction.User.Id == CommonService.Instance.GetAuthorID(context, command)) {
-                    await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, componentBuilder, styles);
+                    currentPage = await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, componentBuilder, styles);
                 }
             };
         }
@@ -66,12 +66,12 @@ namespace KillersLibrary.EmbedPages {
                 if (interaction.Data.Type != ComponentType.Button) return;
 
                 if (interaction.Message.Id == currentMessage.Id && interaction.User.Id == message.Author.Id) {
-                    await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, componentBuilder, styles);
+                    currentPage = await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, componentBuilder, styles);
                 }
             };
         }
 
-        private async Task FinishEmbedActions(SocketMessageComponent interaction, List<EmbedBuilder> embedBuilders, int currentPage, RestUserMessage currentMessage, ComponentBuilder componentBuilder, EmbedPagesStyles styles) {
+        private async Task<int> FinishEmbedActions(SocketMessageComponent interaction, List<EmbedBuilder> embedBuilders, int currentPage, RestUserMessage currentMessage, ComponentBuilder componentBuilder, EmbedPagesStyles styles) {
             currentPage = GetCurrentPage(interaction, currentPage, embedBuilders);
 
             switch (interaction.Data.CustomId) {
@@ -90,6 +90,8 @@ namespace KillersLibrary.EmbedPages {
                     await interaction.FollowupAsync(styles.DeletionMessage, ephemeral: true);
                     break;
             }
+
+            return currentPage;
         }
 
         private int GetCurrentPage(SocketMessageComponent interaction, int currentPage, List<EmbedBuilder> embedBuilders) {
