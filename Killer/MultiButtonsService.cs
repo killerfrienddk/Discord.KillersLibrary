@@ -93,6 +93,35 @@ namespace KillersLibrary {
             return builder;
         }
 
+
+        /// <summary>
+        ///     This is for choosing the amount of rows pr message.
+        /// </summary>
+        public enum MultiButtonsRows {
+            One = 125,
+            Two = 250,
+            Three = 375,
+            Four = 500,
+            Five = 650
+        }
+
+        /// <summary>
+        ///     Creates Multiple Multi Buttons.
+        /// </summary>
+        /// <param name="titles">List of strings that will be placed on the buttons title e.g A-B"/></param>
+        /// <param name="styles">The <see cref="MultiButtonsStyles"/> is for customization of many parameters.</param>
+        /// <returns>A list of <see cref="ComponentBuilder"/></returns>
+        public virtual List<ComponentBuilder> CreateMultipleMultiButtons(List<string> titles, MultiButtonsRows multiButtonsRows = MultiButtonsRows.Five, MultiButtonsStyles styles = null) {
+            List<ComponentBuilder> componentBuilders = new();
+
+            for (int i = 0; i < titles.Count; i++) {
+                var strings = titles.Skip(i + (int)multiButtonsRows).Take((int)multiButtonsRows).ToList();
+                componentBuilders.Add(CreateMultiButtons(strings, styles));
+            }
+
+            return componentBuilders;
+        }
+
         /// <summary>
         ///     Creates Select For Multi Buttons.
         /// </summary>
