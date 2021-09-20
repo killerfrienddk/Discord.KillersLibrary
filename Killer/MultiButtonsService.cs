@@ -3,7 +3,6 @@ using System.Linq;
 using System;
 using Discord.WebSocket;
 using Discord;
-using System.Threading.Tasks;
 
 namespace KillersLibrary {
 
