@@ -35,7 +35,7 @@ Moreover it includes support for any command framework.</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Discord.Net.Labs" Version="3.0.4" />
+    <PackageReference Include="Discord.Net.Labs" Version="3.0.3" />
   </ItemGroup>
   
   <ItemGroup>
