@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using System;
 using Discord.WebSocket;
 using Discord;
 
 namespace KillersLibrary {
-
     /// <summary>
     ///     This is for choosing the amount of rows pr message.
     /// </summary>
@@ -168,6 +168,32 @@ namespace KillersLibrary {
                 (styles.RagedLettersOnEndOfPlaceholder ? " - " + rangeLetters : ""));
 
             return new ComponentBuilder().WithSelectMenu(selectMenu);
+        }
+
+        public async Task RemoveMultiButtonsAndSelectAsync(SocketMessageComponent interaction) {
+            IMessage repliedIMessage = await interaction.Channel.GetMessageAsync(interaction.Message.Reference.MessageId.Value);
+
+            await interaction.Message.DeleteAsync();
+            await repliedIMessage.DeleteAsync();
+            repliedIMessage = await interaction.Channel.GetMessageAsync(repliedIMessage.Reference.MessageId.Value);
+
+            List<IMessage> messages = new();
+            IAsyncEnumerator<IReadOnlyCollection<IMessage>> e = interaction.Channel.GetMessagesAsync().GetAsyncEnumerator();
+            try {
+                while (await e.MoveNextAsync()) {
+                    foreach (IMessage message in e.Current) {
+                        messages.Add(message);
+                    }
+                }
+            } finally { if (e != null) await e.DisposeAsync(); }
+
+            messages = messages.Where(m => m.Reference != null && m.Reference.MessageId.IsSpecified && m.Reference.MessageId.Value == repliedIMessage.Id).ToList();
+
+            foreach (IMessage message in messages) {
+                await message.DeleteAsync();
+            }
+
+            await repliedIMessage.DeleteAsync();
         }
     }
 }
