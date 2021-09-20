@@ -170,8 +170,9 @@ namespace KillersLibrary {
             return new ComponentBuilder().WithSelectMenu(selectMenu);
         }
 
-        public async Task RemoveMultiButtonsAndSelectAsync(SocketMessageComponent interaction) {
+        public async Task<IMessage> RemoveMultiButtonsAndSelectAsync(SocketMessageComponent interaction) {
             IMessage repliedIMessage = await interaction.Channel.GetMessageAsync(interaction.Message.Reference.MessageId.Value);
+            IMessage repliedIMessageOld = await interaction.Channel.GetMessageAsync(interaction.Message.Reference.MessageId.Value); ;
 
             await interaction.Message.DeleteAsync();
             await repliedIMessage.DeleteAsync();
@@ -194,6 +195,7 @@ namespace KillersLibrary {
             }
 
             await repliedIMessage.DeleteAsync();
+            return repliedIMessageOld;
         }
     }
 }
