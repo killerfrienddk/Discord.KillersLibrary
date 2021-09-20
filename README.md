@@ -188,15 +188,17 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
     List<string> titles = new();
     foreach (RestGuildUser user in users) titles.Add(user.Nickname ?? user.Username);
 
-    MultiButtonsStyles multiButtonsStyles = new() {
+    MultipleMultiButtonsStyles multipleMultiButtonsStyles = new() {
         CustomID = "multiButtons",
         ButtonStyle = ButtonStyle.Success,
         UpperCaseLetters = true,
-        OrderByTitle = true
+        OrderByTitle = true,
+        DoNotAddLastButton = false,
+        MultiButtonsRows = MultiButtonsRows.Five
     };
 
-    List<ComponentBuilder> builders = _multiButtonsService.CreateMultiButtons(titles, MultiButtonsRows.Five, multiButtonsStyles);
-    // List<ComponentBuilder> builders = _multiButtonsService.CreateMultipleMultiButtons(titles, styles: multiButtonsStyles);
+    List<ComponentBuilder> builders = _multiButtonsService.CreateMultiButtons(titles, MultiButtonsRows.Five, multipleMultiButtonsStyles);
+    // List<ComponentBuilder> builders = _multiButtonsService.CreateMultipleMultiButtons(titles, styles: multipleMultiButtonsStyles);
 
     foreach (ComponentBuilder builder in builders) {
         await interaction.FollowupAsync("Choose Person", component: builder.Build());
@@ -265,7 +267,7 @@ public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
         OrderByTitle = true
     };
 
-    var builder = await _multiButtonsService.CreateSelectForMultiButtonsAsync(interaction, multiButtons, selectForMultiButtonsStyles);
+    var builder = _multiButtonsService.CreateSelectForMultiButtons(interaction, multiButtons, selectForMultiButtonsStyles);
 
     await interaction.FollowupAsync("Choose Person", component: builder.Build());
 }
