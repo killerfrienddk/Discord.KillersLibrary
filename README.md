@@ -1,6 +1,6 @@
 # Discord.KillersLibrary
 
-[![NuGet](https://img.shields.io/badge/nuget-v1.0.93--labs-brightgreen.svg?style=plastic)](https://www.nuget.org/packages/Discord.KillersLibrary.Labs)
+[![NuGet](https://img.shields.io/badge/nuget-v1.0.94--labs-brightgreen.svg?style=plastic)](https://www.nuget.org/packages/Discord.KillersLibrary.Labs)
 
 This is an addon for the Discord API Wrapper [Discord.Net-Labs](https://github.com/discord-net-labs/Discord.Net-Labs).
 
@@ -10,6 +10,7 @@ Make sure to use the preview version of this package if you are planning to use 
 ## Features
  - [Creating dynamic embed pages](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#embed-pages).
  - [Creating dynamic multi buttons](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons).
+ - [Creating Multiple Messages Multi Buttons](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multiple-messages-multi-buttons).
  - [Multi buttons select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select). 
  - [There is some Methods that will return either a DiscordID From either slash or normal commands.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/CommonService.cs)
  - [Same thing for GuildID](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/CommonService.cs)
@@ -152,6 +153,58 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
 }
 ```
 
+## Multipule Messages Multi Buttons
+[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/README.md#dependency-injection-in-commands) the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
+
+### Example: Creating Multiple Messages Multi Buttons
+You can do as i have done for making buttons that splits up people in your server by 25 pr button.
+Or just a long list of strings.
+
+In order to get a list of users you have to activate the "Privileged Gateway Intents" those being "PRESENCE INTENT" and "SERVER MEMBERS INTENT" they can be set [here](https://discord.com/developers/applications) by choosing your bot and going to the Bots tab. 
+Remember if you your bot is in 100 or more servers then it needs to get verification and whitelisting from discord for the intents to work. [Read more here](https://support.discord.com/hc/en-us/articles/360040720412).
+```cs
+public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
+    List<RestGuildUser> users = await _userService.GetSortedUserListAsync(((SocketGuildUser)interaction.User).Guild);
+
+    List<string> titles = new();
+    foreach (RestGuildUser user in users) titles.Add(user.Nickname ?? user.Username);
+
+    List<ComponentBuilder> builders = _multiButtonsService.CreateMultipleMultiButtons(titles);
+
+    foreach (ComponentBuilder builder in builders) {
+        await interaction.FollowupAsync("Choose Person", component: builder.Build());
+    }
+}
+```
+
+### Example: Changing Multiple Messages Multi Buttons Customization
+None of the MultiButtonsStyles has to be set what you see is their default values. 
+
+You can leave out all of them or some of them or change them at will.
+```cs 
+public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
+    List<RestGuildUser> users = await _userService.GetSortedUserListAsync(((SocketGuildUser)interaction.User).Guild);
+
+    List<string> titles = new();
+    foreach (RestGuildUser user in users) titles.Add(user.Nickname ?? user.Username);
+
+    MultiButtonsStyles multiButtonsStyles = new() {
+        CustomID = "multiButtons",
+        ButtonStyle = ButtonStyle.Success,
+        UpperCaseLetters = true,
+        OrderByTitle = true
+    };
+
+    List<ComponentBuilder> builders = _multiButtonsService.CreateMultiButtons(titles, MultiButtonsRows.Five, multiButtonsStyles);
+    // List<ComponentBuilder> builders = _multiButtonsService.CreateMultipleMultiButtons(titles, styles: multiButtonsStyles);
+
+    foreach (ComponentBuilder builder in builders) {
+        await interaction.FollowupAsync("Choose Person", component: builder.Build());
+    }
+}
+```
+
+
 ## Multi Buttons Select
 ![MultiButtons Select example](https://i.imgur.com/7MM1il5.jpg)
 
@@ -182,7 +235,7 @@ public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
         multiButtons.Add(multiButton);
     }
 
-    var builder = _multiButtonsService.CreateSelectForMultiButtons(interaction, multiButtons, selectForMultiButtonsStyles);
+    var builder = await _multiButtonsService.CreateSelectForMultiButtonsAsync(interaction, multiButtons, selectForMultiButtonsStyles);
 
     await interaction.FollowupAsync("Choose Person", component: builder.Build());
 }
@@ -212,7 +265,7 @@ public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
         OrderByTitle = true
     };
 
-    var builder = _multiButtonsService.CreateSelectForMultiButtons(interaction, multiButtons, selectForMultiButtonsStyles);
+    var builder = await _multiButtonsService.CreateSelectForMultiButtonsAsync(interaction, multiButtons, selectForMultiButtonsStyles);
 
     await interaction.FollowupAsync("Choose Person", component: builder.Build());
 }
