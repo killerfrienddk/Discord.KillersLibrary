@@ -18,8 +18,9 @@ namespace KillersLibrary {
     }
 
     public class MultiButton {
-        public string Title { get; set; }
+        public string Label { get; set; }
         public string Value { get; set; }
+        public string Description { get; set; }
     }
 
     public class BaseStyle {
@@ -67,18 +68,17 @@ namespace KillersLibrary {
                 if (count == 1) firstLetter = titles[i][0].ToString();
 
                 if (count == 25) {
-                    lastLetter = titles[i][0].ToString();
                     count = 1;
-                    resetAt = i + 1;
-                    ButtonBuilder button = new();
-                    string letters = "";
-                    if (string.IsNullOrWhiteSpace(firstLetter) || firstLetter.ToLower() == lastLetter.ToLower()) {
-                        letters = styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower();
-                    } else {
-                        letters = (styles.UpperCaseLetters ? firstLetter.ToUpper() : firstLetter.ToLower()) +
-                        "-" + (styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower());
-                    }
 
+                    lastLetter = titles[i][0].ToString();
+                    lastLetter = styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower();
+                    firstLetter = styles.UpperCaseLetters ? firstLetter.ToUpper() : firstLetter.ToLower();
+
+                    string letters = "";
+                    if (string.IsNullOrWhiteSpace(firstLetter) || firstLetter == lastLetter) letters = firstLetter;
+                    else letters = $"{firstLetter}-{lastLetter}";
+
+                    ButtonBuilder button = new();
                     button.WithLabel(letters);
                     button.WithStyle(styles.ButtonStyle);
                     button.WithCustomId(styles.CustomID + ++buttonCount);
@@ -86,22 +86,24 @@ namespace KillersLibrary {
                     builder.WithButton(button);
 
                     firstLetter = "";
+                    resetAt = i + 1;
                 } else count++;
             }
 
             if (count >= 2) {
                 if (resetAt > titles.Count) resetAt++;
-                firstLetter = titles[resetAt][0].ToString();
+
                 lastLetter = titles[resetAt + count - 2][0].ToString();
+                lastLetter = styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower();
+
+                firstLetter = titles[resetAt][0].ToString();
+                firstLetter = styles.UpperCaseLetters ? firstLetter.ToUpper() : firstLetter.ToLower();
+
+                string letters = "";
+                if (string.IsNullOrWhiteSpace(firstLetter) || firstLetter == lastLetter) letters = firstLetter;
+                else letters = $"{firstLetter}-{lastLetter}";
 
                 ButtonBuilder button = new();
-                string letters = "";
-                if (string.IsNullOrWhiteSpace(firstLetter)) {
-                    letters = styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower();
-                } else {
-                    letters = (styles.UpperCaseLetters ? firstLetter.ToUpper() : firstLetter.ToLower()) +
-                    "-" + (styles.UpperCaseLetters ? lastLetter.ToUpper() : lastLetter.ToLower());
-                }
                 button.WithLabel(letters);
                 button.WithStyle(styles.ButtonStyle);
                 button.WithCustomId(styles.CustomID + ++buttonCount);
@@ -120,13 +122,13 @@ namespace KillersLibrary {
         /// <returns>A list of <see cref="ComponentBuilder"/></returns>
         public virtual List<ComponentBuilder> CreateMultipleMultiButtons(List<string> titles, MultipleMultiButtonsStyles styles = null) {
             styles ??= new();
-            List<ComponentBuilder> componentBuilders = new();
 
             if (styles.OrderByTitle) {
                 titles = titles.OrderBy(t => t).ToList();
                 styles.OrderByTitle = false; // Prevets the CreateMultiButtonsInternal from doing it Ordering aswell.
             }
 
+            List<ComponentBuilder> componentBuilders = new();
             int buttonCount = 0;
             for (int i = 0; i * (int)styles.MultiButtonsRows < titles.Count; i++) {
                 var strings = titles.Skip(i * (int)styles.MultiButtonsRows - (styles.DoNotAddLastButton ? 25 : 0)).Take((int)styles.MultiButtonsRows - (styles.DoNotAddLastButton ? 25 : 0)).ToList();
@@ -154,20 +156,32 @@ namespace KillersLibrary {
                 .WithCustomId(styles.CustomID);
 
             string lastLetter = "";
-            if (styles.OrderByTitle) multiButtons = multiButtons.OrderBy(m => m.Title).ToList();
+            if (styles.OrderByTitle) multiButtons = multiButtons.OrderBy(m => m.Label).ToList();
             try {
                 for (int i = (number * 25) - 25; i < number * 25; i++) {
-                    selectMenu.AddOption(multiButtons[i].Title.Substring(0, multiButtons[i].Title.Length > 25 ? 25 : multiButtons[i].Title.Length), multiButtons[i].Value);
-                    lastLetter = multiButtons[i].Title[0].ToString();
+                    SelectMenuOptionBuilder option = new();
+                    option.WithLabel(StringLengthFixer(multiButtons[i].Label, 100));
+                    option.WithValue(StringLengthFixer(multiButtons[i].Value, 100));
+                    if (!string.IsNullOrEmpty(multiButtons[i].Description)) option.WithDescription(StringLengthFixer(multiButtons[i].Description, 100));
+
+                    selectMenu.AddOption(option);
+                    lastLetter = multiButtons[i].Label[0].ToString();
                 }
             } catch (Exception) { }
 
-            string rangeLetters = $"{multiButtons[(number * 25) - 25].Title[0]}-{lastLetter}";
+            string rangeLetters = "";
+            string firstLetter = multiButtons[(number * 25) - 25].Label[0].ToString();
+            if (firstLetter == lastLetter) rangeLetters = lastLetter;
+            else rangeLetters = $"{firstLetter}-{lastLetter}";
 
-            selectMenu.WithPlaceholder(styles.Placeholder +
-                (styles.RagedLettersOnEndOfPlaceholder ? " - " + rangeLetters : ""));
+            selectMenu.WithPlaceholder(StringLengthFixer(styles.Placeholder +
+                        (styles.RagedLettersOnEndOfPlaceholder ? " - " + rangeLetters : ""), 100));
 
             return new ComponentBuilder().WithSelectMenu(selectMenu);
+        }
+
+        private string StringLengthFixer(string text, int maxLength) {
+            return text.Substring(0, text.Length > maxLength ? maxLength : text.Length);
         }
 
         public async Task<IMessage> RemoveMultiButtonsAndSelectAsync(SocketMessageComponent interaction) {
