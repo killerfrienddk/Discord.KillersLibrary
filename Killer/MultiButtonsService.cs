@@ -18,7 +18,7 @@ namespace KillersLibrary {
     }
 
     public class MultiButton {
-        public string Label { get; set; }
+        public string Title { get; set; }
         public string Value { get; set; }
         public string Description { get; set; }
     }
@@ -156,21 +156,21 @@ namespace KillersLibrary {
                 .WithCustomId(styles.CustomID);
 
             string lastLetter = "";
-            if (styles.OrderByTitle) multiButtons = multiButtons.OrderBy(m => m.Label).ToList();
+            if (styles.OrderByTitle) multiButtons = multiButtons.OrderBy(m => m.Title).ToList();
             try {
                 for (int i = (number * 25) - 25; i < number * 25; i++) {
                     SelectMenuOptionBuilder option = new();
-                    option.WithLabel(StringLengthFixer(multiButtons[i].Label, 100));
+                    option.WithLabel(StringLengthFixer(multiButtons[i].Title, 100));
                     option.WithValue(StringLengthFixer(multiButtons[i].Value, 100));
                     if (!string.IsNullOrEmpty(multiButtons[i].Description)) option.WithDescription(StringLengthFixer(multiButtons[i].Description, 100));
 
                     selectMenu.AddOption(option);
-                    lastLetter = multiButtons[i].Label[0].ToString();
+                    lastLetter = multiButtons[i].Title[0].ToString();
                 }
             } catch (Exception) { }
 
             string rangeLetters = "";
-            string firstLetter = multiButtons[(number * 25) - 25].Label[0].ToString();
+            string firstLetter = multiButtons[(number * 25) - 25].Title[0].ToString();
             if (firstLetter == lastLetter) rangeLetters = lastLetter;
             else rangeLetters = $"{firstLetter}-{lastLetter}";
 
