@@ -21,6 +21,7 @@ namespace KillersLibrary {
         public string Title { get; set; }
         public string Value { get; set; }
         public Optional<string> Description { get; set; }
+        public Optional<IEmote> Emote { get; set; }
     }
 
     public class BaseStyle {
@@ -163,6 +164,7 @@ namespace KillersLibrary {
                     option.WithLabel(StringLengthFixer(multiButtons[i].Title, 100));
                     option.WithValue(StringLengthFixer(multiButtons[i].Value, 100));
                     if (multiButtons[i].Description.IsSpecified) option.WithDescription(StringLengthFixer(multiButtons[i].Description.Value, 100));
+                    if (multiButtons[i].Emote.IsSpecified) option.WithEmote(multiButtons[i].Emote.Value);
 
                     selectMenu.AddOption(option);
                     lastLetter = multiButtons[i].Title[0].ToString();
