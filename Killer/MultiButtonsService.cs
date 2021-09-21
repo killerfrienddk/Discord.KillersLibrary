@@ -20,7 +20,7 @@ namespace KillersLibrary {
     public class MultiButton {
         public string Title { get; set; }
         public string Value { get; set; }
-        public string Description { get; set; }
+        public Optional<string> Description { get; set; }
     }
 
     public class BaseStyle {
@@ -162,7 +162,7 @@ namespace KillersLibrary {
                     SelectMenuOptionBuilder option = new();
                     option.WithLabel(StringLengthFixer(multiButtons[i].Title, 100));
                     option.WithValue(StringLengthFixer(multiButtons[i].Value, 100));
-                    if (!string.IsNullOrEmpty(multiButtons[i].Description)) option.WithDescription(StringLengthFixer(multiButtons[i].Description, 100));
+                    if (multiButtons[i].Description.IsSpecified) option.WithDescription(StringLengthFixer(multiButtons[i].Description.Value, 100));
 
                     selectMenu.AddOption(option);
                     lastLetter = multiButtons[i].Title[0].ToString();
