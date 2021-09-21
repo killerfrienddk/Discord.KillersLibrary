@@ -20,9 +20,9 @@ namespace KillersLibrary {
     public class MultiButton {
         public string Title { get; set; }
         public string Value { get; set; }
+        public bool Default { get; set; }
         public Optional<string> Description { get; set; }
         public Optional<IEmote> Emote { get; set; }
-        public bool Default { get; set; }
     }
 
     public class BaseStyle {
