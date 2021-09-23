@@ -1,43 +1,17 @@
-using System;
-using System.IO;
-using System.Linq;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
-using Microsoft.Extensions.DependencyInjection;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Timers;
+using System.Linq;
 using System.Text;
-
-// ---- //
-
+using System;
 using Discord;
-using Discord.Commands;
-using Discord.Net;
-using Discord.WebSocket;
-using Discord.Rest;
-
-// ---- //
-
-using csharpi;
-using csharpi.Types;
-using csharpi.Services;
-using csharpi.Sample;
-using csharpi.Globals;
-
-
 using Timer = System.Timers.Timer;
 
-
-namespace csharpi.Modules.Interaction {
-
-	/*
+namespace Interaction.Modules.Interaction {
+    /*
 		Service that manages what to do when interactions occur.
 	*/
-	public class InteractionListenerService : IInteractionListenerService {
+    public class InteractionListenerService : IInteractionListenerService {
 		const int SOFT_CAP = 10;	// Log warns when soft cap is exceeded
 		const int HARD_CAP = 20;	// Throw errors and refuse to add more listners when hard cap is exceeded
 
@@ -48,9 +22,6 @@ namespace csharpi.Modules.Interaction {
 
 		// Number of milliseconds between each time we prune inactive listeners
 		static readonly int PRUNE_INTERVAL = 5_000;
-
-
-
 
 		/*
 			The dictionary storing listeners by the target message.

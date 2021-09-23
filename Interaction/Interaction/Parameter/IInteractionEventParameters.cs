@@ -1,42 +1,14 @@
 using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.DependencyInjection;
-using System.Net.Http;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json.Linq;
-
-// ---- //
-
 using Discord;
-using Discord.Net;
 using Discord.WebSocket;
-using Discord.Commands;
 
-// ---- //
+namespace Interaction.Modules.Interaction {
 
-using csharpi;
-using csharpi.Types;
-using csharpi.Services;
-using csharpi.Sample;  
-using csharpi.Processed;
-using csharpi.Test;
-using csharpi.Globals;
-using csharpi.Fun;
-
-
-
-namespace csharpi.Modules.Interaction {
-
-	/*
+    /*
 		The parameters we send to a reaction listener when it is invoked.
 	*/
-	public interface IInteractionEventParameters {
+    public interface IInteractionEventParameters {
 
 		/*
 			The custom id of the component.

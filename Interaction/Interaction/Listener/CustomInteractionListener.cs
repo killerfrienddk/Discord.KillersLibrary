@@ -1,49 +1,12 @@
 using System;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.DependencyInjection;
-using System.Net.Http;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json.Linq;
-
-// ---- //
-
 using Discord;
-using Discord.Net;
-using Discord.WebSocket;
-using Discord.Commands;
 
-// ---- //
-
-using csharpi;
-using csharpi.Types;
-using csharpi.Services;
-using csharpi.Sample;  
-using csharpi.Processed;
-using csharpi.Test;
-using csharpi.Globals;
-using csharpi.Fun;
-
-
-
-namespace csharpi.Modules.Interaction {
-	public class CustomInteractionListener : BaseInteractionListener {
-
-
-
-
+namespace Interaction.Modules.Interaction {
+    public class CustomInteractionListener : BaseInteractionListener {
 		public EmbedBuilder Embed { get; private set; }
 		public Func<EmbedBuilder> EmbedGenerator { get; private set; }
 		//protected ComponentBuilder Components = new ComponentBuilder();
-
-
-		// ---- //
-
 		
 		public CustomInteractionListener(Func<EmbedBuilder> EmbedGenerator) {
 			if(EmbedGenerator == null)
@@ -51,8 +14,6 @@ namespace csharpi.Modules.Interaction {
 
 			this.EmbedGenerator = EmbedGenerator;
 		}
-
-
 
 		/*
 			Create the message and set up the controlls for this navigator.
