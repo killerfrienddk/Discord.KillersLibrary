@@ -115,12 +115,13 @@ namespace KillersLibrary {
         /// <returns>
         /// A <see cref="RestUserMessage"/>
         /// </returns>
-        public virtual async Task<RestUserMessage> MakeResponseAsync(string text = null, Sticker[] stickers = null, Embed embed = null, Embed[] embeds = null, MessageComponent component = null, bool disregardArgumentExceptions = false, SocketCommandContext context = null, SocketSlashCommand command = null) {
+        public virtual async Task<RestUserMessage> MakeResponseAsync(string text = null, Sticker[] stickers = null, Embed embed = null, Embed[] embeds = null, bool ephemeral = false, MessageComponent component = null, bool disregardArgumentExceptions = false, SocketCommandContext context = null, SocketSlashCommand command = null) {
             ContextAndCommandIsNullCheck(context, command);
             if (context == null) {
                 if (!disregardArgumentExceptions && stickers != null) throw new ArgumentException("Unfortunately FollowupAsync does not support stickers at this time.");
-                return await command.FollowupAsync(text ?? " ", embed: embed, embeds: embeds, component: component);
+                return await command.FollowupAsync(text ?? " ", embed: embed, embeds: embeds, ephemeral: ephemeral, component: component);
             } else {
+                if (!disregardArgumentExceptions && embeds != null) throw new ArgumentException("Unfortunately SendMessageAsync does not support ephemerals at this time.");
                 if (!disregardArgumentExceptions && embeds != null) throw new ArgumentException("Unfortunately SendMessageAsync does not support multiple embeds at this time.");
                 return await context.Channel.SendMessageAsync(text ?? " ", embed: embed, component: component, stickers: stickers);
             }
@@ -138,8 +139,8 @@ namespace KillersLibrary {
         /// A <see cref="RestUserMessage"/>
         /// </returns>
         [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new MakeResponseAsync instead", true)]
-        public virtual async Task MakeResponse(string text = null, Sticker[] stickers = null, Embed embed = null, Embed[] embeds = null, MessageComponent component = null, bool disregardArgumentExceptions = false, SocketCommandContext context = null, SocketSlashCommand command = null) {
-            await MakeResponseAsync(text, stickers, embed, embeds, component, disregardArgumentExceptions, context, command);
+        public virtual async Task MakeResponse(string text = null, Sticker[] stickers = null, Embed embed = null, Embed[] embeds = null, bool ephemeral = false, MessageComponent component = null, bool disregardArgumentExceptions = false, SocketCommandContext context = null, SocketSlashCommand command = null) {
+            await MakeResponseAsync(text, stickers, embed, embeds, ephemeral, component, disregardArgumentExceptions, context, command);
         }
         #endregion
         #endregion
