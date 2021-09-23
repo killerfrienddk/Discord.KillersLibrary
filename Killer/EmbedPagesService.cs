@@ -49,7 +49,7 @@ namespace KillersLibrary.EmbedPages {
         /// <param name="message">Used to send the message. <see cref="SocketUserMessage"/></param>
         /// <param name="embedBuilders">Embeds that you want to be displayed as pages. <see cref="EmbedBuilder"/></param>
         /// <param name="styles">Styling or customization of the embeds and the buttons. <see cref="EmbedPagesStyles"/></param>
-        [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new version instead which is called the same but it uses the context and or the slashcommands.")]
+        [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new version instead which is called the same but it uses the context and or the slashcommands.", true)]
         public virtual async Task CreateEmbedPages(DiscordSocketClient client, SocketUserMessage message, List<EmbedBuilder> embedBuilders, EmbedPagesStyles styles = null) {
             styles ??= new();
 
