@@ -85,10 +85,23 @@ namespace KillersLibrary {
         /// <param name="text">The text of the message to be sent.</param>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
         /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        public virtual async Task MakeFileResponse(Stream stream, string filename, string text = null, SocketCommandContext context = null, SocketSlashCommand command = null) {
+        public virtual async Task MakeFileResponseAsync(Stream stream, string filename, string text = null, SocketCommandContext context = null, SocketSlashCommand command = null) {
             ContextAndCommandIsNullCheck(context, command);
             if (context == null) await command.FollowupWithFileAsync(text, stream, filename);
             else await context.Channel.SendFileAsync(stream, filename, text);
+        }
+
+        /// <summary>
+        ///     Sends a file using <see cref="ISocketMessageChannel"/> depending on which of the two inputs are <see langword="null"/>.
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream"/> is the image data you want to send.</param>
+        /// <param name="filename">The filename of the attachment.</param>
+        /// <param name="text">The text of the message to be sent.</param>
+        /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
+        /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
+        [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new MakeFileResponseAsync instead", true)]
+        public virtual async Task MakeFileResponse(Stream stream, string filename, string text = null, SocketCommandContext context = null, SocketSlashCommand command = null) {
+            await MakeFileResponseAsync(stream, filename, text, context, command);
         }
 
         /// <summary>
