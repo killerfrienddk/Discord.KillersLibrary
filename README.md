@@ -13,7 +13,9 @@ Make sure to use the preview version of this package if you are planning to use 
  - [Creating dynamic multi buttons](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons).
  - [Creating Multiple Messages Multi Buttons](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multiple-messages-multi-buttons).
  - [Multi buttons select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select). 
- - [There is some Methods that will return either a DiscordID From either slash or normal commands.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/CommonService.cs)
+ - [There is some Methods that will return either a DiscordID From either slash or normal commands.]
+ - [Multi buttons select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select). 
+ - [Removing all multi buttons messages and the select message.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#Removing-all-multi-buttons-messages-and-the select-message)
  - [Same thing for GuildID](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/CommonService.cs)
  - [It does also contain FileUpload and SendMessages that both work with the slash and normal commands.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/CommonService.cs)
  - More is to be added in the future.
@@ -23,20 +25,20 @@ Make sure to use the preview version of this package if you are planning to use 
 ## Usage
 To properly use the features this addon provides you need to add the `EmbedPagesService` or `MultiButtonsService` to your service provider depending on which part you want.
 
-```cs
+```csharp
 var provider = new ServiceCollection()
     .AddSingleton<EmbedPagesService>() // For embedding pages
     .AddSingleton<MultiButtonsService>() // For multi buttons
     ....
 ```
 ### Dependency Injection in commands.
-```cs
+```csharp
 public EmbedPagesService EmbedPagesService { get; set; }
 public MultiButtonsService MultiButtonsService { get; set; }
 ```
 
 ### Dependency Injection using ctor.
-```cs
+```csharp
 private readonly EmbedPagesService _embedPagesService;
 private readonly MultiButtonsService _multiButtonsService;
 
@@ -52,7 +54,7 @@ public CTOR(EmbedPagesService embedPagesService, MultiButtonsService multiButton
 [Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/README.md#dependency-injection-in-commands) the EmbedPagesService into your Module using DI instead. (Constructor / Public Property Injection).
 
 ### Example: Creating Embed Pages using discord commands structure or slash commands
-```cs
+```csharp
 [Command("Help")] // Remove this for slash commands
 public async Task HelpAsync() {
     List<EmbedBuilder> embedBuilders = new();
@@ -85,7 +87,7 @@ public async Task HelpAsync() {
 None of the EmbedPagesStyles has to be set what you see is their default values. 
 
 You can leave out all of them or some of them or change them at will.
-```cs
+```csharp
 [Command("Help")] // Remove this for slash commands
 public async Task HelpAsync() {
     EmbedPagesStyles style = new();
@@ -117,7 +119,7 @@ Or just a long list of strings.
 
 In order to get a list of users you have to activate the "Privileged Gateway Intents" those being "PRESENCE INTENT" and "SERVER MEMBERS INTENT" they can be set [here](https://discord.com/developers/applications) by choosing your bot and going to the Bots tab. 
 Remember if you your bot is in 100 or more servers then it needs to get verification and whitelisting from discord for the intents to work. [Read more here](https://support.discord.com/hc/en-us/articles/360040720412).
-```cs
+```csharp
 public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
     List<RestGuildUser> users = await _userService.GetSortedUserListAsync(((SocketGuildUser)interaction.User).Guild);
 
@@ -134,7 +136,7 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
 None of the MultiButtonsStyles has to be set what you see is their default values. 
 
 You can leave out all of them or some of them or change them at will.
-```cs 
+```csharp
 public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
     List<RestGuildUser> users = await _userService.GetSortedUserListAsync(((SocketGuildUser)interaction.User).Guild);
 
@@ -163,7 +165,7 @@ Or just a long list of strings.
 
 In order to get a list of users you have to activate the "Privileged Gateway Intents" those being "PRESENCE INTENT" and "SERVER MEMBERS INTENT" they can be set [here](https://discord.com/developers/applications) by choosing your bot and going to the Bots tab. 
 Remember if you your bot is in 100 or more servers then it needs to get verification and whitelisting from discord for the intents to work. [Read more here](https://support.discord.com/hc/en-us/articles/360040720412).
-```cs
+```csharp
 public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
     List<RestGuildUser> users = await _userService.GetSortedUserListAsync(((SocketGuildUser)interaction.User).Guild);
 
@@ -182,7 +184,7 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
 None of the MultiButtonsStyles has to be set what you see is their default values. 
 
 You can leave out all of them or some of them or change them at will.
-```cs 
+```csharp
 public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
     List<RestGuildUser> users = await _userService.GetSortedUserListAsync(((SocketGuildUser)interaction.User).Guild);
 
@@ -218,14 +220,14 @@ In order to get a list of users you have to activate the "Privileged Gateway Int
 Remember if you your bot is in 100 or more servers then it needs to get verification and whitelisting from discord for the intents to work. [Read more here](https://support.discord.com/hc/en-us/articles/360040720412).
 
 Place this in side of your Button Handler and set the "multiButtons" to what your customId is.
-```cs
+```csharp
 private async Task ButtonHandler(SocketMessageComponent interaction) {
     if (Regex.IsMatch(customId, "multiButtons[0-9]+")) await _buttonCommands.ChooseChildNameRange(interaction);
 }
 ```
 You need to give it the full list and it will figure out the rest.
 Again you can use it as i have with users or your own list.
-```cs
+```csharp
 public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
     List<MultiButton> multiButtons = new();
     List<RestGuildUser> users = await _userService.GetSortedUserListAsync(((SocketGuildUser)interaction.User).Guild);
@@ -248,7 +250,7 @@ public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
 None of the MultiButtonsStyles has to be set what you see is their default values. 
 
 You can leave out all of them or some of them or change them at will.
-```cs
+```csharp
 public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
     List<MultiButton> multiButtons = new();
     List<RestGuildUser> users = await _userService.GetSortedUserListAsync(((SocketGuildUser)interaction.User).Guild);
@@ -271,5 +273,12 @@ public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
     var builder = _multiButtonsService.CreateSelectForMultiButtons(interaction, multiButtons, selectForMultiButtonsStyles);
 
     await interaction.FollowupAsync("Choose Person", component: builder.Build());
+}
+```
+
+### Example: Removing all multi buttons messages and the select message
+```
+public async Task OnSelectionChooseRange(SocketMessageComponent interaction) {
+    await _multiButtonsService.RemoveMultiButtonsAndSelectAsync(interaction);
 }
 ```
