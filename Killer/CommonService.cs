@@ -115,16 +115,31 @@ namespace KillersLibrary {
         /// <returns>
         /// A <see cref="RestUserMessage"/>
         /// </returns>
-        public virtual async Task<RestUserMessage> MakeResponse(string text = null, Sticker[] stickers = null, Embed embed = null, Embed[] embeds = null, MessageComponent component = null, bool disregardArgumentExceptions = false, SocketCommandContext context = null, SocketSlashCommand command = null) {
+        public virtual async Task<RestUserMessage> MakeResponseAsync(string text = null, Sticker[] stickers = null, Embed embed = null, Embed[] embeds = null, MessageComponent component = null, bool disregardArgumentExceptions = false, SocketCommandContext context = null, SocketSlashCommand command = null) {
             ContextAndCommandIsNullCheck(context, command);
             if (context == null) {
                 if (!disregardArgumentExceptions && stickers != null) throw new ArgumentException("Unfortunately FollowupAsync does not support stickers at this time.");
                 return await command.FollowupAsync(text ?? " ", embed: embed, embeds: embeds, component: component);
-            }
-            else {
+            } else {
                 if (!disregardArgumentExceptions && embeds != null) throw new ArgumentException("Unfortunately SendMessageAsync does not support multiple embeds at this time.");
                 return await context.Channel.SendMessageAsync(text ?? " ", embed: embed, component: component, stickers: stickers);
             }
+        }
+
+        /// <summary>
+        ///     Sends a file using <see cref="ISocketMessageChannel"/> depending on which of the two inputs are <see langword="null"/>.
+        /// </summary>
+        /// <param name="text">The text of the message to be sent.</param>
+        /// <param name="embed">A single embed to send with this response. If this is passed alongside an array of embeds, the single embed will be ignored.</param>
+        /// <param name="component">A <see cref="MessageComponent"/> to be sent with this response</param>
+        /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
+        /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
+        /// <returns>
+        /// A <see cref="RestUserMessage"/>
+        /// </returns>
+        [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new MakeResponseAsync instead", true)]
+        public virtual async Task MakeResponse(string text = null, Sticker[] stickers = null, Embed embed = null, Embed[] embeds = null, MessageComponent component = null, bool disregardArgumentExceptions = false, SocketCommandContext context = null, SocketSlashCommand command = null) {
+            await MakeResponseAsync(text, stickers, embed, embeds, component, disregardArgumentExceptions, context, command);
         }
         #endregion
         #endregion

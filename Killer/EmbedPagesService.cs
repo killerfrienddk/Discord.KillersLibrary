@@ -23,7 +23,7 @@ namespace KillersLibrary.EmbedPages {
 
             styles ??= new();
             if (!embedBuilders.Any()) {
-                await CommonService.Instance.MakeResponse("error: EMBEDBUILDERS_NOT_FOUND. You didnt specify any embedBuilders to me. See Examples: https://github.com/killerfrienddk/Discord.KillersLibrary.Labs", context: context, command: command);
+                await CommonService.Instance.MakeResponseAsync("error: EMBEDBUILDERS_NOT_FOUND. You didnt specify any embedBuilders to me. See Examples: https://github.com/killerfrienddk/Discord.KillersLibrary.Labs", context: context, command: command);
                 return;
             }
 
@@ -31,7 +31,7 @@ namespace KillersLibrary.EmbedPages {
 
             int currentPage = 0;
             if (styles.PageNumbers) embedBuilders[0] = embedBuilders[0].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
-            var currentMessage = await CommonService.Instance.MakeResponse(embed: embedBuilders[0].Build(), component: componentBuilder.Build(), context: context, command: command);
+            var currentMessage = await CommonService.Instance.MakeResponseAsync(embed: embedBuilders[0].Build(), component: componentBuilder.Build(), context: context, command: command);
             client.InteractionCreated += async (socketInteraction) => {
                 SocketMessageComponent interaction = (SocketMessageComponent)socketInteraction;
                 if (interaction.Data.Type != ComponentType.Button) return;
