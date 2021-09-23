@@ -104,8 +104,8 @@ namespace KillersLibrary {
         /// </returns>
         public virtual async Task<RestUserMessage> MakeResponse(string text = null, Embed embed = null, MessageComponent component = null, SocketCommandContext context = null, SocketSlashCommand command = null) {
             ContextAndCommandIsNullCheck(context, command);
-            if (context == null) return await command.FollowupAsync(text, embed: embed, component: component);
-            else return await context.Channel.SendMessageAsync(text, embed: embed, component: component);
+            if (context == null) return await command.FollowupAsync(text ?? " ", embed: embed, component: component);
+            else return await context.Channel.SendMessageAsync(text ?? " ", embed: embed, component: component);
         }
         #endregion
         #endregion
