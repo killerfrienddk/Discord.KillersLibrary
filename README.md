@@ -1,6 +1,7 @@
 # Discord.KillersLibrary
 
 [![NuGet](https://img.shields.io/badge/nuget-v1.1.1--labs-brightgreen.svg?style=plastic)](https://www.nuget.org/packages/Discord.KillersLibrary.Labs)
+[![Discord](https://discord.com/api/guilds/890629777818542092/widget.png)](https://discord.gg/2rFB54xQs7)
 
 This is an addon for the Discord API Wrapper [Discord.Net-Labs](https://github.com/discord-net-labs/Discord.Net-Labs).
 
