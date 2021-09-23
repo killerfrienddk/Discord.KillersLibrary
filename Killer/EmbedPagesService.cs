@@ -17,7 +17,7 @@ namespace KillersLibrary.EmbedPages {
         /// <param name="context">the <see cref="SocketCommandContext"/> used to send normal commands.</param>
         /// <param name="context">the <see cref="SocketSlashCommand"/> used to send slash commands.</param>
         /// <param name="styles">The <see cref="EmbedPagesStyles"/> is for customization of many parameters.</param>
-        public virtual async Task CreateEmbedPages(DiscordSocketClient client, List<EmbedBuilder> embedBuilders, SocketCommandContext context = null, SocketSlashCommand command = null, EmbedPagesStyles styles = null) {
+        public virtual async Task CreateEmbedPages(DiscordSocketClient client, List<EmbedBuilder> embedBuilders, ButtonBuilder[] extraButtons = null, SocketCommandContext context = null, SocketSlashCommand command = null, EmbedPagesStyles styles = null) {
             CommonService.Instance.ContextAndCommandIsNullCheck(context, command);
             if (context == null) await command.DeferAsync();
 
@@ -27,7 +27,7 @@ namespace KillersLibrary.EmbedPages {
                 return;
             }
 
-            ComponentBuilder componentBuilder = GetComponentBuilder(styles);
+            ComponentBuilder componentBuilder = GetComponentBuilder(styles, extraButtons);
 
             int currentPage = 0;
             if (styles.PageNumbers) embedBuilders[0] = embedBuilders[0].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
@@ -117,7 +117,8 @@ namespace KillersLibrary.EmbedPages {
             return currentPage;
         }
 
-        private ComponentBuilder GetComponentBuilder(EmbedPagesStyles styles) {
+        private ComponentBuilder GetComponentBuilder(EmbedPagesStyles styles, ButtonBuilder[] extraButtons = null) {
+            int buttonCount = 3;
             ComponentBuilder componentBuilder = new();
             if (styles.FastChangeBtns) {
                 ButtonBuilder firstbtn = new ButtonBuilder()
@@ -125,6 +126,7 @@ namespace KillersLibrary.EmbedPages {
                     .WithLabel(styles.FirstLabel ?? "«")
                     .WithStyle(styles.Skipcolor);
                 componentBuilder.WithButton(firstbtn);
+                buttonCount++;
             }
 
             ButtonBuilder pageMovingButtons2 = new ButtonBuilder()
@@ -151,6 +153,12 @@ namespace KillersLibrary.EmbedPages {
                     .WithLabel(styles.LastLabel ?? "»")
                     .WithStyle(styles.Skipcolor);
                 componentBuilder.WithButton(lastbtn);
+                buttonCount++;
+            }
+
+            if (25 > buttonCount + extraButtons.Length) throw new ArgumentException("Please make sure that there is only 25 buttons!");
+            for (int i = 0; i < extraButtons.Length; i++) {
+                componentBuilder.WithButton(extraButtons[i]);
             }
 
             return componentBuilder;
