@@ -1,19 +1,11 @@
-using System;
 using System.Threading.Tasks;
+using System;
 using Discord;
 
-
-
 namespace Interaction.Modules.Interaction {
-
-	/*
-		Listenes to reactions added to / removed from a message.	
-	*/
+	//Listenes to reactions added to / removed from a message.	
 	public interface IInteractionListener {
-
-		/*
-			The type of listener this is.
-		*/
+		//The type of listener this is.
 		ListenerType ListenerType { get; }
 
 		TimeSpan MaxLifespan { get; } 
@@ -34,31 +26,16 @@ namespace Interaction.Modules.Interaction {
 
 		DateTimeOffset Deadline { get; }
 
-
-
-		/*
-			Checks if the listener has expired.
-		*/
+		//Checks if the listener has expired.
 		bool IsExpired();
 
-
-		
-		/*
-			Runs when a reaction event has been fired.
-		*/
+		//Runs when a reaction event has been fired.
 		Task<IInteractionResult> RunAsync(IInteractionEventParameters par);
 
-
-		/*
-			Connects the listener to a ReactionListenerService
-		*/
+		//Connects the listener to a ReactionListenerService.
 		Task<bool> Connect(InteractionListenerService service);
 
-		
-		/*
-			Kills off the listener.
-		*/
+		//Kills off the listener.
 		Task<bool> Kill();
-
 	}
 }

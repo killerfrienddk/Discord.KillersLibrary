@@ -1,9 +1,7 @@
 using System.ComponentModel;
 
 namespace Interaction.Modules.Interaction {
-    /*
-		The type of listener it is.
-	*/
+    //The type of listener it is.
     public enum ListenerType {
         [Description("The default listener type.")]
         Default = 0,
