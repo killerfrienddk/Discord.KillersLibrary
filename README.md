@@ -70,12 +70,14 @@ public async Task HelpAsync() {
         " - Leave Family.\n\n" +
         "Commands to help you:");
     embedBuilder.AddField("!af or !addFamily", "Add a new family.");
+    embedBuilder.WithColorCode(ColorCodes.Aqua); // Use the colorCodes to find your specific color of what you want to use.
     embedBuilders.Add(embedBuilder);
 
     embedBuilder = new();
     embedBuilder.WithTitle("Animal Searches");
     embedBuilder.WithDescription("This is the animal picture system here is some commands to help you:");
     embedBuilder.AddField("!cat", "Get a cat picture.");
+    embedBuilder.WithColorCode(ColorCodes.White); // Use the colorCodes to find your specific color of what you want to use.
     embedBuilders.Add(embedBuilder);
     
     await _embedPagesService.CreateEmbedPages(client, embedBuilders, context);
