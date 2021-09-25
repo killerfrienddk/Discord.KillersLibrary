@@ -30,7 +30,7 @@ namespace KillersLibrary.Services {
             ComponentBuilder componentBuilder = GetComponentBuilder(styles);
 
             int currentPage = 0;
-            if (styles.PageNumbers) embedBuilders[0] = embedBuilders[0].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
+            if (styles.PageNumbers) embedBuilders[0] = embedBuilders[0].WithFooter($"Page: {currentPage + 1}/{embedBuilders.Count}");
             var currentMessage = await CommonService.Instance.MakeResponse(embed: embedBuilders[0].Build(), component: componentBuilder.Build(), context: context, command: command);
             client.InteractionCreated += async (socketInteraction) => {
                 SocketMessageComponent interaction = (SocketMessageComponent)socketInteraction;
