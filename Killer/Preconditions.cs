@@ -12,7 +12,7 @@ namespace KillersLibrary {
 
         private static ArgumentNullException CreateNotNullException(string name, string msg) {
             if (msg == null) return new ArgumentNullException(paramName: name);
-            else return new ArgumentNullException(paramName: name, message: msg);
+            else return new ArgumentNullException(msg, name);
         }
         #endregion
 
@@ -51,7 +51,7 @@ namespace KillersLibrary {
         }
 
         private static ArgumentException CreateNotEmptyException(string name, string msg)
-            => new ArgumentException(message: msg ?? "Argument cannot be blank.", paramName: name);
+            => new(msg ?? "Argument cannot be blank.", name);
         #endregion
 
         #region Numerics
@@ -122,7 +122,7 @@ namespace KillersLibrary {
         public static void NotEqual(Optional<ulong?> obj, ulong value, string name, string msg = null) { if (obj.IsSpecified && obj.Value == value) throw CreateNotEqualException(name, msg, value); }
 
         private static ArgumentException CreateNotEqualException<T>(string name, string msg, T value)
-            => new ArgumentException(message: msg ?? $"Value may not be equal to {value}.", paramName: name);
+            => new(msg ?? $"Value may not be equal to {value}.", name);
         #endregion
 
         #region AtLeast
@@ -160,7 +160,7 @@ namespace KillersLibrary {
         public static void AtLeast(Optional<ulong> obj, ulong value, string name, string msg = null) { if (obj.IsSpecified && obj.Value < value) throw CreateAtLeastException(name, msg, value); }
 
         private static ArgumentException CreateAtLeastException<T>(string name, string msg, T value)
-            => new ArgumentException(message: msg ?? $"Value must be at least {value}.", paramName: name);
+            => new(msg ?? $"Value must be at least {value}.", name);
         #endregion
 
         #region GreaterThan
@@ -198,7 +198,7 @@ namespace KillersLibrary {
         public static void GreaterThan(Optional<ulong> obj, ulong value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanException(name, msg, value); }
 
         private static ArgumentException CreateGreaterThanException<T>(string name, string msg, T value)
-            => new ArgumentException(message: msg ?? $"Value must be greater than {value}.", paramName: name);
+            => new(msg ?? $"Value must be greater than {value}.", name);
         #endregion
 
         #region AtMost
@@ -236,7 +236,7 @@ namespace KillersLibrary {
         public static void AtMost(Optional<ulong> obj, ulong value, string name, string msg = null) { if (obj.IsSpecified && obj.Value > value) throw CreateAtMostException(name, msg, value); }
 
         private static ArgumentException CreateAtMostException<T>(string name, string msg, T value)
-            => new ArgumentException(message: msg ?? $"Value must be at most {value}.", paramName: name);
+            => new(msg ?? $"Value must be at most {value}.", name);
         #endregion
 
         #region LessThan
@@ -274,7 +274,7 @@ namespace KillersLibrary {
         public static void LessThan(Optional<ulong> obj, ulong value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanException(name, msg, value); }
 
         private static ArgumentException CreateLessThanException<T>(string name, string msg, T value)
-            => new ArgumentException(message: msg ?? $"Value must be less than {value}.", paramName: name);
+            => new(msg ?? $"Value must be less than {value}.", name);
         #endregion
         #endregion
 
@@ -292,7 +292,7 @@ namespace KillersLibrary {
         public static void NotEveryoneRole(ulong[] roles, ulong guildId, string name) {
             for (var i = 0; i < roles.Length; i++) {
                 if (roles[i] == guildId)
-                    throw new ArgumentException(message: "The everyone role cannot be assigned to a user.", paramName: name);
+                    throw new ArgumentException("The everyone role cannot be assigned to a user.", name);
             }
         }
         #endregion
