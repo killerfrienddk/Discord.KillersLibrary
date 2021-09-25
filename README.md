@@ -21,6 +21,10 @@ Make sure to use the preview version of this package if you are planning to use 
 
 ## Wiki
 [Wiki on github](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/wiki).
+
+## Other Libraries
+[DatabaseConnection for mysql](https://github.com/killerfrienddk/DatabaseConnection).
+
 ## Usage
 To properly use the features this addon provides you need to add the `EmbedPagesService` or `MultiButtonsService` to your service provider depending on which part you want.
 
