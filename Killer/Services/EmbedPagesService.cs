@@ -31,7 +31,7 @@ namespace KillersLibrary.Services {
 
             int currentPage = 0;
             if (styles.PageNumbers) embedBuilders[0] = embedBuilders[0].WithFooter($"Page: {currentPage + 1}/{embedBuilders.Count}");
-            var currentMessage = await CommonService.Instance.MakeResponse(embed: embedBuilders[0].Build(), component: componentBuilder.Build(), context: context, command: command);
+            var currentMessage = await CommonService.Instance.MakeResponseAsync(embed: embedBuilders[0].Build(), component: componentBuilder.Build(), context: context, command: command);
             client.InteractionCreated += async (socketInteraction) => {
                 SocketMessageComponent interaction = (SocketMessageComponent)socketInteraction;
                 if (interaction.Data.Type != ComponentType.Button) return;
@@ -128,8 +128,6 @@ namespace KillersLibrary.Services {
                     .WithLabel(styles.FirstLabel ?? "«")
                     .WithStyle(styles.SkipColor);
                 componentBuilder.WithButton(firstBtn);
-                    .WithStyle(styles.Skipcolor);
-                componentBuilder.WithButton(firstbtn);
                 buttonCount++;
             }
 
@@ -156,9 +154,6 @@ namespace KillersLibrary.Services {
                     .WithCustomId("killer_last_embed")
                     .WithLabel(styles.LastLabel ?? "»")
                     .WithStyle(styles.SkipColor);
-                componentBuilder.WithButton(lastBtn);
-                    .WithStyle(styles.Skipcolor);
-                componentBuilder.WithButton(lastbtn);
                 buttonCount++;
             }
 
