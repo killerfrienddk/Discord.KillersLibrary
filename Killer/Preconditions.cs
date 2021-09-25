@@ -279,40 +279,78 @@ namespace KillersLibrary {
 
         #region LessThan
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(sbyte obj, sbyte value, string name, string msg = null) { if (obj >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(sbyte obj, sbyte value, string name, string msg = null) { if (obj > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(byte obj, byte value, string name, string msg = null) { if (obj >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(byte obj, byte value, string name, string msg = null) { if (obj > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(short obj, short value, string name, string msg = null) { if (obj >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(short obj, short value, string name, string msg = null) { if (obj > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(ushort obj, ushort value, string name, string msg = null) { if (obj >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(ushort obj, ushort value, string name, string msg = null) { if (obj > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(int obj, int value, string name, string msg = null) { if (obj >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(int obj, int value, string name, string msg = null) { if (obj > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(uint obj, uint value, string name, string msg = null) { if (obj >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(uint obj, uint value, string name, string msg = null) { if (obj > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(long obj, long value, string name, string msg = null) { if (obj >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(long obj, long value, string name, string msg = null) { if (obj > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(ulong obj, ulong value, string name, string msg = null) { if (obj >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(ulong obj, ulong value, string name, string msg = null) { if (obj > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(Optional<sbyte> obj, sbyte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(Optional<sbyte> obj, sbyte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(Optional<byte> obj, byte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(Optional<byte> obj, byte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(Optional<short> obj, short value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(Optional<short> obj, short value, string name, string msg = null) { if (obj.IsSpecified && obj.Value > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(Optional<ushort> obj, ushort value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(Optional<ushort> obj, ushort value, string name, string msg = null) { if (obj.IsSpecified && obj.Value > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(Optional<int> obj, int value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(Optional<int> obj, int value, string name, string msg = null) { if (obj.IsSpecified && obj.Value > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(Optional<uint> obj, uint value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(Optional<uint> obj, uint value, string name, string msg = null) { if (obj.IsSpecified && obj.Value > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(Optional<long> obj, long value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(Optional<long> obj, long value, string name, string msg = null) { if (obj.IsSpecified && obj.Value > value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
-        public static void LessThan(Optional<ulong> obj, ulong value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanException(name, msg, value); }
+        public static void LessThan(Optional<ulong> obj, ulong value, string name, string msg = null) { if (obj.IsSpecified && obj.Value > value) throw CreateLessThanException(name, msg, value); }
 
         private static ArgumentException CreateLessThanException<T>(string name, string msg, T value)
             => new(msg ?? $"Value must be less than {value}.", name);
+        #endregion
+
+        #region LessThanOrEquals
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(sbyte obj, sbyte value, string name, string msg = null) { if (obj >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(byte obj, byte value, string name, string msg = null) { if (obj >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(short obj, short value, string name, string msg = null) { if (obj >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(ushort obj, ushort value, string name, string msg = null) { if (obj >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(int obj, int value, string name, string msg = null) { if (obj >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(uint obj, uint value, string name, string msg = null) { if (obj >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(long obj, long value, string name, string msg = null) { if (obj >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(ulong obj, ulong value, string name, string msg = null) { if (obj >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(Optional<sbyte> obj, sbyte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(Optional<byte> obj, byte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(Optional<short> obj, short value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(Optional<ushort> obj, ushort value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(Optional<int> obj, int value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(Optional<uint> obj, uint value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(Optional<long> obj, long value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
+        public static void LessThanOrEquals(Optional<ulong> obj, ulong value, string name, string msg = null) { if (obj.IsSpecified && obj.Value >= value) throw CreateLessThanOrEqualsException(name, msg, value); }
+
+        private static ArgumentException CreateLessThanOrEqualsException<T>(string name, string msg, T value)
+            => new(msg ?? $"Value must be less than or equals {value}.", name);
         #endregion
         #endregion
 
