@@ -80,16 +80,16 @@ namespace KillersLibrary.Services {
 
             switch (interaction.Data.CustomId) {
                 case "killer_first_embed":
-                case "back_button_embed":
-                case "forward_button_embed":
-                case "last_embed":
-                    if (styles.PageNumbers) embedBuilders[currentPage] = embedBuilders[currentPage].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
+                case "killer_back_button_embed":
+                case "killer_forward_button_embed":
+                case "killer_last_embed":
+                    if (styles.PageNumbers) embedBuilders[currentPage] = embedBuilders[currentPage].WithFooter($"Page: {currentPage + 1}/{embedBuilders.Count}");
                     await currentMessage.ModifyAsync(msg => {
                         msg.Embed = embedBuilders[currentPage].Build();
                         msg.Components = componentBuilder.Build();
                     });
                     break;
-                case "delete_embed_pages":
+                case "killer_delete_embed_pages":
                     await currentMessage.DeleteAsync();
                     await interaction.FollowupAsync(styles.DeletionMessage, ephemeral: true);
                     break;
@@ -100,18 +100,18 @@ namespace KillersLibrary.Services {
 
         private int GetCurrentPage(SocketMessageComponent interaction, int currentPage, List<EmbedBuilder> embedBuilders) {
             switch (interaction.Data.CustomId) {
-                case "back_button_embed":
+                case "killer_back_button_embed":
                     if (currentPage - 1 < 0) currentPage = embedBuilders.Count - 1;
                     else currentPage -= 1;
                     break;
-                case "forward_button_embed":
+                case "killer_forward_button_embed":
                     if (currentPage + 1 == embedBuilders.Count) currentPage = 0;
                     else currentPage += 1;
                     break;
-                case "last_embed":
+                case "killer_last_embed":
                     currentPage = embedBuilders.Count - 1;
                     break;
-                case "first_embed":
+                case "killer_first_embed":
                     currentPage = 0;
                     break;
             }
@@ -123,33 +123,33 @@ namespace KillersLibrary.Services {
             ComponentBuilder componentBuilder = new();
             if (styles.FastChangeBtns) {
                 ButtonBuilder firstbtn = new ButtonBuilder()
-                    .WithCustomId("first_embed")
+                    .WithCustomId("killer_first_embed")
                     .WithLabel(styles.FirstLabel ?? "«")
                     .WithStyle(styles.Skipcolor);
                 componentBuilder.WithButton(firstbtn);
             }
 
             ButtonBuilder pageMovingButtons2 = new ButtonBuilder()
-                .WithCustomId("back_button_embed")
+                .WithCustomId("killer_back_button_embed")
                 .WithLabel(styles.BackLabel ?? "‹")
                 .WithStyle(styles.Btncolor);
             componentBuilder.WithButton(pageMovingButtons2);
 
             ButtonBuilder deleteBtn = new ButtonBuilder()
-                .WithCustomId("delete_embed_pages")
+                .WithCustomId("killer_delete_embed_pages")
                 .WithEmote(new Emoji(styles.DelEmoji ?? "🗑"))
                 .WithStyle(ButtonStyle.Danger);
             componentBuilder.WithButton(deleteBtn);
 
             ButtonBuilder pageMovingButtons1 = new ButtonBuilder()
-                .WithCustomId("forward_button_embed")
+                .WithCustomId("killer_forward_button_embed")
                 .WithLabel(styles.ForwardLabel ?? "›")
                 .WithStyle(styles.Btncolor);
             componentBuilder.WithButton(pageMovingButtons1);
 
             if (styles.FastChangeBtns) {
                 ButtonBuilder lastbtn = new ButtonBuilder()
-                    .WithCustomId("last_embed")
+                    .WithCustomId("killer_last_embed")
                     .WithLabel(styles.LastLabel ?? "»")
                     .WithStyle(styles.Skipcolor);
                 componentBuilder.WithButton(lastbtn);
