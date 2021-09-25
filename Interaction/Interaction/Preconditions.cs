@@ -4,7 +4,7 @@ using Discord;
 namespace Interaction.Services {
     //Nabbed this from the Discord.Net library cause they won't let your code access it.
     public static class Preconditions {
-        //Objects
+        #region Objects
         /// <exception cref="ArgumentNullException"><paramref name="obj"/> must not be <see langword="null"/>.</exception>
         public static void NotNull<T>(T obj, string name, string msg = null) where T : class { if (obj == null) throw CreateNotNullException(name, msg); }
         /// <exception cref="ArgumentNullException"><paramref name="obj"/> must not be <see langword="null"/>.</exception>
@@ -14,8 +14,9 @@ namespace Interaction.Services {
             if (msg == null) return new ArgumentNullException(paramName: name);
             else return new ArgumentNullException(paramName: name, message: msg);
         }
+        #endregion
 
-        //Strings
+        #region Strings
         /// <exception cref="ArgumentException"><paramref name="obj"/> cannot be blank.</exception>
         public static void NotEmpty(string obj, string name, string msg = null) { if (obj.Length == 0) throw CreateNotEmptyException(name, msg); }
         /// <exception cref="ArgumentException"><paramref name="obj"/> cannot be blank.</exception>
@@ -51,8 +52,10 @@ namespace Interaction.Services {
 
         private static ArgumentException CreateNotEmptyException(string name, string msg)
             => new ArgumentException(message: msg ?? "Argument cannot be blank.", paramName: name);
+        #endregion
 
-        //Numerics
+        #region Numerics
+        #region NotEqual
         /// <exception cref="ArgumentException">Value may not be equal to <paramref name="value"/>.</exception>
         public static void NotEqual(sbyte obj, sbyte value, string name, string msg = null) { if (obj == value) throw CreateNotEqualException(name, msg, value); }
         /// <exception cref="ArgumentException">Value may not be equal to <paramref name="value"/>.</exception>
@@ -120,7 +123,9 @@ namespace Interaction.Services {
 
         private static ArgumentException CreateNotEqualException<T>(string name, string msg, T value)
             => new ArgumentException(message: msg ?? $"Value may not be equal to {value}.", paramName: name);
+        #endregion
 
+        #region AtLeast
         /// <exception cref="ArgumentException">Value must be at least <paramref name="value"/>.</exception>
         public static void AtLeast(sbyte obj, sbyte value, string name, string msg = null) { if (obj < value) throw CreateAtLeastException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be at least <paramref name="value"/>.</exception>
@@ -156,7 +161,9 @@ namespace Interaction.Services {
 
         private static ArgumentException CreateAtLeastException<T>(string name, string msg, T value)
             => new ArgumentException(message: msg ?? $"Value must be at least {value}.", paramName: name);
+        #endregion
 
+        #region GreaterThan
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
         public static void GreaterThan(sbyte obj, sbyte value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
@@ -192,7 +199,9 @@ namespace Interaction.Services {
 
         private static ArgumentException CreateGreaterThanException<T>(string name, string msg, T value)
             => new ArgumentException(message: msg ?? $"Value must be greater than {value}.", paramName: name);
+        #endregion
 
+        #region AtMost
         /// <exception cref="ArgumentException">Value must be at most <paramref name="value"/>.</exception>
         public static void AtMost(sbyte obj, sbyte value, string name, string msg = null) { if (obj > value) throw CreateAtMostException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be at most <paramref name="value"/>.</exception>
@@ -228,7 +237,9 @@ namespace Interaction.Services {
 
         private static ArgumentException CreateAtMostException<T>(string name, string msg, T value)
             => new ArgumentException(message: msg ?? $"Value must be at most {value}.", paramName: name);
+        #endregion
 
+        #region LessThan
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
         public static void LessThan(sbyte obj, sbyte value, string name, string msg = null) { if (obj >= value) throw CreateLessThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be less than <paramref name="value"/>.</exception>
@@ -264,8 +275,10 @@ namespace Interaction.Services {
 
         private static ArgumentException CreateLessThanException<T>(string name, string msg, T value)
             => new ArgumentException(message: msg ?? $"Value must be less than {value}.", paramName: name);
+        #endregion
+        #endregion
 
-        // Bulk Delete
+        #region Bulk Delete
         /// <exception cref="ArgumentOutOfRangeException">Messages are younger than 2 weeks.</exception>
         public static void YoungerThanTwoWeeks(ulong[] collection, string name) {
             var minimum = SnowflakeUtils.ToSnowflake(DateTimeOffset.UtcNow.Subtract(TimeSpan.FromDays(14)));
@@ -282,5 +295,6 @@ namespace Interaction.Services {
                     throw new ArgumentException(message: "The everyone role cannot be assigned to a user.", paramName: name);
             }
         }
+        #endregion
     }
 }
