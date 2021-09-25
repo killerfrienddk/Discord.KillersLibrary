@@ -7,7 +7,10 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Discord;
 using Timer = System.Timers.Timer;
+using Interaction.Listener.Enum;
+using Interaction.Parameter;
 using Interaction.Listener;
+using Interaction.Services;
 using Interaction.Types;
 
 namespace Interaction.Modules.Interaction {
@@ -58,7 +61,7 @@ namespace Interaction.Modules.Interaction {
 
             _contextualizerService = services.GetRequiredService<ContextualizerService>();
 
-            _logger = SysLog.CreateAsync("Interactions").Result;
+            _logger = SysLog.Instance.CreateAsync("Interactions").Result;
 
             _contextualizerService.MessageComponentInteraction += InteractionHandler;
 

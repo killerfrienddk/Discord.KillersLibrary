@@ -3,9 +3,6 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
-	<ItemGroup>
-	  <Compile Remove="Interaction\Utils\EmbedUtils.cs" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Discord.Net.Labs" Version="3.1.1" />

@@ -20,21 +20,12 @@ namespace Interaction.Services {
                 .WithCurrentTimestamp()
                 ;
 
-            if (author != null)
-                embed.WithAuthor(author);
+            if (author != null) embed.WithAuthor(author);
 
             if (target != null) embed.WithFooter(footer => {
                 footer.WithIconUrl(target.GetAvatarUrl() ?? target.GetDefaultAvatarUrl())
                     .WithText(target.Username);
             });
-
-            //if(author != null) embed.WithAuthor(auth => auth.WithName(author.Username)
-            //	.WithIconUrl(author.GetAvatarUrl() ?? author.GetDefaultAvatarUrl()));
-            //
-            //if(target != null) embed.WithFooter(footer => {
-            //	footer.WithIconUrl(target.GetAvatarUrl() ?? target.GetDefaultAvatarUrl())
-            //		.WithText(target.Username);
-            //});
 
             return embed;
         }
@@ -1124,7 +1115,7 @@ namespace Interaction.Services {
     public static partial class EmbedUtils {
 
         public static EmbedBuilder AddEmptyField(this EmbedBuilder embed, bool inline = false) {
-            return embed.AddField($"\u200b", $"\u200b", inline);
+            return embed.AddField("\u200b", "\u200b", inline);
         }
         public static EmbedBuilder AddFieldIf(this EmbedBuilder embed, bool condition, string name, object value, bool inline = false, bool addEmptyIfFalse = false) {
             if (condition) embed.AddField(name, value, inline);
