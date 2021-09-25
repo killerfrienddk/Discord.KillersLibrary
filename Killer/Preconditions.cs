@@ -165,40 +165,78 @@ namespace KillersLibrary {
 
         #region GreaterThan
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(sbyte obj, sbyte value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(sbyte obj, sbyte value, string name, string msg = null) { if (obj < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(byte obj, byte value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(byte obj, byte value, string name, string msg = null) { if (obj < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(short obj, short value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(short obj, short value, string name, string msg = null) { if (obj < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(ushort obj, ushort value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(ushort obj, ushort value, string name, string msg = null) { if (obj < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(int obj, int value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(int obj, int value, string name, string msg = null) { if (obj < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(uint obj, uint value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(uint obj, uint value, string name, string msg = null) { if (obj < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(long obj, long value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(long obj, long value, string name, string msg = null) { if (obj < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(ulong obj, ulong value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(ulong obj, ulong value, string name, string msg = null) { if (obj < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(Optional<sbyte> obj, sbyte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(Optional<sbyte> obj, sbyte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(Optional<byte> obj, byte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(Optional<byte> obj, byte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(Optional<short> obj, short value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(Optional<short> obj, short value, string name, string msg = null) { if (obj.IsSpecified && obj.Value < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(Optional<ushort> obj, ushort value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(Optional<ushort> obj, ushort value, string name, string msg = null) { if (obj.IsSpecified && obj.Value < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(Optional<int> obj, int value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(Optional<int> obj, int value, string name, string msg = null) { if (obj.IsSpecified && obj.Value < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(Optional<uint> obj, uint value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(Optional<uint> obj, uint value, string name, string msg = null) { if (obj.IsSpecified && obj.Value < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(Optional<long> obj, long value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(Optional<long> obj, long value, string name, string msg = null) { if (obj.IsSpecified && obj.Value < value) throw CreateGreaterThanException(name, msg, value); }
         /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
-        public static void GreaterThan(Optional<ulong> obj, ulong value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanException(name, msg, value); }
+        public static void GreaterThan(Optional<ulong> obj, ulong value, string name, string msg = null) { if (obj.IsSpecified && obj.Value < value) throw CreateGreaterThanException(name, msg, value); }
 
         private static ArgumentException CreateGreaterThanException<T>(string name, string msg, T value)
             => new(msg ?? $"Value must be greater than {value}.", name);
+        #endregion
+
+        #region GreaterThanOrEquals
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(sbyte obj, sbyte value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(byte obj, byte value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(short obj, short value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(ushort obj, ushort value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(int obj, int value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(uint obj, uint value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(long obj, long value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(ulong obj, ulong value, string name, string msg = null) { if (obj <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(Optional<sbyte> obj, sbyte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(Optional<byte> obj, byte value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(Optional<short> obj, short value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(Optional<ushort> obj, ushort value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(Optional<int> obj, int value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(Optional<uint> obj, uint value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(Optional<long> obj, long value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+        /// <exception cref="ArgumentException">Value must be greater than <paramref name="value"/>.</exception>
+        public static void GreaterThanOrEquals(Optional<ulong> obj, ulong value, string name, string msg = null) { if (obj.IsSpecified && obj.Value <= value) throw CreateGreaterThanOrEqualsException(name, msg, value); }
+
+        private static ArgumentException CreateGreaterThanOrEqualsException<T>(string name, string msg, T value)
+            => new(msg ?? $"Value must be greater than or equals {value}.", name);
         #endregion
 
         #region AtMost
