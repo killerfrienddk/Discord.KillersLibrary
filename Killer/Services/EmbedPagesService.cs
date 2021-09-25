@@ -122,17 +122,17 @@ namespace KillersLibrary.Services {
         private ComponentBuilder GetComponentBuilder(EmbedPagesStyles styles) {
             ComponentBuilder componentBuilder = new();
             if (styles.FastChangeBtns) {
-                ButtonBuilder firstbtn = new ButtonBuilder()
+                ButtonBuilder firstBtn = new ButtonBuilder()
                     .WithCustomId("killer_first_embed")
                     .WithLabel(styles.FirstLabel ?? "«")
-                    .WithStyle(styles.Skipcolor);
-                componentBuilder.WithButton(firstbtn);
+                    .WithStyle(styles.SkipColor);
+                componentBuilder.WithButton(firstBtn);
             }
 
             ButtonBuilder pageMovingButtons2 = new ButtonBuilder()
                 .WithCustomId("killer_back_button_embed")
                 .WithLabel(styles.BackLabel ?? "‹")
-                .WithStyle(styles.Btncolor);
+                .WithStyle(styles.BtnColor);
             componentBuilder.WithButton(pageMovingButtons2);
 
             ButtonBuilder deleteBtn = new ButtonBuilder()
@@ -144,15 +144,15 @@ namespace KillersLibrary.Services {
             ButtonBuilder pageMovingButtons1 = new ButtonBuilder()
                 .WithCustomId("killer_forward_button_embed")
                 .WithLabel(styles.ForwardLabel ?? "›")
-                .WithStyle(styles.Btncolor);
+                .WithStyle(styles.BtnColor);
             componentBuilder.WithButton(pageMovingButtons1);
 
             if (styles.FastChangeBtns) {
-                ButtonBuilder lastbtn = new ButtonBuilder()
+                ButtonBuilder lastBtn = new ButtonBuilder()
                     .WithCustomId("killer_last_embed")
                     .WithLabel(styles.LastLabel ?? "»")
-                    .WithStyle(styles.Skipcolor);
-                componentBuilder.WithButton(lastbtn);
+                    .WithStyle(styles.SkipColor);
+                componentBuilder.WithButton(lastBtn);
             }
 
             return componentBuilder;
@@ -166,9 +166,9 @@ namespace KillersLibrary.Services {
         public string ForwardLabel { get; set; } = "›";
         public string LastLabel { get; set; } = "»";
         public string DeletionMessage { get; set; } = "Embed page has been deleted";
-        public ButtonStyle Btncolor { get; set; } = ButtonStyle.Success;
+        public ButtonStyle BtnColor { get; set; } = ButtonStyle.Success;
         public ButtonStyle Delcolor { get; set; } = ButtonStyle.Danger;
-        public ButtonStyle Skipcolor { get; set; } = ButtonStyle.Primary;
+        public ButtonStyle SkipColor { get; set; } = ButtonStyle.Primary;
         public bool FastChangeBtns { get; set; } = false;
         public bool PageNumbers { get; set; } = true;
     }
