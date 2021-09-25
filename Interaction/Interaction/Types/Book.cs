@@ -28,17 +28,9 @@ namespace Interaction.Types {
 		Books are used to split longer collections of elements into pages and display individual pages of them.
 	*/
     public class Book<T> : Book, IEnumerable<T> {
-
-
-        // ---- // Fields
-
         private readonly List<T> _list;
         private int _pageLength;
         private int _pageCount;
-
-
-
-        // ---- // Constructors 
 
         protected Book(List<T> list, int pageLength) {
             _list = list;
@@ -63,16 +55,10 @@ namespace Interaction.Types {
 
         }
 
-
-        // ---- // Properties
-
         public IReadOnlyList<T> List => _list;
         public int Count => _list.Count;
         public int PageLength => _pageLength;
         public int PageCount => _pageCount;
-
-
-
 
         // ---- // Methods 
 
@@ -94,14 +80,13 @@ namespace Interaction.Types {
                 yield return _list[i];
             }
         }
+
         public void GetPageEnumerable(int pageNr, Action<T> action) {
             var pageEnum = GetPageEnumerable(pageNr);
             foreach (var elem in pageEnum) {
                 action(elem);
             }
         }
-
-
 
         /// <summary>
         /// 	Gets a Page object representing the desired page of the book.
@@ -116,11 +101,9 @@ namespace Interaction.Types {
         /// 	An IPage<T> object representing the desired page of the book.
         /// </returns>
         public IPage<T> GetPage(int pageNr, int pageLength, bool closestIfOutOfRange = false) {
-
             var maxPage = GetPageCount(pageLength);
-            if (closestIfOutOfRange) {
-                pageNr = Math.Clamp(pageNr, 0, maxPage - 1);
-            } else if (pageNr < 0 || pageNr >= maxPage) {
+            if (closestIfOutOfRange) pageNr = Math.Clamp(pageNr, 0, maxPage - 1);
+            else if (pageNr < 0 || pageNr >= maxPage) {
                 throw new IndexOutOfRangeException($"parameter {nameof(pageNr)} ({pageNr}) out of range [0, {maxPage}). ({nameof(pageLength)} = {pageLength})");
             }
 
@@ -133,20 +116,13 @@ namespace Interaction.Types {
         public IPage<T> GetPage(int pageNr, bool closestIfOutOfRange = false)
             => GetPage(pageNr, _pageLength, closestIfOutOfRange);
 
-
-
         // ---- // Standard Methods 
-
 
         public IEnumerator<T> GetEnumerator() => _list.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-
-
-
         class Enumerator : IEnumerator<T> {
-
             public T Current { get; }
 
             object IEnumerator.Current => Current;
@@ -155,10 +131,8 @@ namespace Interaction.Types {
             }
             public void Reset() { }
 
-
             public void Dispose() { }
         }
-
     }
 
     /*
@@ -175,11 +149,7 @@ namespace Interaction.Types {
         public bool HasNextPage => PageNr < PageCount - 1;
         public bool HasPrevPage => PageNr > 0;
 
-
         private readonly List<T> _list;
-
-
-
 
         public Page(Book<T> book, List<T> list, int pageNr, int pageLength, int pageCount) {
             Book = book;
@@ -188,7 +158,6 @@ namespace Interaction.Types {
             PageLength = pageLength;
             PageCount = pageCount;
         }
-
 
         /// <summary>
         ///     Get an element at the ith index of a page.
@@ -207,14 +176,13 @@ namespace Interaction.Types {
             }
         }
 
-
         public IPage<T> GetNextPage() {
             return Book.GetPage(PageNr + 1, PageLength);
         }
+
         public IPage<T> GetPrevPage() {
             return Book.GetPage(PageNr - 1, PageLength);
         }
-
 
         public void ForEach(Action<T> action) {
             foreach (var elem in this) {
@@ -222,38 +190,25 @@ namespace Interaction.Types {
             }
         }
 
-
-
         public IEnumerator<T> GetEnumerator() {
             return _list.GetEnumerator();
         }
         IEnumerator IEnumerable.GetEnumerator()
             => GetEnumerator();
-
     }
 
 
     public interface IPage<T> : IReadOnlyList<T> {
-
         int PageNr { get; }
         int PageLength { get; }
         int PageCount { get; }
 
-
         bool HasNextPage { get; }
         bool HasPrevPage { get; }
 
-
         void ForEach(Action<T> action);
-
-
-
 
         IPage<T> GetNextPage();
         IPage<T> GetPrevPage();
-
     }
-
-
-
 }

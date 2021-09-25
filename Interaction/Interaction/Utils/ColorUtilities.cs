@@ -2,29 +2,31 @@ using System.Collections.Generic;
 using System;
 using Discord;
 
-namespace Ínteraction.Services {
-	public static partial class ColorUtils {
+namespace Ínteraction.Utilities {
+	public static partial class ColorUtilities {
 
 	}
 
 	// Constants
-	public static partial class ColorUtils {
+	public static partial class ColorUtilities {
 		public const uint MaxRawValue = 16_777_215;	// The highest value allowed for a RGB color
 		private static Color _default = new Color( 0.50f, 0.50f, 0.50f );
 		public static Color Default => _default;
 
 		private static readonly Dictionary<ColorCodes, Color> DefaultColors;
 
-		static ColorUtils() {
+		static ColorUtilities() {
 			DefaultColors = new Dictionary<ColorCodes, Color>();
 		}
 
 		private static void SetDefaultColor(ColorCodes code, double r, double g, double b) {
 			DefaultColors.TryAdd(code, new Color((float) r, (float) g, (float) b));
 		}
+
 		private static void SetDefaultColor(ColorCodes code, byte r, byte g, byte b) {
 			DefaultColors.TryAdd(code, new Color(r, g, b));
 		}
+
 		private static void SetDefaultColor(ColorCodes code, uint number)
 			=> DefaultColors.TryAdd(code, new Color(number));
 

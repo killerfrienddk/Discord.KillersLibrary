@@ -1,5 +1,5 @@
 namespace Interaction.Services {
-	public static class TimeUtils {
+	public static class TimeUtilities {
 		public const long TICKS_TO_MS 		=  10_000;
 		public const long TICKS_TO_SECONDS	=  10_000_000;
 		public const long TICKS_TO_MINUTES 	=  600_000_000;

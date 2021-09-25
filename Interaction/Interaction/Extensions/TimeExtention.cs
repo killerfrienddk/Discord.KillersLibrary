@@ -14,26 +14,26 @@ namespace Interaction.Services {
 
     public static class TimeExtention {
         public static long ToMilliseconds(this DateTimeOffset time)
-            => TimeUtils.TicksToMilliseconds(time.Ticks);
+            => TimeUtilities.TicksToMilliseconds(time.Ticks);
         public static long ToSeconds(this DateTimeOffset time)
-            => TimeUtils.TicksToSeconds(time.Ticks);
+            => TimeUtilities.TicksToSeconds(time.Ticks);
         public static long ToMinutes(this DateTimeOffset time)
-            => TimeUtils.TicksToMinutes(time.Ticks);
+            => TimeUtilities.TicksToMinutes(time.Ticks);
         public static long ToHours(this DateTimeOffset time)
-            => TimeUtils.TicksToHours(time.Ticks);
+            => TimeUtilities.TicksToHours(time.Ticks);
         public static long ToDays(this DateTimeOffset time)
-            => TimeUtils.TicksToDays(time.Ticks);
+            => TimeUtilities.TicksToDays(time.Ticks);
 
         public static long ToMilliseconds(this DateTime time)
-            => TimeUtils.TicksToMilliseconds(time.Ticks);
+            => TimeUtilities.TicksToMilliseconds(time.Ticks);
         public static long ToSeconds(this DateTime time)
-            => TimeUtils.TicksToSeconds(time.Ticks);
+            => TimeUtilities.TicksToSeconds(time.Ticks);
         public static long ToMinutes(this DateTime time)
-            => TimeUtils.TicksToMinutes(time.Ticks);
+            => TimeUtilities.TicksToMinutes(time.Ticks);
         public static long ToHours(this DateTime time)
-            => TimeUtils.TicksToHours(time.Ticks);
+            => TimeUtilities.TicksToHours(time.Ticks);
         public static long ToDays(this DateTime time)
-            => TimeUtils.TicksToDays(time.Ticks);
+            => TimeUtilities.TicksToDays(time.Ticks);
 
         //Returns last sunday 00:00:00.
         public static DateTimeOffset GetStartOfWeek(this DateTimeOffset date) {

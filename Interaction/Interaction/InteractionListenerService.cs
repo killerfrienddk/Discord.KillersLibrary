@@ -207,7 +207,7 @@ namespace Interaction.Modules.Interaction {
 
             //If this user isn't allowed to use this message, tell them.
             if (listener.ListenerType == ListenerType.Owned && par.User.Id != listener.Target.Id) {
-                var embed = EmbedUtils.StandardEmbed("Button pressed", par.User)
+                var embed = EmbedUtilities.StandardEmbed("Button pressed", par.User)
                     .WithColor(Color.Green)
                     .WithDescription(new StringBuilder()
                         .AppendLine($"You cannot interact with this message, only {listener.Target.Mention} can.")

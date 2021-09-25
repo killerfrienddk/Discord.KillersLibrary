@@ -1,6 +1,6 @@
 using Discord;
 
-namespace Interaction.Services {
+namespace Interaction.Utilities {
     //Constants used for emojis.
     // 
     //Find more at: https://emojipedia.org/symbols/

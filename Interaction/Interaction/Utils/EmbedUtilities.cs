@@ -8,10 +8,11 @@ using Discord.WebSocket;
 using Discord.Rest;
 using Discord;
 
-namespace Interaction.Services {
-    public static partial class EmbedUtils {
+namespace Interaction.Utilities {
+    public static partial class EmbedUtilities {
         public static EmbedBuilder StandardEmbed(string title, IUser author = null, IUser target = null)
             => StandardEmbed(new EmbedBuilder(), title, author, target);
+
         public static EmbedBuilder StandardEmbed(EmbedBuilder embed, string title, IUser author = null, IUser target = null) {
             embed ??= new EmbedBuilder();
 
@@ -38,6 +39,7 @@ namespace Interaction.Services {
             }
             return embed;
         }
+
         public static EmbedBuilder AddReactionsField(EmbedBuilder embed, IMessage message, int cap = 5, bool inline = false) {
             var reacts = new StringBuilder();
             int count = 0, sum = 0;
@@ -48,6 +50,7 @@ namespace Interaction.Services {
             if (count > 0) embed.AddField($"Reactions (Count: {count}/{cap}, Sum: {sum})", reacts, inline);
             return embed;
         }
+
         public static EmbedBuilder AddAttachmentsField(EmbedBuilder embed, IMessage message, int cap = 5, bool inline = false) {
             string attachmentString = string.Join("\n", message.Attachments.Select(att => $"{att.Filename} - {att.Size / 1024.0:f2}KB ({att.Width}x{att.Height})"));
             if (!string.IsNullOrWhiteSpace(attachmentString)) embed.AddField($"Attachments", attachmentString, inline);
@@ -62,12 +65,12 @@ namespace Interaction.Services {
         }
 
         public static EmbedBuilder AddMessageDescription(EmbedBuilder embed, IMessage message) {
-            var description = new StringBuilder().AppendLine($"**Message created**: {TextUtils.Format(message.CreatedAt)}");
-            if (message.EditedTimestamp.HasValue) description.AppendLine($"**Last edited**: {TextUtils.Format(message.EditedTimestamp.Value)}");
+            var description = new StringBuilder().AppendLine($"**Message created**: {TextUtilities.Format(message.CreatedAt)}");
+            if (message.EditedTimestamp.HasValue) description.AppendLine($"**Last edited**: {TextUtilities.Format(message.EditedTimestamp.Value)}");
 
             description
                 .AppendLine($"**Message ID**: {message.Id}")
-                .AppendLine(TextUtils.MakeLink("Take me to the message", message.GetJumpUrl()));
+                .AppendLine(TextUtilities.MakeLink("Take me to the message", message.GetJumpUrl()));
 
             embed.WithDescription(description.ToString());
 
@@ -101,7 +104,7 @@ namespace Interaction.Services {
             var sb = new StringBuilder()
                 .AppendLine($"{user.Mention}")
                 .AppendLine($"**Status**: {user.Status}")
-                .AppendLine($"**Account created**: {TextUtils.DateString(user.CreatedAt)}");
+                .AppendLine($"**Account created**: {TextUtilities.DateString(user.CreatedAt)}");
 
             if (user.IsBot) sb.AppendLine($"__User is a bot__");
             if (user.IsWebhook) sb.AppendLine($"__User is a webhook__");
@@ -125,7 +128,7 @@ namespace Interaction.Services {
                 .AppendLine($"Name: {role.Name}")
                 .AppendLine($"Position: {role.Position}")
                 .AppendLine($"Color: {role.Color}")
-                .AppendLine($"Creation date: {TextUtils.Format(role.CreatedAt)}");
+                .AppendLine($"Creation date: {TextUtilities.Format(role.CreatedAt)}");
 
             var memberCount = role.Members.Count();
             if (memberCount > 0) desc.AppendLine($"Member Count: {memberCount}");
@@ -183,7 +186,7 @@ namespace Interaction.Services {
     /*
 		For commands
 	*/
-    public static partial class EmbedUtils {
+    public static partial class EmbedUtilities {
 
         /*
 		=============================
@@ -409,7 +412,7 @@ namespace Interaction.Services {
                     .AppendLine($"**Position**: {summary.Position}")
                     .AppendLine($"**Color**: #{summary.ColorValue:X}")
                     .AppendLine($"**Member Count**: {summary.MemberCount:N0}")
-                    .AppendLine($"**Age**: {TextUtils.Format(summary.CreatedAt.GetTimeSince())} ||({TextUtils.Format(summary.CreatedAt, false)})||")
+                    .AppendLine($"**Age**: {TextUtilities.Format(summary.CreatedAt.GetTimeSince())} ||({TextUtilities.Format(summary.CreatedAt, false)})||")
                     .ToString()
                 ).AddFieldIf(summary.RawPermissions != GuildPermissions.None.RawValue, "Permissions",
                     string.Join(", ", summary.Permissions.ToList().Select(perm => $"`{perm}`"))
@@ -427,14 +430,14 @@ namespace Interaction.Services {
             embed
                 .AddField("General Info", new StringBuilder()
                     .AppendLine($"**Name**: {summary.Name}")
-                    .AppendLine($"**Age**: {TextUtils.Format(summary.CreatedAt.GetTimeSince())} ||({TextUtils.Format(summary.CreatedAt, false)})||")
+                    .AppendLine($"**Age**: {TextUtilities.Format(summary.CreatedAt.GetTimeSince())} ||({TextUtilities.Format(summary.CreatedAt, false)})||")
                     .AppendLine($"**Owner**: {MentionUtils.MentionUser(summary.OwnerId)}")
                     .ToString(), true
                 ).AddEmptyField(true)
                 .AddField("Game Info", new StringBuilder()
                     .AppendLine($"**Bot Subscription Level**: {summary.SubscriptionLevel}")
                     .AppendLine($"**Flags**: {summary.Flags}")
-                    .AppendLine($"**Reserves**: {TextUtils.Format(summary.Reserves)}")
+                    .AppendLine($"**Reserves**: {TextUtilities.Format(summary.Reserves)}")
                     .AppendLine($"**Income Tax**: {summary.IncomeTax:P0}")
                     .ToString(), true
                 ).AddField("Stats", new StringBuilder()
@@ -572,7 +575,7 @@ namespace Interaction.Services {
                 var sb = new StringBuilder()
                     .AppendLine($"{MentionUtils.MentionUser(summary.Id)}")
                     .AppendLine($"**Status**: {summary.Status}")
-                    .AppendLine($"**Account Age**: {TextUtils.Format(summary.CreatedAt.GetTimeSince())} ||({TextUtils.GetTimestamp(summary.CreatedAt, format: 'd')})||");
+                    .AppendLine($"**Account Age**: {TextUtilities.Format(summary.CreatedAt.GetTimeSince())} ||({TextUtilities.GetTimestamp(summary.CreatedAt, format: 'd')})||");
                 if (summary.IsBot) sb.AppendLine($"User is a bot");
                 if (summary.IsWebhook) sb.AppendLine($"User is a webhook");
                 //embed.WithDescription(sb.ToString());
@@ -609,15 +612,15 @@ namespace Interaction.Services {
 
                 sb
                     .AppendLineIf(summary.TotalStayDuration > new TimeSpan(0, 5, 0),
-                        $"**Member For**: {TextUtils.Format(summary.TotalStayDuration)}")
-                    .AppendLine($"**Latest Join**: {TextUtils.GetTimestamp(summary.LatestJoin, format: 'd')}")
+                        $"**Member For**: {TextUtilities.Format(summary.TotalStayDuration)}")
+                    .AppendLine($"**Latest Join**: {TextUtilities.GetTimestamp(summary.LatestJoin, format: 'd')}")
 
                     .AppendLineIf(summary.FirstJoin != summary.LatestJoin,
-                        $"**First Join**: {TextUtils.GetTimestamp(summary.FirstJoin, format: 'd')}")
+                        $"**First Join**: {TextUtilities.GetTimestamp(summary.FirstJoin, format: 'd')}")
                     .AppendLineIf(summary.FirstJoin != summary.LatestJoin,
                         $"**Join Count**: {summary.JoinCount}")
                     .AppendLineIf(details.LatestLeave >= details.LatestJoin,
-                        $"**Left**: {TextUtils.GetTimestamp(details.LatestLeave, format: 'd')}");
+                        $"**Left**: {TextUtilities.GetTimestamp(details.LatestLeave, format: 'd')}");
 
 
                 /// VC status
@@ -628,7 +631,7 @@ namespace Interaction.Services {
                         var validRate = Math.Round((details.ValidVcTime / details.TotalVcTime) / 5, 2) * 5;
                         validTimeStr = $" (~{validRate:P0} active)";
                     }
-                    sb.AppendLine($"**Vc**: {TextUtils.Format(details.TotalVcTime)}{validTimeStr}");
+                    sb.AppendLine($"**Vc**: {TextUtilities.Format(details.TotalVcTime)}{validTimeStr}");
                 }
 
 
@@ -660,7 +663,7 @@ namespace Interaction.Services {
                 StringBuilder sb = new StringBuilder()
                     .AppendLine($"**Code**: {invite.Code}")
                     .AppendLine($"**Inviter**: {MentionUtils.MentionUser(invite.InviterId)}")
-                    .AppendLine($"**Created**: {TextUtils.Format(invite.CreatedAt, false)}")
+                    .AppendLine($"**Created**: {TextUtilities.Format(invite.CreatedAt, false)}")
                     .AppendLine($"**Use Count**: {invite.UseCount}");
 
                 embed.AddField("Invite Used", sb.ToString(), inline);
@@ -749,7 +752,7 @@ namespace Interaction.Services {
 
             sb
                 .AppendLine($"**Global Lvl:** {player.Level}")
-                .AppendLine($"`{TextUtils.ProgressBar(rate, 20)}`")
+                .AppendLine($"`{TextUtilities.ProgressBar(rate, 20)}`")
                 ;
 
             //embed.AddField($"Global Level", new StringBuilder()
@@ -771,7 +774,7 @@ namespace Interaction.Services {
                 //, true);
                 sb
                     .AppendLine($"**Local Lvl:** {member.Level}")
-                    .AppendLine($"`{TextUtils.ProgressBar(mRate, 20)}`")
+                    .AppendLine($"`{TextUtilities.ProgressBar(mRate, 20)}`")
                     ;
             }
 
@@ -793,10 +796,10 @@ namespace Interaction.Services {
             embed
                 .AddEmptyField(true)
                 .AddField(Player.CURRENCY_NAME, new StringBuilder()
-                    .AppendLine($"**Wallet:** {Player.CURRENCY_SYMBOL}{TextUtils.Format(available)}")
-                    .AppendLine($"**Stonks:** {Player.CURRENCY_SYMBOL}{TextUtils.Format(stonkValue)}")
-                    .AppendLine($"**Inventory:** {Player.CURRENCY_SYMBOL}{TextUtils.Format(inventoryValue)}")
-                    .AppendLine($"**Total:** {Player.CURRENCY_SYMBOL}{TextUtils.Format(totalWallet)}")
+                    .AppendLine($"**Wallet:** {Player.CURRENCY_SYMBOL}{TextUtilities.Format(available)}")
+                    .AppendLine($"**Stonks:** {Player.CURRENCY_SYMBOL}{TextUtilities.Format(stonkValue)}")
+                    .AppendLine($"**Inventory:** {Player.CURRENCY_SYMBOL}{TextUtilities.Format(inventoryValue)}")
+                    .AppendLine($"**Total:** {Player.CURRENCY_SYMBOL}{TextUtilities.Format(totalWallet)}")
 
                     .ToString(), true
                 )
@@ -804,9 +807,9 @@ namespace Interaction.Services {
                     .AppendLine($"**Rank:** {player.PlayerRank?.Title}")
                     .AppendLine($"**Daily Streak:** {player.DailyStreak}")
                     .AppendLineIf(xpMultiplier != 1, $"**Xp Multiplier:** {xpMultiplier,VALUE_WIDTH:P0}")
-                    .AppendLineIf(player.HasCovid, $"**Covid:** {TextUtils.Format(player.TimeSincePositive)} ago.")
-                    .AppendLineIf(details?.AmountTaxed > 0, $"**Taxed**: {Player.CURRENCY_SYMBOL}{TextUtils.Format(details.AmountTaxed)}")
-                    .AppendLineIf(details?.AmountContributed > 0, $"**Contributed**: {Player.CURRENCY_SYMBOL}{TextUtils.Format(details.AmountContributed)}")
+                    .AppendLineIf(player.HasCovid, $"**Covid:** {TextUtilities.Format(player.TimeSincePositive)} ago.")
+                    .AppendLineIf(details?.AmountTaxed > 0, $"**Taxed**: {Player.CURRENCY_SYMBOL}{TextUtilities.Format(details.AmountTaxed)}")
+                    .AppendLineIf(details?.AmountContributed > 0, $"**Contributed**: {Player.CURRENCY_SYMBOL}{TextUtilities.Format(details.AmountContributed)}")
                     .AppendLine($"**Age:** {player.Age.TotalDays / 365:N0}")
 
                     .ToString(), true
@@ -841,9 +844,9 @@ namespace Interaction.Services {
                     .AppendLine($"**Global Lvl:** {player.Level}")
                     .AppendLineIf(member != null, $"**Local Lvl:** {member?.Level}")
                     .AppendLine($"**Rank:** {player.PlayerRank?.Title}")
-                    .AppendLine($"**Wallet:** {Player.CURRENCY_SYMBOL}{TextUtils.Format(available)}")
-                    .AppendLine($"**Value:** {Player.CURRENCY_SYMBOL}{TextUtils.Format(totalWallet)}")
-                    .AppendLineIf(player.HasCovid, $"**Covid:** {TextUtils.Format(player.TimeSincePositive)} ago.")
+                    .AppendLine($"**Wallet:** {Player.CURRENCY_SYMBOL}{TextUtilities.Format(available)}")
+                    .AppendLine($"**Value:** {Player.CURRENCY_SYMBOL}{TextUtilities.Format(totalWallet)}")
+                    .AppendLineIf(player.HasCovid, $"**Covid:** {TextUtilities.Format(player.TimeSincePositive)} ago.")
                     .AppendLine($"**Age:** {player.Age.TotalDays / 365:N0}")
                 , inline: inline);
             } else if (addEmptyIfFalse) {
@@ -898,7 +901,7 @@ namespace Interaction.Services {
                 .AppendJoin('\n', dist.Select(pair => $"- {pair.Key,-10}: {pair.Value / runDur.TotalDays,9:N}/day, {(double)pair.Value / total,7:P1}"))
                 .AppendLine()
                 .AppendLine($"- {"TOTAL",-10}: {total / runDur.TotalDays,9:N}/day, {total / total,6:P}")
-                .AppendLine($"RunTime: {TextUtils.Format(runDur)}")
+                .AppendLine($"RunTime: {TextUtilities.Format(runDur)}")
                 .AppendLine("```");
 
 
@@ -1066,45 +1069,15 @@ namespace Interaction.Services {
                 count += sc.Count; sum += value; sumCost += sc.Cost;
 
                 // Add a row with the stonk's details.
-                table.AddRow(pair.Key, TextUtils.Format(sc.Count), TextUtils.Format(value), TextUtils.Format(sc.Cost), TextUtils.Format(diff));
+                table.AddRow(pair.Key, TextUtilities.Format(sc.Count), TextUtilities.Format(value), TextUtilities.Format(sc.Cost), TextUtilities.Format(diff));
             }
 
             // Add the row with the total values of the stonks.
-            table.AddRow("TOTAL", TextUtils.Format(count), TextUtils.Format(sum), TextUtils.Format(sumCost), TextUtils.Format(sum - sumCost));
+            table.AddRow("TOTAL", TextUtilities.Format(count), TextUtilities.Format(sum), TextUtilities.Format(sumCost), TextUtilities.Format(sum - sumCost));
 
             // Build the table and return the string.
             return table.Build();
         }
-
-
-        /*
-			Gets the values of a user's stonks.
-		*/
-        static CustomColorGradient PlayerGradient = null;
-        public static CustomColorGradient GetPlayerGradient() {
-            if (PlayerGradient == null) {
-                CustomColorGradientBuilder builder = new CustomColorGradientBuilder();
-
-                builder
-                    .AddColor(ColorCodes.Black.ToColor())
-
-                    .AddColor(ColorCodes.Green.ToColor(), 10)
-                    .AddColor(ColorCodes.Lime.ToColor(), 10)
-                    .AddColor(ColorCodes.Crimson.ToColor(), 20)
-                    .AddColor(ColorCodes.Dodger_Blue.ToColor(), 20)
-
-                    .AddColor(ColorCodes.Violet.ToColor(), 15)
-
-                    .AddColor(ColorCodes.Bronze.ToColor(), 10)
-                    .AddColor(ColorCodes.Silver.ToColor(), 10)
-                    .AddColor(ColorCodes.Gold.ToColor(), 10);
-
-                PlayerGradient = builder.Build();
-            }
-            return PlayerGradient;
-        }
-
-
     }
 
 
@@ -1112,7 +1085,7 @@ namespace Interaction.Services {
     /*
 		Extensions
 	*/
-    public static partial class EmbedUtils {
+    public static partial class EmbedUtilities {
 
         public static EmbedBuilder AddEmptyField(this EmbedBuilder embed, bool inline = false) {
             return embed.AddField("\u200b", "\u200b", inline);
@@ -1124,76 +1097,70 @@ namespace Interaction.Services {
         }
 
 
-        /*
-			Enforces that there are no more than 2 fields in any row.
-		*/
+        /// <summary>
+        ///     Enforces that there are no more than 2 fields in any row.
+        /// </summary>
+        /// <param name="embedBuilder"></param>
+        /// <param name="removeEmptyFields"></param>
+        /// <param name="forceLastLineGrid"></param>
+        /// <param name="sortByHeight"></param>
+        /// <returns></returns>
         public static EmbedBuilder SplitRows(
-            this EmbedBuilder embed, bool removeEmptyFields = true, bool forceLastLineGrid = true, bool sortByHeight = true
+            this EmbedBuilder embedBuilder, bool removeEmptyFields = true, bool forceLastLineGrid = true, bool sortByHeight = true
         ) {
             var emptyField = new EmbedFieldBuilder()
                 .WithIsInline(true)
                 .WithName($"_ _")
                 .WithValue($"_ _");
 
-            bool isEmpty(EmbedFieldBuilder field)
+            bool IsEmpty(EmbedFieldBuilder field)
                 => field.Name == "\u200b" && field.Value.ToString() == "\u200b";
 
+            IEnumerable<EmbedFieldBuilder> fields = embedBuilder.Fields;
 
-            IEnumerable<EmbedFieldBuilder> fields = embed.Fields;
+            //Remove empty fields.
+            if (removeEmptyFields) fields = fields.Where(field => !IsEmpty(field));
 
-            // Remove empty fields
-            if (removeEmptyFields)
-                fields = fields.Where(field => !isEmpty(field));
-
-            // Sort by the number of linebreaks in the field value.
-            if (sortByHeight)
-                fields = fields.OrderByDescending(field => field.Value.ToString().Count(chr => chr == '\n'));
-
+            //Sort by the number of linebreaks in the field value.
+            if (sortByHeight) fields = fields.OrderByDescending(field => field.Value.ToString().Count(chr => chr == '\n'));
 
             var res = new List<EmbedFieldBuilder>();
             int fieldCount = 0;
 
-            // Go through each field in the embed.
+            //Go through each field in the embed.
             foreach (var field in fields) {
-
-                // If the field is inline
+                //If the field is inline
                 if (field.IsInline) {
-
-                    // If we already have 2 fields on this row
+                    //If we already have 2 fields on this row.
                     if (fieldCount == 2) {
-                        // Add an empty field to force it on the next line.
+                        //Add an empty field to force it on the next line.
                         res.Add(emptyField);
 
-                        // Since we're now on the next line: Reset the count
+                        //Since we're now on the next line: Reset the count.
                         fieldCount = 0;
                     }
 
-                    // Add the field
+                    //Add the field.
                     res.Add(field);
                     ++fieldCount;
                 }
 
-                // If the field isn't inline
+                //If the field isn't inline.
                 else {
-                    // Add the field and reset the counter.
+                    //Add the field and reset the counter.
                     res.Add(field);
                     fieldCount = 0;
                 }
             }
 
+            //Add an empty field at the end if it has 2 fields in the last row.
+            //This forces it to conform to the same width as the other lines.
+            if (forceLastLineGrid && fieldCount == 2) res.Add(emptyField);
 
-            // Add an empty field at the end if it has 2 fields in the last row
-            // 	 This forces it to conform to the same width as the other lines
-            if (forceLastLineGrid && fieldCount == 2)
-                res.Add(emptyField);
+            //Replace the fields of this embed.
+            embedBuilder.Fields = res;
 
-            // Replace the fields of this embed.
-            embed.Fields = res;
-
-            return embed;
+            return embedBuilder;
         }
-
     }
-
-
 }
