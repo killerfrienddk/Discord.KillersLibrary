@@ -6,7 +6,7 @@ using Discord.Commands;
 using Discord.Rest;
 using Discord;
 
-namespace KillersLibrary {
+namespace KillersLibrary.Services {
     public class CommonService {
         internal CommonService() { }
         static CommonService() { }

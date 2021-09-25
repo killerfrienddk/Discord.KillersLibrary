@@ -5,7 +5,7 @@ using System;
 using Discord.WebSocket;
 using Discord;
 
-namespace KillersLibrary {
+namespace KillersLibrary.Services {
     /// <summary>
     ///     This is for choosing the amount of rows pr message.
     /// </summary>
