@@ -154,6 +154,7 @@ namespace KillersLibrary.Services {
                     .WithCustomId("killer_last_embed")
                     .WithLabel(styles.LastLabel ?? "»")
                     .WithStyle(styles.SkipColor);
+                componentBuilder.WithButton(lastBtn);
                 buttonCount++;
             }
 
