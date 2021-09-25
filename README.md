@@ -5,9 +5,6 @@
 
 This is an addon for the Discord API Wrapper [Discord.Net-Labs](https://github.com/discord-net-labs/Discord.Net-Labs).
 
-## Installation
-Make sure to use the preview version of this package if you are planning to use the preview of Discord.Net.Labs.
-
 ## Features
  - [Creating dynamic embed pages](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#embed-pages).
  - [Creating dynamic multi buttons](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons).
