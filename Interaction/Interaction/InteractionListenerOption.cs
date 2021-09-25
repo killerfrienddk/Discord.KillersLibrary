@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Interaction.Parameter;
 
 namespace Interaction.Modules.Interaction {
     //An option for the IInteractionListener.

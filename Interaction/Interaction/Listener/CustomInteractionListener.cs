@@ -1,8 +1,9 @@
 using System.Threading.Tasks;
 using System;
 using Discord;
+using Interaction.Modules.Interaction;
 
-namespace Interaction.Modules.Interaction {
+namespace Interaction.Listener {
     public class CustomInteractionListener : BaseInteractionListener {
         public EmbedBuilder Embed { get; private set; }
         public Func<EmbedBuilder> EmbedGenerator { get; private set; }

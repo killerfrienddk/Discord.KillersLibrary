@@ -3,7 +3,7 @@ using System;
 using Discord.WebSocket;
 using Discord;
 
-namespace Interaction.Modules.Interaction {
+namespace Interaction.Parameter {
 
     //The parameters we send to a reaction listener when it is invoked.
     public interface IInteractionEventParameters {

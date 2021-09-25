@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Discord;
+using Interaction.Parameter;
 
 namespace Interaction.Modules.Interaction {
     //Delegate that represents an action to be commited upon an interaction being activated.

@@ -4,8 +4,11 @@ using System.Timers;
 using System.Linq;
 using System.Text;
 using System;
+using Microsoft.Extensions.DependencyInjection;
 using Discord;
 using Timer = System.Timers.Timer;
+using Interaction.Listener;
+using Interaction.Types;
 
 namespace Interaction.Modules.Interaction {
     //Service that manages what to do when interactions occur.
@@ -68,9 +71,8 @@ namespace Interaction.Modules.Interaction {
             _timer.Elapsed += OnTimedEvent;
         }
 
-        private async void OnTimedEvent(Object source, ElapsedEventArgs e) {
-            if (await TryRemoveOldListners())
-                await _logger.Info(GetType(), $"Successfully removed old listener(s)!");
+        private async void OnTimedEvent(object source, ElapsedEventArgs e) {
+            if (await TryRemoveOldListners()) await _logger.Info(GetType(), $"Successfully removed old listener(s)!");
         }
 
         //Registres a new reaction listener to a message.

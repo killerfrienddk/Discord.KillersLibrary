@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System;
-using Newtonsoft.Json.Linq;
 using Discord.WebSocket;
 using Discord;
+using Interaction.Types;
 
-namespace Interaction.Modules.Interaction {
+namespace Interaction.Parameter {
     //The parameters we send to a reaction listener when it is invoced.
     public class InteractionEventParameters : IInteractionEventParameters {
         //The custom id of the component.

@@ -1,8 +1,11 @@
 using System.Threading.Tasks;
 using System;
 using Discord;
+using Interaction.Listener.Enum;
+using Interaction.Modules.Interaction;
+using Interaction.Parameter;
 
-namespace Interaction.Modules.Interaction {
+namespace Interaction.Listener {
 	//Listenes to reactions added to / removed from a message.	
 	public interface IInteractionListener {
 		//The type of listener this is.

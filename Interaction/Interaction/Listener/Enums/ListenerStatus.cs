@@ -1,4 +1,4 @@
-namespace Interaction.Modules.Interaction {
+namespace Interaction.Listener.Enum {
     //The current status of a listener.
     public enum ListenerStatus {
         SettingUp,          //Initially.

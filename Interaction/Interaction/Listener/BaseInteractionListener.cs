@@ -4,9 +4,12 @@ using System.Threading;
 using System.Text;
 using System;
 using Discord;
+using Interaction.Modules.Interaction;
+using Interaction.Listener.Enum;
+using Interaction.Parameter;
 using Interaction.Services;
 
-namespace Interaction.Modules.Interaction {
+namespace Interaction.Listener {
     //Listenes to reactions added to / removed from a message.	
     public abstract class BaseInteractionListener : IInteractionListener {
         //Lifespan of the listener.
@@ -119,7 +122,7 @@ namespace Interaction.Modules.Interaction {
         public string LastComponentIdUsed { get; private set; }
 
         //The task that adds reactions under the message.
-        private Task _interactionTask;
+        private Task InteractionTask;
 
         protected readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
 

@@ -1,9 +1,12 @@
 using System.Threading.Tasks;
-using System.Linq;
 using System;
 using Discord;
+using Interaction.Modules.Interaction;
+using Interaction.Parameter;
+using Interaction.Services;
+using Interaction.Types;
 
-namespace Interaction.Modules.Interaction {
+namespace Interaction.Listener {
     public static class PagedInterationListener {
         public static PagedInterationListener<T> Create<T>(Book<T> Book, Func<EmbedBuilder> EmbedGenerator, Action<EmbedBuilder, IPage<T>> PageEmbedder, int pageNr = 1) {
             return new PagedInterationListener<T>(Book, EmbedGenerator, PageEmbedder, pageNr);
