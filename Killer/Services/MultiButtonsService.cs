@@ -53,7 +53,7 @@ namespace KillersLibrary.Services {
         /// <param name="styles">The <see cref="MultiButtonsStyles"/> is for customization of many parameters.</param>
         /// <returns>A <see cref="ComponentBuilder"/></returns>
         public virtual ComponentBuilder CreateMultiButtons(List<string> titles, MultiButtonsStyles styles = null) {
-            Preconditions.LessThan(titles.Count, (int)MultiButtonsRows.Five, $"If you have more than {(int)MultiButtonsRows.Five} then please use the {nameof(CreateMultipleMultiButtons)} function.");
+            Preconditions.AtMost(titles.Count, (int)MultiButtonsRows.Five, "Buttons", $"If you have more than {(int)MultiButtonsRows.Five} then please use the {nameof(CreateMultipleMultiButtons)} function.");
             return CreateMultiButtonsInternal(titles, styles).Item1;
         }
 
@@ -191,7 +191,6 @@ namespace KillersLibrary.Services {
 
         public async Task<IMessage> RemoveMultiButtonsAndSelectAsync(SocketMessageComponent interaction) {
             IMessage repliedIMessage = await interaction.Channel.GetMessageAsync(interaction.Message.Reference.MessageId.Value);
-            IMessage repliedIMessageOld = await interaction.Channel.GetMessageAsync(interaction.Message.Reference.MessageId.Value); ;
 
             await interaction.Message.DeleteAsync();
             await repliedIMessage.DeleteAsync();
@@ -214,7 +213,7 @@ namespace KillersLibrary.Services {
             }
 
             await repliedIMessage.DeleteAsync();
-            return repliedIMessageOld;
+            return await interaction.Channel.GetMessageAsync(interaction.Message.Reference.MessageId.Value);
         }
     }
 }

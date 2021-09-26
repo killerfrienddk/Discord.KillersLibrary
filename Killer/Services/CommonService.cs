@@ -31,19 +31,6 @@ namespace KillersLibrary.Services {
         }
 
         /// <summary>
-        ///     Gets the UserID depending on which of the two inputs are <see langword="null"/>.
-        /// </summary>
-        /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
-        /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        /// <returns>A UserID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is <see langword="null"/>.</returns>
-        [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new GetDiscordID instead", true)]
-        public virtual ulong GetUserID(SocketCommandContext context = null, SocketSlashCommand command = null) {
-            ContextAndCommandIsNullCheck(context, command);
-            if (context == null) return command.User.Id;
-            else return context.User.Id;
-        }
-
-        /// <summary>
         ///     Gets the GuildID depending on which of the two inputs are <see langword="null"/>.
         /// </summary>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
@@ -94,19 +81,6 @@ namespace KillersLibrary.Services {
         /// <summary>
         ///     Sends a file using <see cref="ISocketMessageChannel"/> depending on which of the two inputs are <see langword="null"/>.
         /// </summary>
-        /// <param name="stream">The <see cref="Stream"/> is the image data you want to send.</param>
-        /// <param name="filename">The filename of the attachment.</param>
-        /// <param name="text">The text of the message to be sent.</param>
-        /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
-        /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new MakeFileResponseAsync instead", true)]
-        public virtual async Task MakeFileResponse(Stream stream, string filename, string text = null, SocketCommandContext context = null, SocketSlashCommand command = null) {
-            await MakeFileResponseAsync(stream, filename, text, context, command);
-        }
-
-        /// <summary>
-        ///     Sends a file using <see cref="ISocketMessageChannel"/> depending on which of the two inputs are <see langword="null"/>.
-        /// </summary>
         /// <param name="text">The text of the message to be sent.</param>
         /// <param name="embed">A single embed to send with this response. If this is passed alongside an array of embeds, the single embed will be ignored.</param>
         /// <param name="component">A <see cref="MessageComponent"/> to be sent with this response</param>
@@ -119,28 +93,14 @@ namespace KillersLibrary.Services {
             ContextAndCommandIsNullCheck(context, command);
             if (context == null) {
                 if (!disregardArgumentExceptions && stickers != null) throw new ArgumentException("Unfortunately FollowupAsync does not support stickers at this time.");
+
                 return await command.FollowupAsync(text ?? " ", embed: embed, embeds: embeds, ephemeral: ephemeral, component: component);
             } else {
                 if (!disregardArgumentExceptions && embeds != null) throw new ArgumentException("Unfortunately SendMessageAsync does not support ephemerals at this time.");
                 if (!disregardArgumentExceptions && embeds != null) throw new ArgumentException("Unfortunately SendMessageAsync does not support multiple embeds at this time.");
-                return await context.Channel.SendMessageAsync(text ?? " ", embed: embed, component: component, stickers: stickers);
-            }
-        }
 
-        /// <summary>
-        ///     Sends a file using <see cref="ISocketMessageChannel"/> depending on which of the two inputs are <see langword="null"/>.
-        /// </summary>
-        /// <param name="text">The text of the message to be sent.</param>
-        /// <param name="embed">A single embed to send with this response. If this is passed alongside an array of embeds, the single embed will be ignored.</param>
-        /// <param name="component">A <see cref="MessageComponent"/> to be sent with this response</param>
-        /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
-        /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        /// <returns>
-        /// A <see cref="RestUserMessage"/>
-        /// </returns>
-        [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new MakeResponseAsync instead", true)]
-        public virtual async Task MakeResponse(string text = null, Sticker[] stickers = null, Embed embed = null, Embed[] embeds = null, bool ephemeral = false, MessageComponent component = null, bool disregardArgumentExceptions = false, SocketCommandContext context = null, SocketSlashCommand command = null) {
-            await MakeResponseAsync(text, stickers, embed, embeds, ephemeral, component, disregardArgumentExceptions, context, command);
+                return await context.Channel.SendMessageAsync(text ?? " ", embed: embed, component: component, stickers: stickers/*, embeds: embeds*/);
+            }
         }
         #endregion
         #endregion
