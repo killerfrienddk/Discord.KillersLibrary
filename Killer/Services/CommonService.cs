@@ -94,19 +94,6 @@ namespace KillersLibrary.Services {
         /// <summary>
         ///     Sends a file using <see cref="ISocketMessageChannel"/> depending on which of the two inputs are <see langword="null"/>.
         /// </summary>
-        /// <param name="stream">The <see cref="Stream"/> is the image data you want to send.</param>
-        /// <param name="filename">The filename of the attachment.</param>
-        /// <param name="text">The text of the message to be sent.</param>
-        /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
-        /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new MakeFileResponseAsync instead", true)]
-        public virtual async Task MakeFileResponse(Stream stream, string filename, string text = null, SocketCommandContext context = null, SocketSlashCommand command = null) {
-            await MakeFileResponseAsync(stream, filename, text, context, command);
-        }
-
-        /// <summary>
-        ///     Sends a file using <see cref="ISocketMessageChannel"/> depending on which of the two inputs are <see langword="null"/>.
-        /// </summary>
         /// <param name="text">The text of the message to be sent.</param>
         /// <param name="embed">A single embed to send with this response. If this is passed alongside an array of embeds, the single embed will be ignored.</param>
         /// <param name="component">A <see cref="MessageComponent"/> to be sent with this response</param>
