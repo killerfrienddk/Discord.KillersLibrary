@@ -42,39 +42,6 @@ namespace KillersLibrary.Services {
             };
         }
 
-        #region Obsolete
-        /// <summary>
-        ///     Creates Embed Pages as a message.
-        /// </summary>
-        /// <param name="client">Discord Client. <see cref="DiscordSocketClient"/></param>
-        /// <param name="message">Used to send the message. <see cref="SocketUserMessage"/></param>
-        /// <param name="embedBuilders">Embeds that you want to be displayed as pages. <see cref="EmbedBuilder"/></param>
-        /// <param name="styles">Styling or customization of the embeds and the buttons. <see cref="EmbedPagesStyles"/></param>
-        [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new version instead which is called the same but it uses the context and or the slashcommands.", true)]
-        public virtual async Task CreateEmbedPages(DiscordSocketClient client, SocketUserMessage message, List<EmbedBuilder> embedBuilders, EmbedPagesStyles styles = null) {
-            styles ??= new();
-
-            if (!embedBuilders.Any()) {
-                await message.Channel.SendMessageAsync($"error: EMBEDBUILDERS_NOT_FOUND. You didnt specify any embedBuilders to me. See Examples: https://github.com/killerfrienddk/Discord.KillersLibrary.Labs");
-                return;
-            }
-
-            ComponentBuilder componentBuilder = GetComponentBuilder(styles);
-
-            var currentPage = 0;
-            if (styles.PageNumbers) embedBuilders[0] = embedBuilders[0].WithFooter("Page: " + (currentPage + 1) + "/" + embedBuilders.Count);
-            var currentMessage = await message.Channel.SendMessageAsync(embed: embedBuilders[0].Build(), component: componentBuilder.Build());
-            client.InteractionCreated += async (socketInteraction) => {
-                SocketMessageComponent interaction = (SocketMessageComponent)socketInteraction;
-                if (interaction.Data.Type != ComponentType.Button) return;
-
-                if (interaction.Message.Id == currentMessage.Id && interaction.User.Id == message.Author.Id) {
-                    currentPage = await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, componentBuilder, styles);
-                }
-            };
-        }
-        #endregion
-
         private async Task<int> FinishEmbedActions(SocketMessageComponent interaction, List<EmbedBuilder> embedBuilders, int currentPage, RestUserMessage currentMessage, ComponentBuilder componentBuilder, EmbedPagesStyles styles) {
             currentPage = GetCurrentPage(interaction, currentPage, embedBuilders);
 
