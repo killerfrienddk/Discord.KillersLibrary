@@ -14,7 +14,7 @@ This is an addon for the Discord API Wrapper [Discord.Net-Labs](https://github.c
  - [There is some Methods that will return either a DiscordID From either slash or normal commands.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Services/CommonService.cs)
  - [Same thing for GuildID](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Services/CommonService.cs)
  - [It does also contain FileUpload and SendMessages that both work with the slash and normal commands.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Services/CommonService.cs)
- - [Modified version of discord.net Preconditions.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Preconditions.cs)
+ - [Discord.net Preconditions.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Preconditions.cs)
  - More is to be added in the future.
 
 ## Wiki
