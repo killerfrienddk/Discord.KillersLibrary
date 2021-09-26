@@ -191,7 +191,6 @@ namespace KillersLibrary.Services {
 
         public async Task<IMessage> RemoveMultiButtonsAndSelectAsync(SocketMessageComponent interaction) {
             IMessage repliedIMessage = await interaction.Channel.GetMessageAsync(interaction.Message.Reference.MessageId.Value);
-            IMessage repliedIMessageOld = await interaction.Channel.GetMessageAsync(interaction.Message.Reference.MessageId.Value); ;
 
             await interaction.Message.DeleteAsync();
             await repliedIMessage.DeleteAsync();
@@ -214,7 +213,7 @@ namespace KillersLibrary.Services {
             }
 
             await repliedIMessage.DeleteAsync();
-            return repliedIMessageOld;
+            return await interaction.Channel.GetMessageAsync(interaction.Message.Reference.MessageId.Value);
         }
     }
 }
