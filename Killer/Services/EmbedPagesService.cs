@@ -14,8 +14,8 @@ namespace KillersLibrary.Services {
         /// </summary>
         /// <param name="client">The <see cref="DiscordSocketClient"/> Client. </param>
         /// <param name="embedBuilders">The list of <see cref="EmbedBuilder"/> is used to display them as pages.</param>
-        /// <param name="context">the <see cref="SocketCommandContext"/> used to send normal commands.</param>
-        /// <param name="context">the <see cref="SocketSlashCommand"/> used to send slash commands.</param>
+        /// <param name="context">The <see cref="SocketCommandContext"/> used to send normal commands.</param>
+        /// <param name="command">The <see cref="SocketSlashCommand"/> used to send slash commands.</param>
         /// <param name="styles">The <see cref="EmbedPagesStyles"/> is for customization of many parameters.</param>
         public virtual async Task CreateEmbedPages(DiscordSocketClient client, List<EmbedBuilder> embedBuilders, ButtonBuilder[] extraButtons = null, SocketCommandContext context = null, SocketSlashCommand command = null, EmbedPagesStyles styles = null) {
             CommonService.Instance.ContextAndCommandIsNullCheck(context, command);
