@@ -31,19 +31,6 @@ namespace KillersLibrary.Services {
         }
 
         /// <summary>
-        ///     Gets the UserID depending on which of the two inputs are <see langword="null"/>.
-        /// </summary>
-        /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
-        /// <param name="command">The <see cref="SocketSlashCommand"/> is used to send slash commands.</param>
-        /// <returns>A UserID from either <see cref="SocketCommandContext"/> or <see cref="SocketSlashCommand"/> depending on which is <see langword="null"/>.</returns>
-        [Obsolete("This method will soon be deprecated and will be removed in future versions. Please use the new GetDiscordID instead", true)]
-        public virtual ulong GetUserID(SocketCommandContext context = null, SocketSlashCommand command = null) {
-            ContextAndCommandIsNullCheck(context, command);
-            if (context == null) return command.User.Id;
-            else return context.User.Id;
-        }
-
-        /// <summary>
         ///     Gets the GuildID depending on which of the two inputs are <see langword="null"/>.
         /// </summary>
         /// <param name="context">The <see cref="SocketCommandContext"/> is used to send normal commands.</param>
