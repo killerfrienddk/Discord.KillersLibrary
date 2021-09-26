@@ -11,9 +11,9 @@ This is an addon for the Discord API Wrapper [Discord.Net-Labs](https://github.c
  - [Creating Multiple Messages Multi Buttons](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multiple-messages-multi-buttons).
  - [Multi buttons select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select).
  - [Removing all multi buttons messages and the select message.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/README.md#example-removing-all-multi-buttons-messages-and-the-select-message) 
- - [There is some Methods that will return either a DiscordID From either slash or normal commands.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/CommonService.cs)
- - [Same thing for GuildID](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/CommonService.cs)
- - [It does also contain FileUpload and SendMessages that both work with the slash and normal commands.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/CommonService.cs)
+ - [There is some Methods that will return either a DiscordID From either slash or normal commands.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Services/CommonService.cs)
+ - [Same thing for GuildID](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Services/CommonService.cs)
+ - [It does also contain FileUpload and SendMessages that both work with the slash and normal commands.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Services/CommonService.cs)
  - [Modified version of discord.net Preconditions.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Preconditions.cs)
  - More is to be added in the future.
 
