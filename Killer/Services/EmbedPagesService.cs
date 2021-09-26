@@ -89,39 +89,40 @@ namespace KillersLibrary.Services {
         private ComponentBuilder GetComponentBuilder(EmbedPagesStyles styles, ButtonBuilder[] extraButtons = null) {
             int buttonCount = 3;
             ComponentBuilder componentBuilder = new();
+            ButtonBuilder buttonBuilder;
             if (styles.FastChangeBtns) {
-                ButtonBuilder firstBtn = new ButtonBuilder()
+                buttonBuilder = new ButtonBuilder()
                     .WithCustomId("killer_first_embed")
                     .WithLabel(styles.FirstLabel ?? "«")
                     .WithStyle(styles.SkipColor);
-                componentBuilder.WithButton(firstBtn);
+                componentBuilder.WithButton(buttonBuilder);
                 buttonCount++;
             }
 
-            ButtonBuilder pageMovingButtons2 = new ButtonBuilder()
-                .WithCustomId("killer_back_button_embed")
+            buttonBuilder = new ButtonBuilder()
+            .WithCustomId("killer_back_button_embed")
                 .WithLabel(styles.BackLabel ?? "‹")
                 .WithStyle(styles.BtnColor);
-            componentBuilder.WithButton(pageMovingButtons2);
+            componentBuilder.WithButton(buttonBuilder);
 
-            ButtonBuilder deleteBtn = new ButtonBuilder()
-                .WithCustomId("killer_delete_embed_pages")
+            buttonBuilder = new ButtonBuilder()
+            .WithCustomId("killer_delete_embed_pages")
                 .WithEmote(new Emoji(styles.DelEmoji ?? "🗑"))
                 .WithStyle(ButtonStyle.Danger);
-            componentBuilder.WithButton(deleteBtn);
+            componentBuilder.WithButton(buttonBuilder);
 
-            ButtonBuilder pageMovingButtons1 = new ButtonBuilder()
-                .WithCustomId("killer_forward_button_embed")
+            buttonBuilder = new ButtonBuilder()
+            .WithCustomId("killer_forward_button_embed")
                 .WithLabel(styles.ForwardLabel ?? "›")
                 .WithStyle(styles.BtnColor);
-            componentBuilder.WithButton(pageMovingButtons1);
+            componentBuilder.WithButton(buttonBuilder);
 
             if (styles.FastChangeBtns) {
-                ButtonBuilder lastBtn = new ButtonBuilder()
+                buttonBuilder = new ButtonBuilder()
                     .WithCustomId("killer_last_embed")
                     .WithLabel(styles.LastLabel ?? "»")
                     .WithStyle(styles.SkipColor);
-                componentBuilder.WithButton(lastBtn);
+                componentBuilder.WithButton(buttonBuilder);
                 buttonCount++;
             }
 
