@@ -126,8 +126,9 @@ namespace KillersLibrary.Services {
                 buttonCount++;
             }
 
-            if (25 > buttonCount + extraButtons.Length) throw new ArgumentException("Please make sure that there is only 25 buttons!");
-            for (int i = 0; i < extraButtons.Length; i++) {
+            int maxButtonCount = 25;
+            Preconditions.AtMost(maxButtonCount, buttonCount + extraButtons.Length, "Button Count", $"Please make sure that there is only {maxButtonCount} buttons!");
+            for (int i = 0; i < (extraButtons.Length > maxButtonCount ? maxButtonCount : extraButtons.Length); i++) {
                 componentBuilder.WithButton(extraButtons[i]);
             }
 
