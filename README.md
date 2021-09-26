@@ -100,9 +100,9 @@ public async Task HelpAsync() {
     style.ForwardLabel = "›";
     style.LastLabel = "»";
     style.DeletionMessage = "Embed page has been deleted";
-    style.Btncolor = ButtonStyle.Success;
-    style.Delcolor = ButtonStyle.Danger;
-    style.Skipcolor = ButtonStyle.Primary;
+    style.BtnColor = ButtonStyle.Success;
+    style.DeletionBtnColor = ButtonStyle.Danger;
+    style.SkipBtnColor = ButtonStyle.Primary;
     style.FastChangeBtns = false; // Do you want there to be a button that goes directly to either ends?
     style.PageNumbers = true; //Do you want the embed to have page numbers like "Page: 1/4"? Depends on how many pages you have.
     

@@ -94,7 +94,7 @@ namespace KillersLibrary.Services {
                 buttonBuilder = new ButtonBuilder()
                     .WithCustomId("killer_first_embed")
                     .WithLabel(styles.FirstLabel ?? "«")
-                    .WithStyle(styles.SkipColor);
+                    .WithStyle(styles.SkipBtnColor);
                 componentBuilder.WithButton(buttonBuilder);
                 buttonCount++;
             }
@@ -108,7 +108,7 @@ namespace KillersLibrary.Services {
             buttonBuilder = new ButtonBuilder()
             .WithCustomId("killer_delete_embed_pages")
                 .WithEmote(new Emoji(styles.DelEmoji ?? "🗑"))
-                .WithStyle(styles.DelColor);
+                .WithStyle(styles.DeletionBtnColor);
             componentBuilder.WithButton(buttonBuilder);
 
             buttonBuilder = new ButtonBuilder()
@@ -121,7 +121,7 @@ namespace KillersLibrary.Services {
                 buttonBuilder = new ButtonBuilder()
                     .WithCustomId("killer_last_embed")
                     .WithLabel(styles.LastLabel ?? "»")
-                    .WithStyle(styles.SkipColor);
+                    .WithStyle(styles.SkipBtnColor);
                 componentBuilder.WithButton(buttonBuilder);
                 buttonCount++;
             }
@@ -144,8 +144,8 @@ namespace KillersLibrary.Services {
         public string LastLabel { get; set; } = "»";
         public string DeletionMessage { get; set; } = "Embed page has been deleted";
         public ButtonStyle BtnColor { get; set; } = ButtonStyle.Success;
-        public ButtonStyle DelColor { get; set; } = ButtonStyle.Danger;
-        public ButtonStyle SkipColor { get; set; } = ButtonStyle.Primary;
+        public ButtonStyle DeletionBtnColor { get; set; } = ButtonStyle.Danger;
+        public ButtonStyle SkipBtnColor { get; set; } = ButtonStyle.Primary;
         public bool FastChangeBtns { get; set; } = false;
         public bool PageNumbers { get; set; } = true;
     }
