@@ -7,6 +7,12 @@ namespace KillersLibrary.Extensions {
             embedBuilder.WithColor(new Color((uint)colorCodes));
             return embedBuilder;
         }
+
+        public static EmbedBuilder WithHexColor(this EmbedBuilder embedBuilder, string hexCode) {
+            bool success = uint.TryParse("0x" + hexCode.Replace("#", ""), out uint hex);
+
+            embedBuilder.WithColor(new Color(success ? hex : 0x000000));
+            return embedBuilder;
         }
     }
 }
