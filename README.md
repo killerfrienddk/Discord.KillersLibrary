@@ -29,7 +29,7 @@ To properly use the features this addon provides you need to add the `EmbedPages
 ```csharp
 var provider = new ServiceCollection()
     .AddSingleton<EmbedPagesService>() // For embedding pages
-    .AddSingleton<MultiButtonsService>() // For multi buttons
+    .AddSingleton<MultiButtonsService>(); // For multi buttons
     ....
 ```
 ### Dependency Injection in commands.
