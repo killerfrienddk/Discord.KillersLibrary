@@ -1,9 +1,15 @@
+using System.ComponentModel;
+
 namespace Interaction.Listener.Enum {
     //The current status of a listener.
     public enum ListenerStatus {
-        SettingUp,          //Initially.
-        Started,            //When set up and ready.
-        Completed,          //When the listener has completed it's role.
-        Dead,               //When the listener successfully been killed.
+        [Description("Initially.")]
+        SettingUp,
+        [Description("When set up and ready.")]
+        Started,
+        [Description("When the listener has completed it's role.")]
+        Completed,
+        [Description("When the listener successfully been killed.")]
+        Dead,
     }
 }
