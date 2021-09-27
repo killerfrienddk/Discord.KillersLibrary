@@ -96,7 +96,7 @@ public async Task HelpAsync() {
     EmbedPagesStyles style = new();
     style.FirstLabel = "«";
     style.BackLabel = "‹";
-    style.DelEmoji = "🗑";
+    style.DeletionEmoji = "🗑";
     style.ForwardLabel = "›";
     style.LastLabel = "»";
     style.DeletionMessage = "Embed page has been deleted";
