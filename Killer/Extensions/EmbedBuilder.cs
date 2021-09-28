@@ -100,6 +100,24 @@ namespace KillersLibrary.Extensions {
         public static EmbedBuilder AddEmptyField(this EmbedBuilder embedBuilder, bool inline = false) {
             return embedBuilder.AddField("\u200b", "\u200b", inline);
         }
+
+        //Got this from True Love he allowed me to copy it and modified it a bit.
+        /// <summary>
+        /// Add field if <paramref name="condition"/> is true.
+        /// Or an empty field if <paramref name="addEmptyIfFalse"/> is true.
+        /// </summary>
+        /// <param name="condition">The condition for if the field should be added or not.</param>
+        /// <param name="name">The title of the field.</param>
+        /// <param name="value">The value of the field.</param>
+        /// <param name="inline">Indicates whether the field is in-line or not.</param>
+        /// <param name="addEmptyIfFalse">Indicates whether an empty field should be added in place of the real field if the <paramref name="condition"/> is false.</param>
+        /// <returns>The current builder.</returns>
+        public static EmbedBuilder AddFieldIf(this EmbedBuilder embedBuilder, string name, object value, bool condition, bool inline = false, bool addEmptyIfFalse = false) {
+            if (condition) embedBuilder.AddField(name, value, inline);
+            else if (addEmptyIfFalse) embedBuilder.AddEmptyField(inline);
+
+            return embedBuilder;
+        }
         #endregion
 
         #region Helper EmbedBuilder Extensions
