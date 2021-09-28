@@ -4,7 +4,7 @@ using KillersLibrary.Enums;
 namespace KillersLibrary.Extensions {
     public static class StringExtensions {
         #region Text
-        public static string IndentWithWhitespace(this string text, int indentationAmount = 4) => StringUtilities.IndentWithWhitespace(text, indentationAmount);
+        public static string IndentWithWhitespace(this string text, int indentationAmount = 4) => StringUtilities.IndentWithCharacter(text, " ", indentationAmount);
         public static string IndentWithCharacter(this string text, string indentationCharacter, int indentationAmount = 4) => StringUtilities.IndentWithCharacter(text, indentationCharacter, indentationAmount);
         #endregion
 
