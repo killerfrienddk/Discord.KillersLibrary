@@ -5,6 +5,7 @@ using KillersLibrary.Enums;
 
 namespace KillersLibrary.Extensions {
     public static class EmbedBuilderExtension {
+        #region Colors EmbedBuilder Extensions
         /// <summary> Adds embed color based on the provided <see cref="ColorCodes"/>.</summary>
         /// <param name="colorCodes">Choose which color you want using <see cref="ColorCodes"/></param>,
         /// <returns>The current builder.</returns>
@@ -24,8 +25,12 @@ namespace KillersLibrary.Extensions {
 
             return embedBuilder;
         }
+        #endregion
 
         //Got this from True Love he allowed me to copy it and modified it abit.
+
+        #region Structuring EmbedBuilder Extensions
+        //Got this from True Love he allowed me to copy it and modified it a bit.
         /// <summary>Sorts columns in to rows, two side by side.</summary>
         /// <param name="removeEmptyFields">Wheather or not you want to remove empty fields.</param>
         /// <param name="forceLastLineGrid">Wheather or not you want to enforce the last row to be two columns.</param>
@@ -82,7 +87,11 @@ namespace KillersLibrary.Extensions {
 
             return embedBuilder;
         }
+        #endregion
 
+        #region Helper EmbedBuilder Extensions
+        //Got this from True Love he allowed me to copy it and modified it a bit.
         private static bool IsEmpty(EmbedFieldBuilder field) => field.Name == "\u200b" && field.Value.ToString() == "\u200b";
+        #endregion
     }
 }
