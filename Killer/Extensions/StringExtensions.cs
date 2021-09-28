@@ -3,6 +3,10 @@ using KillersLibrary.Enums;
 
 namespace KillersLibrary.Extensions {
     public static class StringExtensions {
+        #region Text
+        public static string IndentWithWhitespace(this string text, int indentation = 4) => StringUtilities.IndentWithWhitespace(text, indentation);
+        #endregion
+
         //Got this from True Love he allowed me to copy it and modified it a bit.
         #region Markdown
         #region Complex Markdown String Extensions
