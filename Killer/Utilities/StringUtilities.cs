@@ -11,8 +11,11 @@ namespace KillersLibrary.Utilities {
             return sb.ToString();
         }
 
+        public static string IndentWithCharacter(string text, string indentationCharacter, int indentationAmount = 4) {
+            Preconditions.NotNullOrEmpty(indentationCharacter, nameof(indentationCharacter));
+
             var sb = new StringBuilder(text ?? "");
-            sb.Insert(0, " ", indentation);
+            sb.Insert(0, indentationCharacter, indentationAmount);
 
             return sb.ToString();
         }
