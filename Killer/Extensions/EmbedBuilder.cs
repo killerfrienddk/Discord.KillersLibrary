@@ -1,5 +1,6 @@
 ﻿﻿using System.Collections.Generic;
 using System.Linq;
+using Discord.WebSocket;
 using Discord;
 using KillersLibrary.Enums;
 
@@ -27,7 +28,22 @@ namespace KillersLibrary.Extensions {
         }
         #endregion
 
-        //Got this from True Love he allowed me to copy it and modified it abit.
+        #region Template EmbedBuilder Extensions
+        //Got this from True Love he allowed me to copy it and modified it a bit.
+        /// <summary>Adds a field that mentions all mentionable roles of which a user has.</summary>
+        /// <param name="user">Represents a WebSocket-based guild user.</param>
+        /// <param name="inline">Indicates whether the field is in-line or not.</param>
+        /// <returns>The current builder.</returns>
+        public static EmbedBuilder AddRoleField(this EmbedBuilder embedBuilder, SocketGuildUser user, bool inline = false) {
+            if (user == null) return embedBuilder;
+
+            var roles = user.Roles.Where(role => !role.IsEveryone);
+            string roleString = string.Join(", ", roles.OrderByDescending(r => r.Position).Select(r => r.Mention));
+            if (roleString.Length > 0) embedBuilder.AddField("Roles", roleString, inline);
+
+            return embedBuilder;
+        }
+        #endregion
 
         #region Structuring EmbedBuilder Extensions
         //Got this from True Love he allowed me to copy it and modified it a bit.
