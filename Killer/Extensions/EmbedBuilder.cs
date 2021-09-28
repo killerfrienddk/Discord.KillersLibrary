@@ -23,7 +23,7 @@ namespace KillersLibrary.Extensions {
             return embedBuilder;
         }
 
-        //Got this from True Love he allowed me to copy it and modifiy it abit.
+        //Got this from True Love he allowed me to copy it and modified it abit.
         /// <summary>Sorts columns in to rows, two side by side.</summary>
         /// <param name="removeEmptyFields">Wheather or not you want to remove empty fields.</param>
         /// <param name="forceLastLineGrid">Wheather or not you want to enforce the last row to be two columns.</param>
