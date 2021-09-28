@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-using System;
 using Discord.WebSocket;
 using Discord.Commands;
 using Discord.Rest;
 using Discord;
+using KillersLibrary.Utilities;
 
 namespace KillersLibrary.Services {
     public class EmbedPagesService {
@@ -107,7 +107,7 @@ namespace KillersLibrary.Services {
 
             buttonBuilder = new ButtonBuilder()
             .WithCustomId("killer_delete_embed_pages")
-                .WithEmote(new Emoji(styles.DelEmoji ?? "🗑"))
+                .WithEmote(new Emoji(styles.DeletionEmoji ?? "🗑"))
                 .WithStyle(styles.DeletionBtnColor);
             componentBuilder.WithButton(buttonBuilder);
 
@@ -139,7 +139,7 @@ namespace KillersLibrary.Services {
     public class EmbedPagesStyles {
         public string FirstLabel { get; set; } = "«";
         public string BackLabel { get; set; } = "‹";
-        public string DelEmoji { get; set; } = "🗑";
+        public string DeletionEmoji { get; set; } = "🗑";
         public string ForwardLabel { get; set; } = "›";
         public string LastLabel { get; set; } = "»";
         public string DeletionMessage { get; set; } = "Embed page has been deleted";
