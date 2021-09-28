@@ -20,7 +20,10 @@ namespace KillersLibrary.Extensions {
         /// <param name="hexCode">Choose which color using a hex code.</param>
         /// <returns>The current builder.</returns>
         public static EmbedBuilder WithHexColor(this EmbedBuilder embedBuilder, string hexCode) {
-            bool success = uint.TryParse("0x" + hexCode.Replace("#", ""), out uint hex);
+            hexCode = hexCode.Replace("#", ""); //Removing # from the hex code.
+            if (!hexCode.ToLower().StartsWith("0x")) hexCode = "0x" + hexCode; //Checks if hexCode starts with 0x other ways add it.
+
+            bool success = uint.TryParse(hexCode, out uint hex);
 
             embedBuilder.WithColor(new Color(success ? hex : 0x000000));
 
