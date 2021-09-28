@@ -1,4 +1,5 @@
 ﻿namespace KillersLibrary.Enums {
+    //Got this from True Love he allowed me to copy it and modifiy it.
     public enum ColorCodes : uint {
         /// <summary> Gets the grey 50 color value. </summary>
         /// <returns> A color struct with the hex value of <see href="http://www.color-hex.com/color/7F7F7F">7F7F7F</see>.</returns>
