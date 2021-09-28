@@ -6,15 +6,17 @@ using KillersLibrary.Enums;
 namespace KillersLibrary.Extensions {
     public static class EmbedBuilderExtension {
         /// <summary> Adds embed color based on the provided <see cref="ColorCodes"/>.</summary>
-        /// <param name="colorCodes">Choose which color you want using <see cref="ColorCodes"/></param>
+        /// <param name="colorCodes">Choose which color you want using <see cref="ColorCodes"/></param>,
+        /// <returns>The current builder.</returns>
         public static EmbedBuilder WithColorCode(this EmbedBuilder embedBuilder, ColorCodes colorCodes = ColorCodes.Default) {
             embedBuilder.WithColor(new Color((uint)colorCodes));
 
             return embedBuilder;
         }
 
-        /// <summary> Adds embed color based on the provided hex code e.g #000000.</summary>
+        /// <summary> Adds embed color based on the provided hex code, e.g #000000.</summary>
         /// <param name="hexCode">Choose which color using a hex code.</param>
+        /// <returns>The current builder.</returns>
         public static EmbedBuilder WithHexColor(this EmbedBuilder embedBuilder, string hexCode) {
             bool success = uint.TryParse("0x" + hexCode.Replace("#", ""), out uint hex);
 
@@ -28,7 +30,7 @@ namespace KillersLibrary.Extensions {
         /// <param name="removeEmptyFields">Wheather or not you want to remove empty fields.</param>
         /// <param name="forceLastLineGrid">Wheather or not you want to enforce the last row to be two columns.</param>
         /// <param name="sortByHeight">Wheather or not you want it to sort by height.</param>
-        /// <returns></returns>
+        /// <returns>The current builder.</returns>
         public static EmbedBuilder ColumnCombiner(
             this EmbedBuilder embedBuilder, bool removeEmptyFields = true, bool forceLastLineGrid = true, bool sortByHeight = true
         ) {
