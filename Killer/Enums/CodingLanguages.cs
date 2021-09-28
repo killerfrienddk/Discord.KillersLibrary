@@ -23,7 +23,7 @@
         bash,
         diff,
         elixir,
-        /// <summary>HTML + Embedded Ruby</summary>
+        /// <summary>HTML + Embedded Ruby On Rails</summary>
         erb,
         go,
         haml,
@@ -62,11 +62,11 @@
         sql,
         svg,
         swift,
-        /// <summary>Ruby</summary>
+        /// <summary>Ruby On Rails</summary>
         rb,
-        /// <summary>Ruby</summary>
+        /// <summary>Ruby On Rails</summary>
         jruby,
-        /// <summary>Ruby</summary>
+        /// <summary>Ruby On Rails</summary>
         ruby,
         smalltalk,
         /// <summary>Vim Script</summary>
