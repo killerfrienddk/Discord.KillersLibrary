@@ -1,7 +1,7 @@
 using System;
 using Discord;
 
-namespace KillersLibrary {
+namespace KillersLibrary.Utilities {
     //Nabbed this from the Discord.Net library cause they won't let your code access it.
     public static class Preconditions {
         #region Objects

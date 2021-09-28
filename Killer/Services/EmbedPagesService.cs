@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-using System;
 using Discord.WebSocket;
 using Discord.Commands;
 using Discord.Rest;
 using Discord;
+using KillersLibrary.Utilities;
 
 namespace KillersLibrary.Services {
     public class EmbedPagesService {
