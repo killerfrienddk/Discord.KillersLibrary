@@ -89,6 +89,19 @@ namespace KillersLibrary.Extensions {
         }
         #endregion
 
+        #region Add Field EmbedBuilder Extensions
+        //Got this from True Love he allowed me to copy it and modified it a bit.
+        /// <summary>
+        ///     Adds an Discord.Embed field with the provided name and value.
+        /// </summary>
+        /// <param name="embedBuilder"></param>
+        /// <param name="inline">Indicates whether the field is in-line or not.</param>
+        /// <returns>The current builder.</returns>
+        public static EmbedBuilder AddEmptyField(this EmbedBuilder embedBuilder, bool inline = false) {
+            return embedBuilder.AddField("\u200b", "\u200b", inline);
+        }
+        #endregion
+
         #region Helper EmbedBuilder Extensions
         //Got this from True Love he allowed me to copy it and modified it a bit.
         private static bool IsEmpty(EmbedFieldBuilder field) => field.Name == "\u200b" && field.Value.ToString() == "\u200b";
