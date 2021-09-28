@@ -5,7 +5,7 @@ using Discord;
 using KillersLibrary.Enums;
 
 namespace KillersLibrary.Extensions {
-    public static class EmbedBuilderExtension {
+    public static class EmbedBuilderExtensions {
         #region Colors EmbedBuilder Extensions
         /// <summary> Adds embed color based on the provided <see cref="ColorCodes"/>.</summary>
         /// <param name="colorCodes">Choose which color you want using <see cref="ColorCodes"/></param>,
