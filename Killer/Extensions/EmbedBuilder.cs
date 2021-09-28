@@ -7,6 +7,7 @@ namespace KillersLibrary.Extensions {
         /// <param name="colorCodes">Choose which color you want using <see cref="ColorCodes"/></param>
         public static EmbedBuilder WithColorCode(this EmbedBuilder embedBuilder, ColorCodes colorCodes = ColorCodes.Default) {
             embedBuilder.WithColor(new Color((uint)colorCodes));
+
             return embedBuilder;
         }
 
@@ -16,6 +17,9 @@ namespace KillersLibrary.Extensions {
             bool success = uint.TryParse("0x" + hexCode.Replace("#", ""), out uint hex);
 
             embedBuilder.WithColor(new Color(success ? hex : 0x000000));
+
+            return embedBuilder;
+        }
             return embedBuilder;
         }
     }
