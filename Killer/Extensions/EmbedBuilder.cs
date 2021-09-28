@@ -1,4 +1,6 @@
-﻿using Discord;
+﻿﻿using System.Collections.Generic;
+using System.Linq;
+using Discord;
 using KillersLibrary.Enums;
 
 namespace KillersLibrary.Extensions {
@@ -20,7 +22,65 @@ namespace KillersLibrary.Extensions {
 
             return embedBuilder;
         }
+
+        //Got this from True Love he allowed me to copy it and modifiy it abit.
+        /// <summary>Sorts columns in to rows, two side by side.</summary>
+        /// <param name="removeEmptyFields">Wheather or not you want to remove empty fields.</param>
+        /// <param name="forceLastLineGrid">Wheather or not you want to enforce the last row to be two columns.</param>
+        /// <param name="sortByHeight">Wheather or not you want it to sort by height.</param>
+        /// <returns></returns>
+        public static EmbedBuilder ColumnCombiner(
+            this EmbedBuilder embedBuilder, bool removeEmptyFields = true, bool forceLastLineGrid = true, bool sortByHeight = true
+        ) {
+            IEnumerable<EmbedFieldBuilder> fields = embedBuilder.Fields;
+
+            //Remove empty fields.
+            if (removeEmptyFields) fields = fields.Where(field => !IsEmpty(field));
+
+            //Sort by the number of linebreaks in the field value.
+            if (sortByHeight) fields = fields.OrderByDescending(field => field.Value.ToString().Count(chr => chr == '\n'));
+
+            int fieldCount = 0;
+            List<EmbedFieldBuilder> res = new();
+
+            //Creates an empty field.
+            EmbedFieldBuilder emptyField = new EmbedFieldBuilder()
+                .WithIsInline(true)
+                .WithName($"_ _")
+                .WithValue($"_ _");
+
+            //Go through each field in the embed.
+            foreach (var field in fields) {
+                if (field.IsInline) { //If the field is inline
+                    //If we already have 2 fields on this row.
+                    if (fieldCount == 2) {
+                        //Add an empty field to force it on the next line.
+                        res.Add(emptyField);
+
+                        //Since we're now on the next line: Reset the count.
+                        fieldCount = 0;
+                    }
+
+                    //Add the field.
+                    res.Add(field);
+                    fieldCount++;
+                } else { //If the field isn't inline.
+                    //Add the field and reset the counter.
+                    res.Add(field);
+                    fieldCount = 0;
+                }
+            }
+
+            //Add an empty field at the end if it has 2 fields in the last row.
+            //This forces it to conform to the same width as the other lines.
+            if (forceLastLineGrid && fieldCount == 2) res.Add(emptyField);
+
+            //Replace the fields of this embed.
+            embedBuilder.Fields = res;
+
             return embedBuilder;
         }
+
+        private static bool IsEmpty(EmbedFieldBuilder field) => field.Name == "\u200b" && field.Value.ToString() == "\u200b";
     }
 }
