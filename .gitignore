@@ -262,3 +262,4 @@ __pycache__/
 *.pubxml
 Killer/Properties/AssemblyInfo.cs
 Killer/packages.config
+KillersLibrary.TestBot/Properties/launchSettings.json
