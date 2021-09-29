@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31507.150
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Killer", "Killer\Killer.csproj", "{3D492FFF-FBAA-499D-BD64-A2896EC36AE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Killer", "Killer\Killer.csproj", "{3D492FFF-FBAA-499D-BD64-A2896EC36AE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KillersLibrary.TestBot", "KillersLibrary.TestBot\KillersLibrary.TestBot.csproj", "{CD750250-C6C6-494C-A97E-82BC7E0521E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3D492FFF-FBAA-499D-BD64-A2896EC36AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D492FFF-FBAA-499D-BD64-A2896EC36AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D492FFF-FBAA-499D-BD64-A2896EC36AE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD750250-C6C6-494C-A97E-82BC7E0521E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD750250-C6C6-494C-A97E-82BC7E0521E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD750250-C6C6-494C-A97E-82BC7E0521E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD750250-C6C6-494C-A97E-82BC7E0521E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

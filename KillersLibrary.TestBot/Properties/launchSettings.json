@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "KillersLibraryTestBot": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "token": "ODkyODMyMzc4ODkwODk1NDIx.YVSo8w.wg8ECN4t9URw3eWQxAupr2Fxm4Q"
+      }
+    }
+  }
+}
