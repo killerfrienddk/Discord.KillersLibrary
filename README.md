@@ -185,6 +185,8 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
 }
 ```
 
+After you use this you have to use the other part which is the selector: [Link to Multi Buttons Select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select).
+
 ### Example: Changing Multiple Messages Multi Buttons Customization
 None of the MultiButtonsStyles has to be set what you see is their default values. 
 
