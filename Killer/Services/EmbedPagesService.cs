@@ -23,7 +23,7 @@ namespace KillersLibrary.Services {
 
             styles ??= new();
             if (!embedBuilders.Any()) {
-                await CommonService.Instance.MakeResponseAsync("error: EMBEDBUILDERS_NOT_FOUND. You didnt specify any embedBuilders to me. See Examples: https://github.com/killerfrienddk/Discord.KillersLibrary.Labs", context: context, command: command);
+                await CommonService.Instance.MakeResponseAsync("error: EMBEDBUILDERS_NOT_FOUND. You didn't specify any embedBuilders to me. See Examples: https://github.com/killerfrienddk/Discord.KillersLibrary.Labs", context: context, command: command);
                 return;
             }
 
