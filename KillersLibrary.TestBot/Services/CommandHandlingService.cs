@@ -11,6 +11,8 @@ using Discord.Net;
 using Discord;
 using KillersLibraryTestBot.Services.Commands;
 using Newtonsoft.Json;
+using Interaction.TestingGrounds.Parameter;
+using Interaction.TestingGrounds.Extensions;
 
 namespace KillersLibraryTestBot.Services {
     public class CommandHandlingService {
@@ -186,9 +188,6 @@ namespace KillersLibraryTestBot.Services {
                 case "chooseChild":
                     await _buttonCommands.CreateChooseChildButtons(interaction);
                     break;
-                /*case "chooseWord":
-                    await _buttonCommands.CreateChooseWordSelect(interaction);
-                    break;*/
                 case "cancel":
                 case "goBack":
                     await interaction.Message.DeleteAsync();
@@ -210,6 +209,26 @@ namespace KillersLibraryTestBot.Services {
                     break;
             }
         }
+
+        // Listen to the client event
+        protected async Task Handler_ComponentInteraction(SocketMessageComponent comp) {
+            var component = comp.Message.Components.GetComponent(comp.Data.CustomId);
+
+            // Crate object
+            MessageComponentParams par = new MessageComponentParams {
+                MessageComponent = comp,
+                Interaction = comp,
+                Component = component,
+            };
+
+            // Set guild if available
+            if (comp.Channel is IGuildChannel gc) await par.SetGuild(gc.Guild);
+
+            // Invoke the managed event
+            _ = MessageComponentInteraction?.Invoke(par);
+        }
+
+        public event Func<MessageComponentParams, Task> MessageComponentInteraction;
 
         public async Task InitializeAsync() {
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);

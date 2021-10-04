@@ -2,15 +2,21 @@ using System.IO;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using KillersLibrary.Services;
 using KillersLibraryTestBot.Services;
+using KillersLibraryTestBot.Services.Commands;
 
-namespace KillersLibraryTestBot.Modules
-{
+namespace KillersLibraryTestBot.Modules {
     // Modules must be public and inherit from an IModuleBase
-    public class PublicModule : ModuleBase<SocketCommandContext>
-    {
+    public class PublicModule : ModuleBase<SocketCommandContext> {
         // Dependency Injection will fill this value in for us
         public PictureService PictureService { get; set; }
+        public CommandsService CommandsService { get; set; }
+
+        [Command("help")]
+        public async Task HelpAsync() {
+            await CommandsService.HelpAsync(Context, client: Context.Client);
+        }
 
         [Command("ping")]
         [Alias("pong", "hello")]
@@ -18,8 +24,7 @@ namespace KillersLibraryTestBot.Modules
             => ReplyAsync("pong!");
 
         [Command("cat")]
-        public async Task CatAsync()
-        {
+        public async Task CatAsync() {
             // Get a stream containing an image of a cat
             var stream = await PictureService.GetCatPictureAsync();
             // Streams must be seeked to their beginning before being uploaded!
@@ -29,8 +34,7 @@ namespace KillersLibraryTestBot.Modules
 
         // Get info on a user, or the user who invoked the command if one is not specified
         [Command("userinfo")]
-        public async Task UserInfoAsync(IUser user = null)
-        {
+        public async Task UserInfoAsync(IUser user = null) {
             user ??= Context.User;
 
             await ReplyAsync(user.ToString());
@@ -43,8 +47,7 @@ namespace KillersLibraryTestBot.Modules
         [RequireUserPermission(GuildPermission.BanMembers)]
         // make sure the bot itself can ban
         [RequireBotPermission(GuildPermission.BanMembers)]
-        public async Task BanUserAsync(IGuildUser user, [Remainder] string reason = null)
-        {
+        public async Task BanUserAsync(IGuildUser user, [Remainder] string reason = null) {
             await user.Guild.AddBanAsync(user, reason: reason);
             await ReplyAsync("ok!");
         }
