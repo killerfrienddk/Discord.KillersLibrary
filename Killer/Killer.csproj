@@ -36,6 +36,7 @@ Moreover it includes support for any command framework and slash commands.</Desc
 
   <ItemGroup>
     <PackageReference Include="Discord.Net.Labs" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
   </ItemGroup>
   
   <ItemGroup>
