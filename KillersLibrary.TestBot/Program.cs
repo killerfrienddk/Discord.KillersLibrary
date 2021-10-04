@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
+using KillersLibraryTestBot.Services.Commands;
 using KillersLibraryTestBot.Services;
 using KillersLibrary.Services;
 
@@ -44,12 +45,24 @@ namespace KillersLibraryTestBot {
                 .AddSingleton<CommandService>()
                 .AddSingleton<CommandHandlingService>()
                 .AddSingleton<HttpClient>()
-                .AddSingleton<PictureService>();
+                .AddSingleton<PictureService>()
+               .AddSingleton<SelectCommandsService>()
+
+                ;
+
+            serviceCollection // Own
+                .AddSingleton<UserService>()
+                .AddSingleton<CommonFunctionService>()
+                .AddSingleton<ButtonCommandsService>()
+                .AddSingleton<CommandsService>()
+
+                ;
 
             serviceCollection // Killers Lib
                 .AddSingleton<EmbedPagesService>()
-                .AddSingleton<MultiButtonsService>();
+                .AddSingleton<MultiButtonsService>()
 
+                ;
 
             return serviceCollection.BuildServiceProvider();
         }

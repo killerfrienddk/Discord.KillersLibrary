@@ -186,9 +186,6 @@ namespace KillersLibraryTestBot.Services {
                 case "chooseChild":
                     await _buttonCommands.CreateChooseChildButtons(interaction);
                     break;
-                /*case "chooseWord":
-                    await _buttonCommands.CreateChooseWordSelect(interaction);
-                    break;*/
                 case "cancel":
                 case "goBack":
                     await interaction.Message.DeleteAsync();
