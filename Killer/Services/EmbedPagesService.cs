@@ -129,8 +129,8 @@ namespace KillersLibrary.Services {
             if (extraButtons == null) return componentBuilder;
 
             const int maxButtonCount = 25;
-            Preconditions.AtMost(maxButtonCount, buttonCount + extraButtons.Length, "Button Count", $"Please make sure that there is only {maxButtonCount} buttons!");
-            for (int i = 0; i < (extraButtons.Length > maxButtonCount ? maxButtonCount : extraButtons.Length); i++) {
+            Preconditions.AtMost(buttonCount + extraButtons.Length, maxButtonCount, "Button Count", $"Please make sure that there is only {maxButtonCount} buttons!");
+            for (int i = 0; i < extraButtons.Length; i++) {
                 componentBuilder.WithButton(extraButtons[i]);
             }
 
