@@ -52,10 +52,15 @@ namespace KillersLibraryTestBot.Services.Commands {
             .AddField("/redpanda or !redpanda", "Get a redpanda picture.");
             embedBuilders.Add(embedBuilder);
 
-            await _embedPagesService.CreateEmbedPages(client, embedBuilders, context: context, command: command);
+            /*ButtonBuilder button = new ButtonBuilder()
+            .WithLabel("dddqweqwe")
+            .WithStyle(ButtonStyle.Danger)
+            .WithCustomId("dddwqweqwe");*/
+
+            await _embedPagesService.CreateEmbedPages(client, embedBuilders, new ButtonBuilder[] { button }, context: context, command: command);
         }
 
-       
+
 
         #region Animal Pictures
         public async Task SelectSendAnimal(string name, SocketCommandContext context = null, SocketSlashCommand command = null) {
