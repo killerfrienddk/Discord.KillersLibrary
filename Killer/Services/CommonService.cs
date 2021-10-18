@@ -77,7 +77,7 @@ namespace KillersLibrary.Services {
             if (context != null) await context.Channel.SendFileAsync(stream, filename, text);
             else {
                 await command.DeferAsync();
-                await command.FollowupWithFileAsync(text, stream, filename);
+                await command.FollowupWithFileAsync(stream, text, filename);
             }
         }
 
