@@ -36,9 +36,9 @@ namespace KillersLibraryTestBot.Services.Commands {
             .AddField("/join-family, !jf or !joinFamily", "Join an existing family.")
             .AddField("/add-family-member, !afm or !addFamilyMember", "Add family member.")
             .AddField("/remove-family-member, !rfm or !removeFamilyMember", "Remove a family member, you have to be a family head.")
-            .AddField("/remove-family-connection, !rfc or !removeFamilyConnection", "Not implemented yet."/*"Remove a connection between you and another."*/)
-            .AddField("/add-family-head, !afh or !addFamilyHead", "Not implemented yet."/*"Add a family head."*/)
-            .AddField("/remove-family-head, !rfh or !removeFamilyHead", "Not implemented yet."/*"Remove a family head."*/)
+            .AddField("/remove-family-connection, !rfc or !removeFamilyConnection", "Not implemented yet.""Remove a connection between you and another.")
+            .AddField("/add-family-head, !afh or !addFamilyHead", "Not implemented yet.""Add a family head.")
+            .AddField("/remove-family-head, !rfh or !removeFamilyHead", "Not implemented yet.""Remove a family head.")
             .AddField("/leave-family, !lf or !leaveFamily", "Leave a family.");
             embedBuilders.Add(embedBuilder);
 
@@ -57,10 +57,8 @@ namespace KillersLibraryTestBot.Services.Commands {
             .WithStyle(ButtonStyle.Danger)
             .WithCustomId("dddwqweqwe");*/
 
-            await _embedPagesService.CreateEmbedPages(client, embedBuilders, new ButtonBuilder[] { button }, context: context, command: command);
+            await _embedPagesService.CreateEmbedPages(client, embedBuilders/*, new ButtonBuilder[] { button }*/, context: context, command: command);
         }
-
-
 
         #region Animal Pictures
         public async Task SelectSendAnimal(string name, SocketCommandContext context = null, SocketSlashCommand command = null) {

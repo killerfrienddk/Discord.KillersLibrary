@@ -76,7 +76,6 @@ namespace KillersLibrary.Services {
             ContextAndCommandIsNullCheck(context, command);
             if (context != null) await context.Channel.SendFileAsync(stream, filename, text);
             else {
-                await command.DeferAsync();
                 await command.FollowupWithFileAsync(stream, text, filename);
             }
         }
@@ -97,7 +96,6 @@ namespace KillersLibrary.Services {
             if (context == null) {
                 if (!disregardArgumentExceptions && stickers != null) throw new ArgumentException("Unfortunately FollowupAsync does not support stickers at this time.");
 
-                await command.DeferAsync();
                 return await command.FollowupAsync(text ?? " ", embed: embed, embeds: embeds, ephemeral: ephemeral, component: component);
             } else {
                 if (!disregardArgumentExceptions && embeds != null) throw new ArgumentException("Unfortunately SendMessageAsync does not support ephemerals at this time.");
