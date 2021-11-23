@@ -36,7 +36,7 @@ namespace KillersLibraryTestBot.Services {
                     continue;
                 }
 
-                if (!button.Disabled && allIsReady) allIsReady = button.Style == ButtonStyle.Danger;
+                if (!button.IsDisabled && allIsReady) allIsReady = button.Style == ButtonStyle.Danger;
                 if (counter == buttonComponents.Count) {
                     button.WithDisabled(!allIsReady);
                     if (allIsReady) button.WithStyle(ButtonStyle.Success);
