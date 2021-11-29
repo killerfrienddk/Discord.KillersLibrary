@@ -79,7 +79,7 @@ namespace KillersLibraryTestBot.Services {
 
                 await _client.BulkOverwriteGlobalApplicationCommandsAsync(applicationCommandProperties.ToArray());*/
             } catch (ApplicationCommandException exception) {
-                var json = JsonConvert.SerializeObject(exception.Error, Formatting.Indented);
+                var json = JsonConvert.SerializeObject(exception.Errors, Formatting.Indented);
 
                 Console.WriteLine(json);
             }
