@@ -1,26 +1,27 @@
 # Discord.KillersLibrary
 
-[![NuGet](https://buildstats.info/nuget/Discord.KillersLibrary.Labs)](https://www.nuget.org/packages/Discord.KillersLibrary.Labs)
+[![NuGet](https://buildstats.info/nuget/Discord.KillersLibrary)](https://www.nuget.org/packages/Discord.KillersLibrary)
+[![NuGet](https://buildstats.info/nuget/Discord.KillersLibrary.Labs)](https://www.nuget.org/packages/Discord.KillersLibrary.Labs) - old version
 [![Discord](https://discord.com/api/guilds/890629777818542092/widget.png)](https://discord.gg/2rFB54xQs7)
 
-This is an addon for the Discord API Wrapper [Discord.Net-Labs](https://github.com/discord-net-labs/Discord.Net-Labs).
+This is an addon for the Discord API Wrapper [Discord.Net](https://github.com/discord-net/Discord.Net).
 
 ## Features
- - [Creating dynamic embed pages](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#embed-pages).
- - [Creating dynamic multi buttons](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons).
- - [Creating Multiple Messages Multi Buttons](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multiple-messages-multi-buttons).
- - [Multi buttons select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select).
- - [Removing all multi buttons messages and the select message.](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/README.md#example-removing-all-multi-buttons-messages-and-the-select-message) .
- - [There is some Methods that will return either a DiscordID From either slash or normal commands](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Services/CommonService.cs).
- - [Same thing for GuildID](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Services/CommonService.cs).
- - [It does also contain FileUpload and SendMessages that both work with the slash and normal commands](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Services/CommonService.cs).
- - [Discord.net Preconditions](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Utilities/Preconditions.cs).
- - [Markdown Utilities](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Utilities/MarkdownUtilities.cs).
- - [String Utilities](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/Killer/Utilities/StringUtilities.cs).
+ - [Creating dynamic embed pages](https://github.com/killerfrienddk/Discord.KillersLibrary#embed-pages).
+ - [Creating dynamic multi buttons](https://github.com/killerfrienddk/Discord.KillersLibrary#multi-buttons).
+ - [Creating Multiple Messages Multi Buttons](https://github.com/killerfrienddk/Discord.KillersLibrary#multiple-messages-multi-buttons).
+ - [Multi buttons select](https://github.com/killerfrienddk/Discord.KillersLibrary#multi-buttons-select).
+ - [Removing all multi buttons messages and the select message.](https://github.com/killerfrienddk/Discord.KillersLibrary/blob/main/README.md#example-removing-all-multi-buttons-messages-and-the-select-message) .
+ - [There is some Methods that will return either a DiscordID From either slash or normal commands](https://github.com/killerfrienddk/Discord.KillersLibrary/blob/main/Killer/Services/CommonService.cs).
+ - [Same thing for GuildID](https://github.com/killerfrienddk/Discord.KillersLibrary/blob/main/Killer/Services/CommonService.cs).
+ - [It does also contain FileUpload and SendMessages that both work with the slash and normal commands](https://github.com/killerfrienddk/Discord.KillersLibrary/blob/main/Killer/Services/CommonService.cs).
+ - [Discord.net Preconditions](https://github.com/killerfrienddk/Discord.KillersLibrary/blob/main/Killer/Utilities/Preconditions.cs).
+ - [Markdown Utilities](https://github.com/killerfrienddk/Discord.KillersLibrary/blob/main/Killer/Utilities/MarkdownUtilities.cs).
+ - [String Utilities](https://github.com/killerfrienddk/Discord.KillersLibrary/blob/main/Killer/Utilities/StringUtilities.cs).
  - More is to be added in the future.
 
 ## Wiki
-[Wiki on github](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/wiki).
+[Wiki on github](https://github.com/killerfrienddk/Discord.KillersLibrary/wiki).
 
 ## Other Libraries
 [Database Connection for mysql](https://github.com/killerfrienddk/DatabaseConnection).
@@ -54,7 +55,7 @@ public CTOR(EmbedPagesService embedPagesService, MultiButtonsService multiButton
 ## Embed Pages
 ![Embed Pages example](https://i.imgur.com/hUxpVg2.jpg)
 
-[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/README.md#dependency-injection-in-commands) the EmbedPagesService into your Module using DI instead. (Constructor / Public Property Injection).
+[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary/blob/main/README.md#dependency-injection-in-commands) the EmbedPagesService into your Module using DI instead. (Constructor / Public Property Injection).
 
 ### Example: Creating Embed Pages using discord commands structure or slash commands
 ```csharp
@@ -116,7 +117,7 @@ public async Task HelpAsync() {
 ## Multi Buttons
 ![Multi Buttons example](https://i.imgur.com/9tXMrmS.jpg)
 
-[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/README.md#dependency-injection-in-commands) the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
+[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary/blob/main/README.md#dependency-injection-in-commands) the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
 
 ### Example: Creating Multi Buttons
 You can do as i have done for making buttons that splits up people in your server by 25 pr button.
@@ -162,7 +163,7 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
 ```
 
 ## Multipule Messages Multi Buttons
-[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/README.md#dependency-injection-in-commands) the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
+[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary/blob/main/README.md#dependency-injection-in-commands) the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
 
 ### Example: Creating Multiple Messages Multi Buttons
 You can do as i have done for making buttons that splits up people in your server by 25 pr button.
@@ -185,7 +186,7 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
 }
 ```
 
-After you use this you have to use the other part which is the selector: [Link to Multi Buttons Select](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs#multi-buttons-select).
+After you use this you have to use the other part which is the selector: [Link to Multi Buttons Select](https://github.com/killerfrienddk/Discord.KillersLibrary#multi-buttons-select).
 
 ### Example: Changing Multiple Messages Multi Buttons Customization
 None of the MultiButtonsStyles has to be set what you see is their default values. 
@@ -220,7 +221,7 @@ public async Task CreateChooseChildButtons(SocketMessageComponent interaction) {
 ## Multi Buttons Select
 ![MultiButtons Select example](https://i.imgur.com/7MM1il5.jpg)
 
-[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary.Labs/blob/main/README.md#dependency-injection-in-commands) the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
+[Inject](https://github.com/killerfrienddk/Discord.KillersLibrary/blob/main/README.md#dependency-injection-in-commands) the MultiButtonsService into your Module using DI instead. (Constructor / Public Property Injection).
 
 ### Example: Creating Multi Buttons Select
 In order to get a list of users you have to activate the "Privileged Gateway Intents" those being "PRESENCE INTENT" and "SERVER MEMBERS INTENT" they can be set [here](https://discord.com/developers/applications) by choosing your bot and going to the Bots tab. 

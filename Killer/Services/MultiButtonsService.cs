@@ -187,7 +187,7 @@ namespace KillersLibrary.Services {
         }
 
         private string StringLengthFixer(string text, int maxLength) {
-            return text.Substring(0, text.Length > maxLength ? maxLength : text.Length);
+            return text[..(text.Length > maxLength ? maxLength : text.Length)];
         }
 
         public async Task<IMessage> RemoveMultiButtonsAndSelectAsync(SocketMessageComponent interaction) {

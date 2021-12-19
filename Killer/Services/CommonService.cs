@@ -96,12 +96,12 @@ namespace KillersLibrary.Services {
             if (context == null) {
                 if (!disregardArgumentExceptions && stickers != null) throw new ArgumentException("Unfortunately FollowupAsync does not support stickers at this time.");
 
-                return await command.FollowupAsync(text ?? " ", embed: embed, embeds: embeds, ephemeral: ephemeral, component: component);
+                return await command.FollowupAsync(text ?? " ", embed: embed, embeds: embeds, ephemeral: ephemeral, components: component);
             } else {
                 if (!disregardArgumentExceptions && embeds != null) throw new ArgumentException("Unfortunately SendMessageAsync does not support ephemerals at this time.");
                 if (!disregardArgumentExceptions && embeds != null) throw new ArgumentException("Unfortunately SendMessageAsync does not support multiple embeds at this time.");
 
-                return await context.Channel.SendMessageAsync(text ?? " ", embed: embed, component: component, stickers: stickers/*, embeds: embeds*/);
+                return await context.Channel.SendMessageAsync(text ?? " ", embed: embed, components: component, stickers: stickers/*, embeds: embeds*/);
             }
         }
         #endregion

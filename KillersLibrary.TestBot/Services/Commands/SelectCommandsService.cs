@@ -25,7 +25,7 @@ namespace KillersLibraryTestBot.Services.Commands {
                 await interaction.Message.DeleteAsync();
                 await repliedIMessage.DeleteAsync();
                 await interaction.Channel.SendMessageAsync(text: "Add person to Family:",
-                    component: _commonFunctionService.RemakeMessage(repliedIMessage, "connectionType", ButtonStyle.Danger).Build());
+                    components: _commonFunctionService.RemakeMessage(repliedIMessage, "connectionType", ButtonStyle.Danger).Build());
             }
         }
         #endregion

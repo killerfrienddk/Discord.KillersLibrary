@@ -26,7 +26,7 @@ namespace KillersLibraryTestBot.Services.Commands {
 
             builder.WithButton(_commonFunctionService.MakeGoBackButton());
 
-            await interaction.FollowupAsync(text: "Choose Person", component: builder.Build());
+            await interaction.FollowupAsync(text: "Choose Person", components: builder.Build());
         }
 
         public async Task ChooseChildNameRange(SocketMessageComponent interaction) {
@@ -44,7 +44,7 @@ namespace KillersLibraryTestBot.Services.Commands {
 
             var builder = _multiButtonsService.CreateSelectForMultiButtons(interaction, multibuttons, new() { CustomID = "selectChild" });
 
-            await interaction.FollowupAsync("Choose Person", component: builder.Build());
+            await interaction.FollowupAsync("Choose Person", components: builder.Build());
         }
     }
 }
