@@ -25,7 +25,7 @@ Moreover it includes support for any command framework and slash commands.</Desc
     <Authors>KillerFRIEND</Authors>
     <TargetFrameworkProfile />
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -35,7 +35,7 @@ Moreover it includes support for any command framework and slash commands.</Desc
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="3.0.0" />
+    <PackageReference Include="Discord.Net" Version="3.1.0" />
   </ItemGroup>
   
   <ItemGroup>
