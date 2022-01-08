@@ -2,7 +2,7 @@
 
 [![NuGet](https://buildstats.info/nuget/Discord.KillersLibrary)](https://www.nuget.org/packages/Discord.KillersLibrary)
 [![Discord](https://discord.com/api/guilds/890629777818542092/widget.png)](https://discord.gg/2rFB54xQs7)
-[![NuGet](https://buildstats.info/nuget/Discord.KillersLibrary.Labs)](https://www.nuget.org/packages/Discord.KillersLibrary.Labs) - old version
+[![NuGet](https://buildstats.info/nuget/Discord.KillersLibrary.Labs)](https://www.nuget.org/packages/Discord.KillersLibrary.Labs) - Labs version
 
 This is an addon for the Discord API Wrapper [Discord.Net](https://github.com/discord-net/Discord.Net).
 
