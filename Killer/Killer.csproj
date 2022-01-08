@@ -7,7 +7,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KillersLibrary</RootNamespace>
     <AssemblyName>Discord.KillersLibrary.Labs</AssemblyName>
-    <RepositoryUrl>https://github.com/killerfrienddk/Discord.Killer</RepositoryUrl>
+    <RepositoryUrl>https://github.com/killerfrienddk/Discord.Killer.</RepositoryUrl>
     <Deterministic>true</Deterministic>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType>Github</RepositoryType>
@@ -25,7 +25,7 @@ Moreover it includes support for any command framework and slash commands.</Desc
     <Authors>KillerFRIEND</Authors>
     <TargetFrameworkProfile />
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>1.2.01</Version>
+    <Version>1.2.2</Version>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -33,15 +33,15 @@ Moreover it includes support for any command framework and slash commands.</Desc
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <Optimize>false</Optimize>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="3.0.0" />
-  </ItemGroup>
   
   <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Discord.Net.Labs" Version="3.6.1" />
   </ItemGroup>
 </Project>

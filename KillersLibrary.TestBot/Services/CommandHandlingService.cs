@@ -78,8 +78,8 @@ namespace KillersLibraryTestBot.Services {
                 *//*
 
                 await _client.BulkOverwriteGlobalApplicationCommandsAsync(applicationCommandProperties.ToArray());*/
-            } catch (ApplicationCommandException exception) {
-                var json = JsonConvert.SerializeObject(exception.Errors, Formatting.Indented);
+            } catch (ApplicationException exception) {
+                var json = JsonConvert.SerializeObject(exception.Message, Formatting.Indented);
 
                 Console.WriteLine(json);
             }
