@@ -39,12 +39,12 @@ namespace KillersLibrary.Services {
                 if (interaction.Data.Type != ComponentType.Button) return;
 
                 if (interaction.Message.Id == currentMessage.Id && interaction.User.Id == CommonService.Instance.GetAuthorID(context, command)) {
-                    currentPage = await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, componentBuilder, styles, extraButtons);
+                    currentPage = await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, styles, extraButtons);
                 }
             };
         }
 
-        private async Task<int> FinishEmbedActions(SocketMessageComponent interaction, List<EmbedBuilder> embedBuilders, int currentPage, RestUserMessage currentMessage, ComponentBuilder componentBuilder, EmbedPagesStyles styles, ButtonBuilder[] extraButtons) {
+        private async Task<int> FinishEmbedActions(SocketMessageComponent interaction, List<EmbedBuilder> embedBuilders, int currentPage, RestUserMessage currentMessage, EmbedPagesStyles styles, ButtonBuilder[] extraButtons) {
             currentPage = GetCurrentPage(interaction, currentPage, embedBuilders);
 
             switch (interaction.Data.CustomId) {
