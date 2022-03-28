@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Discord.WebSocket;
@@ -27,22 +27,24 @@ namespace KillersLibrary.Services {
                 return;
             }
 
-            ComponentBuilder componentBuilder = GetComponentBuilder(styles, extraButtons);
-
             int currentPage = 0;
             if (styles.PageNumbers) embedBuilders[0] = embedBuilders[0].WithFooter($"Page: {currentPage + 1}/{embedBuilders.Count}");
+
+            ComponentBuilder componentBuilder = GetComponentBuilder(embedBuilders.Count, currentPage + 1, styles, extraButtons);
+
             var currentMessage = await CommonService.Instance.MakeResponseAsync(embed: embedBuilders[0].Build(), component: componentBuilder.Build(), context: context, command: command);
+
             client.InteractionCreated += async (socketInteraction) => {
                 SocketMessageComponent interaction = (SocketMessageComponent)socketInteraction;
                 if (interaction.Data.Type != ComponentType.Button) return;
 
                 if (interaction.Message.Id == currentMessage.Id && interaction.User.Id == CommonService.Instance.GetAuthorID(context, command)) {
-                    currentPage = await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, componentBuilder, styles);
+                    currentPage = await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, componentBuilder, styles, extraButtons);
                 }
             };
         }
 
-        private async Task<int> FinishEmbedActions(SocketMessageComponent interaction, List<EmbedBuilder> embedBuilders, int currentPage, RestUserMessage currentMessage, ComponentBuilder componentBuilder, EmbedPagesStyles styles) {
+        private async Task<int> FinishEmbedActions(SocketMessageComponent interaction, List<EmbedBuilder> embedBuilders, int currentPage, RestUserMessage currentMessage, ComponentBuilder componentBuilder, EmbedPagesStyles styles, ButtonBuilder[] extraButtons) {
             currentPage = GetCurrentPage(interaction, currentPage, embedBuilders);
 
             switch (interaction.Data.CustomId) {
@@ -51,8 +53,12 @@ namespace KillersLibrary.Services {
                 case "killer_forward_button_embed":
                 case "killer_last_embed":
                     if (styles.PageNumbers) embedBuilders[currentPage] = embedBuilders[currentPage].WithFooter($"Page: {currentPage + 1}/{embedBuilders.Count}");
+
                     await currentMessage.ModifyAsync(msg => {
                         msg.Embed = embedBuilders[currentPage].Build();
+
+                        ComponentBuilder componentBuilder = GetComponentBuilder(embedBuilders.Count, currentPage + 1, styles, extraButtons);
+
                         msg.Components = componentBuilder.Build();
                     });
                     break;
@@ -86,55 +92,119 @@ namespace KillersLibrary.Services {
             return currentPage;
         }
 
-        private ComponentBuilder GetComponentBuilder(EmbedPagesStyles styles, ButtonBuilder[] extraButtons = null) {
+        private ComponentBuilder GetComponentBuilder(int maxPage, int currentPage, EmbedPagesStyles styles, ButtonBuilder[] extraButtons = null) {
             int buttonCount = 2;
-            
+
             ComponentBuilder componentBuilder = new();
             ButtonBuilder buttonBuilder;
-            
+
             if (styles.FastChangeBtns) {
-                buttonBuilder = new ButtonBuilder()
-                    .WithCustomId("killer_first_embed")
-                    .WithLabel(styles.FirstLabel ?? "«")
-                    .WithStyle(styles.SkipBtnColor);
-                componentBuilder.WithButton(buttonBuilder);
-                buttonCount++;
+                if (currentPage != 1)
+                {
+                    buttonBuilder = new ButtonBuilder()
+                        .WithCustomId("killer_first_embed")
+                        .WithLabel(styles.FirstLabel ?? "«")
+                        .WithStyle(styles.SkipBtnColor);
+
+                    componentBuilder.WithButton(buttonBuilder);
+                    buttonCount++;
+                }
+                else
+                {
+                    buttonBuilder = new ButtonBuilder()
+                        .WithCustomId("killer_first_embed")
+                        .WithLabel(styles.FirstLabel ?? "«")
+                        .WithStyle(styles.SkipBtnColor);
+
+                    buttonBuilder.IsDisabled = true;
+
+                    componentBuilder.WithButton(buttonBuilder);
+                    buttonCount++;
+                }
             }
 
-            buttonBuilder = new ButtonBuilder()
-            .WithCustomId("killer_back_button_embed")
-                .WithLabel(styles.BackLabel ?? "‹")
-                .WithStyle(styles.BtnColor);
-            componentBuilder.WithButton(buttonBuilder);
+            if (currentPage != 1)
+            {
+                buttonBuilder = new ButtonBuilder()
+                    .WithCustomId("killer_back_button_embed")
+                    .WithLabel(styles.BackLabel ?? "‹")
+                    .WithStyle(styles.BtnColor);
+
+                componentBuilder.WithButton(buttonBuilder);
+            }
+            else
+            {
+                buttonBuilder = new ButtonBuilder()
+                    .WithCustomId("killer_back_button_embed")
+                    .WithLabel(styles.BackLabel ?? "‹")
+                    .WithStyle(styles.BtnColor);
+
+                buttonBuilder.IsDisabled = true;
+
+                componentBuilder.WithButton(buttonBuilder);
+            }
 
             if (!styles.RemoveDeleteBtn)
             {
                 buttonBuilder = new ButtonBuilder()
-                .WithCustomId("killer_delete_embed_pages")
+                    .WithCustomId("killer_delete_embed_pages")
                     .WithEmote(new Emoji(styles.DeletionEmoji ?? "🗑"))
                     .WithStyle(styles.DeletionBtnColor);
+
                 componentBuilder.WithButton(buttonBuilder);
                 buttonCount++;
             }
 
-            buttonBuilder = new ButtonBuilder()
-            .WithCustomId("killer_forward_button_embed")
-                .WithLabel(styles.ForwardLabel ?? "›")
-                .WithStyle(styles.BtnColor);
-            componentBuilder.WithButton(buttonBuilder);
+            if (currentPage < maxPage)
+            {
+                buttonBuilder = new ButtonBuilder()
+                    .WithCustomId("killer_forward_button_embed")
+                    .WithLabel(styles.ForwardLabel ?? "›")
+                    .WithStyle(styles.BtnColor);
+
+                componentBuilder.WithButton(buttonBuilder);
+            }
+            else
+            {
+                buttonBuilder = new ButtonBuilder()
+                    .WithCustomId("killer_forward_button_embed")
+                    .WithLabel(styles.ForwardLabel ?? "›")
+                    .WithStyle(styles.BtnColor);
+
+                buttonBuilder.IsDisabled = true;
+
+                componentBuilder.WithButton(buttonBuilder);
+            }
 
             if (styles.FastChangeBtns) {
-                buttonBuilder = new ButtonBuilder()
-                    .WithCustomId("killer_last_embed")
-                    .WithLabel(styles.LastLabel ?? "»")
-                    .WithStyle(styles.SkipBtnColor);
-                componentBuilder.WithButton(buttonBuilder);
-                buttonCount++;
+                if (currentPage < maxPage)
+                {
+                    buttonBuilder = new ButtonBuilder()
+                        .WithCustomId("killer_last_embed")
+                        .WithLabel(styles.LastLabel ?? "»")
+                        .WithStyle(styles.SkipBtnColor);
+
+                    componentBuilder.WithButton(buttonBuilder);
+                    buttonCount++;
+                }
+                else
+                {
+                    buttonBuilder = new ButtonBuilder()
+                        .WithCustomId("killer_last_embed")
+                        .WithLabel(styles.LastLabel ?? "»")
+                        .WithStyle(styles.SkipBtnColor);
+
+                    buttonBuilder.IsDisabled = true;
+
+                    componentBuilder.WithButton(buttonBuilder);
+                    buttonCount++;
+                }
             }
 
             if (extraButtons == null) return componentBuilder;
 
             const int maxButtonCount = 25;
+
             Preconditions.AtMost(buttonCount + extraButtons.Length, maxButtonCount, "Button Count", $"Please make sure that there is only {maxButtonCount} buttons!");
             for (int i = 0; i < extraButtons.Length; i++) {
                 componentBuilder.WithButton(extraButtons[i]);
