@@ -87,9 +87,11 @@ namespace KillersLibrary.Services {
         }
 
         private ComponentBuilder GetComponentBuilder(EmbedPagesStyles styles, ButtonBuilder[] extraButtons = null) {
-            int buttonCount = 3;
+            int buttonCount = 2;
+            
             ComponentBuilder componentBuilder = new();
             ButtonBuilder buttonBuilder;
+            
             if (styles.FastChangeBtns) {
                 buttonBuilder = new ButtonBuilder()
                     .WithCustomId("killer_first_embed")
@@ -105,11 +107,15 @@ namespace KillersLibrary.Services {
                 .WithStyle(styles.BtnColor);
             componentBuilder.WithButton(buttonBuilder);
 
-            buttonBuilder = new ButtonBuilder()
-            .WithCustomId("killer_delete_embed_pages")
-                .WithEmote(new Emoji(styles.DeletionEmoji ?? "🗑"))
-                .WithStyle(styles.DeletionBtnColor);
-            componentBuilder.WithButton(buttonBuilder);
+            if (!styles.RemoveDeleteBtn)
+            {
+                buttonBuilder = new ButtonBuilder()
+                .WithCustomId("killer_delete_embed_pages")
+                    .WithEmote(new Emoji(styles.DeletionEmoji ?? "🗑"))
+                    .WithStyle(styles.DeletionBtnColor);
+                componentBuilder.WithButton(buttonBuilder);
+                buttonCount++;
+            }
 
             buttonBuilder = new ButtonBuilder()
             .WithCustomId("killer_forward_button_embed")
@@ -142,6 +148,7 @@ namespace KillersLibrary.Services {
         public string FirstLabel { get; set; } = "«";
         public string BackLabel { get; set; } = "‹";
         public string DeletionEmoji { get; set; } = "🗑";
+        public bool RemoveDeleteBtn { get; set; } = false;
         public string ForwardLabel { get; set; } = "›";
         public string LastLabel { get; set; } = "»";
         public string DeletionMessage { get; set; } = "Embed page has been deleted";
