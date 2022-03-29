@@ -6,6 +6,7 @@ using Discord.Commands;
 using Discord.Rest;
 using Discord;
 using KillersLibrary.Utilities;
+using System;
 
 namespace KillersLibrary.Services {
     public class EmbedPagesService {
@@ -34,14 +35,55 @@ namespace KillersLibrary.Services {
 
             var currentMessage = await CommonService.Instance.MakeResponseAsync(embed: embedBuilders[0].Build(), component: componentBuilder.Build(), context: context, command: command);
 
-            client.InteractionCreated += async (socketInteraction) => {
-                SocketMessageComponent interaction = (SocketMessageComponent)socketInteraction;
-                if (interaction.Data.Type != ComponentType.Button) return;
+            if (styles.ButtonDuration > 0)
+            {
+                var timerHandle = SetTimeout(async () =>
+                {
+                    await currentMessage.ModifyAsync(msg => {
+                        msg.Embed = embedBuilders[currentPage].Build();
 
-                if (interaction.Message.Id == currentMessage.Id && interaction.User.Id == CommonService.Instance.GetAuthorID(context, command)) {
-                    currentPage = await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, styles, extraButtons);
-                }
-            };
+                        ComponentBuilder componentBuilderEdit = DisableEmbedButtons(embedBuilders, currentPage + 1, currentMessage, styles, extraButtons);
+
+                       msg.Components = componentBuilderEdit.Build();
+                    });
+                }, styles.ButtonDuration);
+
+                client.InteractionCreated += async (socketInteraction) => {
+                    SocketMessageComponent interaction = (SocketMessageComponent)socketInteraction;
+
+                    if (interaction.Data.Type != ComponentType.Button) return;
+
+                    if (interaction.Message.Id == currentMessage.Id && interaction.User.Id == CommonService.Instance.GetAuthorID(context, command))
+                    {
+                        currentPage = await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, styles, extraButtons);
+                    }
+
+                    timerHandle.Dispose();
+
+                    timerHandle = SetTimeout(async () =>
+                    {
+                        await currentMessage.ModifyAsync(msg => {
+                            msg.Embed = embedBuilders[currentPage].Build();
+
+                            ComponentBuilder componentBuilderEdit = DisableEmbedButtons(embedBuilders, currentPage + 1, currentMessage, styles, extraButtons);
+
+                            msg.Components = componentBuilderEdit.Build();
+                        });
+                    }, styles.ButtonDuration);
+                };
+            }
+            else
+            {
+                client.InteractionCreated += async (socketInteraction) => {
+                    SocketMessageComponent interaction = (SocketMessageComponent)socketInteraction;
+                    if (interaction.Data.Type != ComponentType.Button) return;
+
+                    if (interaction.Message.Id == currentMessage.Id && interaction.User.Id == CommonService.Instance.GetAuthorID(context, command))
+                    {
+                        currentPage = await FinishEmbedActions(interaction, embedBuilders, currentPage, currentMessage, styles, extraButtons);
+                    }
+                };
+            }
         }
 
         private async Task<int> FinishEmbedActions(SocketMessageComponent interaction, List<EmbedBuilder> embedBuilders, int currentPage, RestUserMessage currentMessage, EmbedPagesStyles styles, ButtonBuilder[] extraButtons) {
@@ -62,6 +104,7 @@ namespace KillersLibrary.Services {
                         msg.Components = componentBuilder.Build();
                     });
                     break;
+
                 case "killer_delete_embed_pages":
                     await currentMessage.DeleteAsync();
                     await interaction.FollowupAsync(styles.DeletionMessage, ephemeral: true);
@@ -69,6 +112,74 @@ namespace KillersLibrary.Services {
             }
 
             return currentPage;
+        }
+
+        private ComponentBuilder DisableEmbedButtons(List<EmbedBuilder> embedBuilders, int currentPage, RestUserMessage currentMessage, EmbedPagesStyles styles, ButtonBuilder[] extraButtons)
+        {
+            int buttonCount = 2;
+
+            ComponentBuilder componentBuilder = new();
+            ButtonBuilder buttonBuilder;
+
+            if (styles.FastChangeBtns)
+            {
+                buttonBuilder = new ButtonBuilder()
+                    .WithCustomId("killer_first_embed")
+                    .WithLabel(styles.FirstLabel ?? "«")
+                    .WithStyle(styles.SkipBtnColor);
+                buttonBuilder.IsDisabled = true;
+                componentBuilder.WithButton(buttonBuilder);
+                buttonCount++;
+            }
+
+            buttonBuilder = new ButtonBuilder()
+                .WithCustomId("killer_back_button_embed")
+                .WithLabel(styles.BackLabel ?? "‹")
+                .WithStyle(styles.BtnColor);
+            buttonBuilder.IsDisabled = true;
+            componentBuilder.WithButton(buttonBuilder);
+
+            if (!styles.RemoveDeleteBtn)
+            {
+                buttonBuilder = new ButtonBuilder()
+                    .WithCustomId("killer_delete_embed_pages")
+                    .WithEmote(new Emoji(styles.DeletionEmoji ?? "🗑"))
+                    .WithStyle(styles.DeletionBtnColor);
+                buttonBuilder.IsDisabled = true;
+                componentBuilder.WithButton(buttonBuilder);
+                buttonCount++;
+            }
+
+            buttonBuilder = new ButtonBuilder()
+                .WithCustomId("killer_forward_button_embed")
+                .WithLabel(styles.ForwardLabel ?? "›")
+                .WithStyle(styles.BtnColor);
+            buttonBuilder.IsDisabled = true;
+            componentBuilder.WithButton(buttonBuilder);
+
+            if (styles.FastChangeBtns)
+            {
+                buttonBuilder = new ButtonBuilder()
+                    .WithCustomId("killer_last_embed")
+                    .WithLabel(styles.LastLabel ?? "»")
+                    .WithStyle(styles.SkipBtnColor);
+                buttonBuilder.IsDisabled = true;
+                componentBuilder.WithButton(buttonBuilder);
+                buttonCount++;
+            }
+
+            if (extraButtons == null) return componentBuilder;
+
+            const int maxButtonCount = 25;
+
+            Preconditions.AtMost(buttonCount + extraButtons.Length, maxButtonCount, "Button Count", $"Please make sure that there is only {maxButtonCount} buttons!");
+            for (int i = 0; i < extraButtons.Length; i++)
+            {
+                componentBuilder.WithButton(extraButtons[i]);
+                extraButtons[i].IsDisabled = true;
+            }
+
+            return componentBuilder;
         }
 
         private int GetCurrentPage(SocketMessageComponent interaction, int currentPage, List<EmbedBuilder> embedBuilders) {
@@ -212,6 +323,22 @@ namespace KillersLibrary.Services {
 
             return componentBuilder;
         }
+
+        public static IDisposable SetTimeout(Action method, int delayInMilliseconds)
+        {
+            System.Timers.Timer timer = new(delayInMilliseconds);
+
+            timer.Elapsed += (source, e) =>
+            {
+                method();
+            };
+
+            timer.AutoReset = false;
+            timer.Enabled = true;
+            timer.Start();
+
+            return timer;
+        }
     }
 
     public class EmbedPagesStyles {
@@ -227,5 +354,6 @@ namespace KillersLibrary.Services {
         public ButtonStyle SkipBtnColor { get; set; } = ButtonStyle.Primary;
         public bool FastChangeBtns { get; set; } = false;
         public bool PageNumbers { get; set; } = true;
+        public int ButtonDuration { get; set; } = 120000;
     }
 }
