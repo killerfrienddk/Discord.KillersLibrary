@@ -25,7 +25,7 @@ Moreover it includes support for any command framework and slash commands.</Desc
     <Authors>KillerFRIEND</Authors>
     <TargetFrameworkProfile />
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>1.2.2</Version>
+    <Version>1.2.3</Version>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
