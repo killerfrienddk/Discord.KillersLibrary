@@ -108,6 +108,8 @@ public async Task HelpAsync() {
     style.SkipBtnColor = ButtonStyle.Primary;
     style.FastChangeBtns = false; // Do you want there to be a button that goes directly to either ends?
     style.PageNumbers = true; //Do you want the embed to have page numbers like "Page: 1/4"? Depends on how many pages you have.
+    style.RemoveDeleteBtn = false; // Do you want to remove the Delete button (trash icon)?
+    style.ButtonDuration = 120000; // Change this to `0` if you want to disable the button disable timer. Or specify your own duration (in milliseconds).
     
     await _embedPagesService.CreateEmbedPages(client, embedBuilders, context, style: style);
     // await _embedPagesService.CreateEmbedPages(client, embedBuilders, command: command, style: style); //Or slashcommands
